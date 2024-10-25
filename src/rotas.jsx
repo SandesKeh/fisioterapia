@@ -10,6 +10,7 @@ import Agenda from "./pages/agenda";
 import InserirPacotes from "./pages/inserirPacotes";
 import AddProfissional from "./pages/inserirProfissional";
 import AddDocumento from "./pages/adicionarDocumento";
+import Notificacoes from "./pages/notificacoes";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -29,6 +30,7 @@ export default function Rotas() {
                 <Route path="/inserirPacotes" element={<InserirPacotes/>}/>
                 <Route path="/inserirProfissional" element={<AddProfissional/>}/>
                 <Route path="/inserirDocumento" element={<AddDocumento/>}/>
+                <Route path="/notificacoes" element={<Notificacoes/>}/>
             </Routes>
         </BrowserRouter>
     )
