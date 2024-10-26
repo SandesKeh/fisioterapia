@@ -59,6 +59,133 @@
        
     }
 
+    .rodape{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        background-color: #03989F;
+        justify-content: space-around;  
+        padding: 60px 0px;
+        height: 40%;
 
-    
+        .um{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            #logo{
+                width: 280px;
+                
+            }
+
+            .redes {
+                display: flex ;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-around;
+
+                #a{
+                    width: 40px;
+                    border-radius: 10px;
+                    background-color: #F9F4F4;
+                    cursor: pointer;
+                }
+                #a:hover{
+                    transform: scale(1.1);
+                    background-color: rgb(0, 217, 255);
+                }
+                #a:active{
+                    transform: scale(1.0);
+                    background-color: #F9F4F4;
+                }
+                #b{
+                    width: 40px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+                #b:hover{
+                    transform: scale(1.1);
+                    background-color: rgb(0, 217, 255);
+                }
+                #b:active{
+                    transform: scale(1.0);
+                    background-color: #F9F4F4;
+                }
+                #c{
+                    width: 40px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                }
+                #c:hover{
+                    transform: scale(1.1);
+                    background-color: rgb(0, 217, 255);
+                }
+                #c:active{
+                    transform: scale(1.0);
+                    background-color: #F9F4F4;
+                }
+            }
+        }
+
+        .dois{
+            display: flex;
+            flex-direction: column;
+            margin-left: -5px;
+
+            h1{
+               
+                color: #fff;
+                font: 500 25px Inter;
+            }
+        }
+
+        .tres{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            h1{
+                color: #fff;
+            }
+                .final {
+                background-color: #03989F;
+                color: #fff;
+                border: transparent;
+                font: 400 24px roboto;
+                    display: flex;
+                    justify-items: center;
+            }
+
+            .links{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+
+                a{
+                    font: 400 24px roboto;
+                    color: #fff;
+                    text-decoration: none;
+                }
+                
+            }
+        }
+
+        .quatro{
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+
+            h1{
+                font: 400 30px roboto;
+                color: #fff;
+            }
+        }
+    }
+    .sobre{
+        display: flex;
+        flex-direction: row;
+    }
 }
+        
+        
+    
