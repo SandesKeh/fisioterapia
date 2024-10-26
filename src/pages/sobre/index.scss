@@ -1,5 +1,5 @@
 .sobreMais{
-
+font-family: "Lilita";
 
     .cabecalho{
         display: flex;
@@ -183,7 +183,130 @@
     }
     .sobre{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        justify-items: center;
+        justify-content: space-between;
+        margin: 15px;
+        padding: 30px;
+        gap: 20px;
+        align-items: center;
+        .primeiro{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 30vh;
+            gap: 10vh;
+            padding: 10px;
+            background-color: #03979f36;
+              
+                p{
+                    font-weight: 300;
+                }
+        }
+        .titulo{
+            text-align: center;
+            color: #03989F;
+            width: 100%;
+            background-color: #F9F4F4;
+        }
+        .grup{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: row;
+
+            .visao{
+                display: flex;
+                align-items:safe;
+                flex-direction: column;
+                gap: 20px;
+                border-radius: 25px 25px 25px 0px;
+            
+                background-color: #aac4c7;
+               width: 35%;
+               height: 20vh;
+               font-weight: 300;
+               h1{
+                color: #373d3d;
+                border-radius: 25px 10px 10px 0px;
+                padding-left: 10px;
+                width: 50%;
+                background-color: #03989F;
+               }
+               p{
+                width: 70%;
+                margin: 10px 0px 0px 10px;
+               }
+
+
+            }
+            .missao{
+                display: flex;
+                align-items:safe;
+                flex-direction: column;
+                gap: 20px;
+                border-radius: 25px 25px 25px 0px;
+            
+                background-color: #aac4c7;
+               width: 35%;
+               height: 20vh;
+               font-weight: 300;
+               h1{
+                color: #373d3d;
+                border-radius: 25px 10px 10px 0px;
+                padding-left: 10px;
+                width: 50%;
+                background-color: #03989F;
+               }
+               p{
+                width: 70%;
+                margin: 10px 0px 0px 10px;
+               }
+
+
+            }
+            
+        } 
+        .valores{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 30px;
+            padding: 10px;
+                width: 75%;
+                height: 50vh;
+                color: #303131;
+                font-size: large;
+                font-weight: 300;
+               h1{
+                text-align: center;
+               }
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    border-radius: 25px;
+                    width: 55vh;
+                    padding: 35px;
+                    height: 32vh;
+                    border-color: #303131;
+                    background-color: #aac4c7;
+                    p{
+                        width: 100%;
+                    }
+                    .topicos:hover{
+                        color:#60adb1 ;
+                    }
+                    .topicos{
+                        display: flex;
+                        padding: 20px;
+
+                    }
+                }
+
+             }
+        
     }
 }
         

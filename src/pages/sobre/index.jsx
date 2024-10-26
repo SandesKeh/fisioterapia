@@ -42,9 +42,8 @@ export default function Sobre () {
                  <p>Me chamo Daniela Barbosa Rodrigues, tenho 36 anos, casada, mãe de 2 menina. Formada em Fisioterapia pela Universidade nove de Julho, POS Graduada em Fisioterapia Intensiva Pediátrica e Neonatal pela FABIC. Formação em Pilates pela VOLL Pilates, Curso de Neurociência da dor aplicada a prática clinica pelo TUDO SOBRE DOR. Trabalhei nas instituições de saúde da REDE DOR das unidades do Jabaquara e Morumbi. Atuando tanto em pediatria e adulto. Realizo atendimento domiciliar na região  da Zona Sul de São Paulo.</p>        
                 </div>
             
-
-
-            <div className="visao">
+<div className='grup'>
+<div className="visao">
                 <h1>Visão</h1>
                 <p>"Ser referência em atendimento fisioterapêutico domiciliar na Zona Sul de São Paulo, promovendo a saúde e o bem-estar de crianças e adultos com excelência e humanização."</p>
             </div>
@@ -54,24 +53,36 @@ export default function Sobre () {
                 <p>"Oferecer serviços de fisioterapia de alta qualidade, com foco em cuidados pediátricos e adultos, utilizando abordagens integrativas e personalizadas, sempre priorizando a saúde e o conforto dos nossos pacientes."</p>
             </div>
 
-            <div className="valores">
-                <h1>Valores</h1>
+            
+</div>
+<h1 className='titulo'><hr /> Valores <hr /></h1>
 
-                <h3>Excelência:</h3>
-                <p>Compromisso com a qualidade no atendimento e resultados clínicos.</p>
-
-                <h3>Humanização:</h3>
+<div className="valores">
+              
+<div>
+<h3 className='topicos'>Excelência:</h3>
+                <p>Compromisso com a qualidade no atendimento e resultados clínicos.</p> 
+</div>
+<div>
+<h3 className='topicos'>Humanização:</h3>
                 <p>Atendimento acolhedor e empático, respeitando as necessidades de cada paciente.</p>
 
-                <h3>Inovação:</h3>
+</div>
+ <div>
+ <h3 className='topicos'>Inovação:</h3>
                 <p> Atualização constante em técnicas e conhecimentos, integrando as melhores práticas na fisioterapia.</p>
 
-                <h3>Responsabilidade:</h3>
+ </div>
+ <div>
+ <h3 className='topicos'>Responsabilidade:</h3>
                 <p>Compromisso com a saúde e segurança dos pacientes e suas famílias.</p>
-
-                <h3>Empatia:</h3>
+ </div>
+              <div>
+              <h3 className='topicos'>Empatia:</h3>
                 <p>Compreensão e sensibilidade nas interações com pacientes e colaboradores.</p>
-            </div>
+
+              </div>
+             </div>
 
         </div>
 
