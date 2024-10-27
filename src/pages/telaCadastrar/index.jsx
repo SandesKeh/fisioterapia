@@ -1,8 +1,21 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function TelaCadastrar(){
+
+    const [mostrarMensagem, setMostrarMensagem] = useState(false);
+
+    const abrirMensagem = () => {
+        setMostrarMensagem(true);
+    };
+
+    const fecharMensagem = (e) => {
+        
+        setMostrarMensagem(false)
+        
+    };
     return(
         <div className="telacadastrar">
             <div className="protecao">
@@ -19,9 +32,9 @@ export default function TelaCadastrar(){
                         </div>
                         <div className="botao">
                             
-                              <Link to="/home" >
-                              <button> + Adicionar Cliente </button>
-                              </Link> 
+                              
+                            <button> + Adicionar Cliente </button>
+                              
                             <button> <img src="/assets/image/bx-filter-alt.svg" alt="" /> Mais Filtros </button>
                         </div>
                     </div>
@@ -46,7 +59,7 @@ export default function TelaCadastrar(){
                                 <td> Kevillynsandes07@gmail.com</td>
                                 <td> (11) 978471285 </td>
                                 <td> <img src="/assets/image/bx-edit.svg" alt="" /> 
-                                    <img src="/assets/image/bx-message-alt-minus.svg" alt="" />
+                                    <img onClick={abrirMensagem} src="/assets/image/bx-message-alt-minus.svg" alt="" />
                                 </td>
                                 
                             </tr>
@@ -54,6 +67,27 @@ export default function TelaCadastrar(){
                         </table>
 
                     </div>
+
+                    {mostrarMensagem && (
+                        <div className="popup-background">
+                            <div className="popup">
+                                <div className="mensagem">
+                                    <h1>Cancelar cliente </h1>
+                                    <img onClick={fecharMensagem} src="/assets/image/bx-x.svg" alt="" />
+                                </div>
+                                <div className="mensage">
+                                    <p>Atenção! <br /> Para reativar o cliente, você deve acessar a listagem dos clientes e aplicar o filtro de Clientes Desativados e clicar em Reativar na coluna de ações.</p>
+                                </div>
+                                <div className="botao">
+                                    <h1> Tem certeza que deseja desativar esse cliente? </h1>
+                                    <div className="button">
+                                        <button className='botao' onClick={fecharMensagem} > Cancelar </button>
+                                        <button> Salvar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

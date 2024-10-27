@@ -37,17 +37,32 @@
         .notificacao{
             display: flex;
             flex-direction: column;
-            gap: 50px;
-            margin-left: 30px;
             width: 100%;
             max-width: 100%;
-            
+           
+            .botao{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 20px;
+                button{
+                    background-color: #08B4AC;
+                    width: 7%;
+                    border-radius: 7px;
+                    color: #FFFFFF;
+                    font: 300 16px Inter;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+              
+                }
+            }
             h1{
                 padding: 5px 20px;
                 background-color: #08b4ab67;
                 color: #03857F;
                 font: 600 20px Inter;
-                width: 25%;
+                width: 15%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -60,6 +75,7 @@
                 display: flex;
                 flex-direction: row;
                 width: 100%;
+                
                 table{
                     width: 100%;
                 }
@@ -73,6 +89,7 @@
                         display: flex;
                         border-top: 1px solid #c4c4c4e0;
                         justify-content: space-between;
+                        
                         th{
                             display: flex;
                             flex-direction: column;
@@ -80,9 +97,12 @@
                             text-align: start;
                             width: 80%;
                             gap: 10px;
-
+                            margin-left: 30px;
+                            margin-bottom: 40px;
                             p{
                                 font: 400 16px Inter;
+                                
+    
                             }
                         }
                         td{

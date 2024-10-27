@@ -11,6 +11,9 @@ import InserirPacotes from "./pages/inserirPacotes";
 import AddProfissional from "./pages/inserirProfissional";
 import AddDocumento from "./pages/adicionarDocumento";
 import Notificacoes from "./pages/notificacoes";
+import Inventario from "./pages/inventario";
+import TelaCliente from "./pages/telaCliente";
+import Financas from "./pages/financas";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -31,6 +34,9 @@ export default function Rotas() {
                 <Route path="/inserirProfissional" element={<AddProfissional/>}/>
                 <Route path="/inserirDocumento" element={<AddDocumento/>}/>
                 <Route path="/notificacoes" element={<Notificacoes/>}/>
+                <Route path="/inventario" element={<Inventario/>}/>
+                <Route path="/telaCliente" element={<TelaCliente/>}/>
+                <Route path="/financas" element={<Financas/>}/>
             </Routes>
         </BrowserRouter>
     )
