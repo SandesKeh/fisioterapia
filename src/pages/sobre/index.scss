@@ -210,6 +210,8 @@ font-family: "Lilita";
             color: #03989F;
             width: 100%;
             background-color: #F9F4F4;
+            margin-top: 60px;
+            
         }
         .grup{
             display: flex;
@@ -217,51 +219,27 @@ font-family: "Lilita";
             justify-content: space-evenly;
             flex-direction: row;
 
-            .visao{
-                display: flex;
-                align-items: safe;
-                flex-direction: column;
-                gap: 20px;
-                border-radius: 25px 25px 25px 0px;
             
-                background-color: #c0edf5;
-               width: 35%;
-               height: 20vh;
-               font-weight: 300;
-               h1{
-                color: #000000;
-                border-radius: 25px 10px 10px 0px;
-                padding-left: 10px;
-                width: 50%;
-                background-color: #06c0ca;
-               }
-               p{
-                width: 70%;
-                margin: 10px 0px 0px 10px;
-               }
-
-
-            }
             .missao{
                 display: flex;
                 align-items:safe;
                 flex-direction: column;
                 gap: 20px;
                 border-radius: 25px 25px 25px 0px;
-            
                 background-color: #c0edf5;
-               width: 35%;
-               height: 20vh;
-               font-weight: 300;
+                width: 35%;
+                height: 20vh;
+                font-weight: 300;
                h1{
                 color: #000000;
                 border-radius: 25px 10px 10px 0px;
                 padding-left: 10px;
-                width: 50%;
+                width: 100%;
+                font-size: 24px;
                 background-color: #06c0ca;
                }
                p{
-                width: 70%;
+                width: auto;
                 margin: 10px 0px 0px 10px;
                }
 
@@ -274,8 +252,7 @@ font-family: "Lilita";
             flex-direction: row;
             align-items: center;
             gap: 30px;
-            padding: 10px;
-                width: 75%;
+                width: 100%;
                 height: 50vh;
                 color: #000000;
                 font-size: large;
@@ -283,21 +260,21 @@ font-family: "Lilita";
                h1{
                 text-align: center;
                }
-                div{
+                .mae{
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     border-radius: 25px;
-                    width: 55vh;
+                    width: 207px;
                     padding: 35px;
                     height: 32vh;
                     border-color: #06c0ca;
-                    background-color: #c0edf5;
+                    background-color: #b5e1e9;
                     p{
                         width: 100%;
                     }
                     .topicos:hover{
-                        color:#c0edf5;
+                        color:#178194;
                     }
                     .topicos{
                         display: flex;

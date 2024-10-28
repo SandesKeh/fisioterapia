@@ -115,10 +115,16 @@ export default function Landingpage() {
                 <img src="assets/image/logo.webp" alt="nao foi" />
                 <div className="links">
                     <button onClick={() => homeRef.current.scrollIntoView({ behavior: 'smooth' })}>Home</button>
+
                     <button onClick={() => sobreRef.current.scrollIntoView({ behavior: 'smooth' })}>Sobre Nós</button>
+
                     <button onClick={() => especialidadesRef.current.scrollIntoView({ behavior: 'smooth' })}>Especialidades</button>
+                    
                     <button onClick={() => curiosidadeRef.current.scrollIntoView({ behavior: 'smooth' })}>Curiosidades</button>
-                        <Link to="/">Contatos</Link>
+                    
+                    <button>
+                    <Link className='contato' to="/">Contatos</Link>
+                    </button>
                     
                         <Link id='oloco' to='/loginCliente'> Login </Link>
                        

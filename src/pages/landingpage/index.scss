@@ -100,8 +100,14 @@
             justify-content: space-around;
             background-color: #03989F;
           
+            
             align-items: center;
             width: 80%;
+            .contato{
+                display: flex;
+                align-items: baseline;
+
+            }
             
             
 
@@ -109,13 +115,25 @@
                 font: 400 24px roboto;
                 color: #fff;
                 text-decoration: none;
-              
+                
             }
             button {
                 font: 400 24px roboto;
                 color: #fff;
                 border: none;
                 background: transparent;
+                cursor: pointer;
+
+            }
+
+            button:hover{
+
+                font: 400 24px roboto;
+                color: #000000;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+
 
             }
             
