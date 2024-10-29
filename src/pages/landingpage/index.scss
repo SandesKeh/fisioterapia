@@ -142,7 +142,7 @@
                 color: #03989F; 
                 padding: 5px 10px;
                 border: 3px solid transparent;
-                border-radius: 2px;
+                border-radius: 5px;
                 font: 400 24px roboto;
                 background-color: #fff;
                 transition: .3s;
@@ -150,8 +150,8 @@
 
             #oloco:hover{
                 transform: scale(1.1);
-                background-color: #27C1C6;
-                color: #fff;
+                background-color: #03989F;
+                color: #ffffff;
                 border: 3px solid #fff;
             }
 
