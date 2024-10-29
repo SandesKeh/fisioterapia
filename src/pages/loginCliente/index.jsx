@@ -24,7 +24,7 @@ export default function Login() {
         storage('clientelogado', resposta.data);
         
         navegate('/telaCliente') 
-       } 
+       }  
        
        catch (error) {
         alert("errou a senha porra")

@@ -1,162 +1,215 @@
 .financas{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100vh ;
-    background-color: #FFFFFF;
-
-    .protecao{
+display: flex;
+flex-direction: column;
+width: 100%;
+height: 100vh auto;
+align-items: center;
+    .all{
         display: flex;
-        flex-direction: column;
-        height: 100vh;
-        gap: 30px;
-    }
-    .cima1{
-        height: 45vh;
+        flex-direction: row;
         width: 100%;
-        display: flex;
-        justify-content: center;
-        .cima{
-            width: 90%;
-            margin: 20px 0px 10px 0px;
+        height: 100vh auto;
+        background-color: #FFFFFF;
+    
+        .protecao{
             display: flex;
             flex-direction: column;
-            
-            
-            background-color: #F6F6F6;
-
-            .periodo{
-                align-items: center;
+            height: 100vh;
+            gap: 30px;
+        }
+        .cima1{
+            height: 45vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            .cima{
+                width: 90%;
+                margin: 20px 0px 10px 0px;
                 display: flex;
-                flex-direction: row;
-                margin: 50px 0px 50px 50px;
-                gap: 20px;
-
-
-                h1{
-                    font: 600 20px Inter;
-                    color: #08B4AC;
-                }
-
-                select{
-                    height: 30px;
-                    width: 20%;
-                    display: flex;
-                    justify-content: center;
+                flex-direction: column;
+                
+                
+                background-color: #F6F6F6;
+    
+                .periodo{
                     align-items: center;
-                }
-
-                .botao{
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 30px;
-                    margin-left: 30%;
-
-                    
-                    #primeiro{
-                        font: 300 15px Inter;
-                        background-color: #1C7330;
-                        color: #F1F1F1;
+                    flex-direction: row;
+                    margin: 50px 0px 50px 50px;
+                    gap: 20px;
+    
+    
+                    h1{
+                        font: 600 20px Inter;
+                        color: #08B4AC;
                     }
-
-                    #segundo{
-                        font: 300 15px Inter;
-                        background-color: #F44336;
-                        color: #F1F1F1;
-                        
-                    }
-
-                    #terceiro{
+    
+                    select{
+                        height: 30px;
+                        width: 20%;
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        font: 300 15px Inter;
-                        background-color: #FFFFFF;
-                        border: 1px solid #08B4AC;
-                        color: #07A09B;
                     }
-                
+    
+                    .botao{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 30px;
+                        margin-left: 30%;
+    
+                        
+                        #primeiro{
+                            font: 300 15px Inter;
+                            background-color: #1C7330;
+                            color: #F1F1F1;
+                        }
+    
+                        #segundo{
+                            font: 300 15px Inter;
+                            background-color: #F44336;
+                            color: #F1F1F1;
+                            
+                        }
+    
+                        #terceiro{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font: 300 15px Inter;
+                            background-color: #FFFFFF;
+                            border: 1px solid #08B4AC;
+                            color: #07A09B;
+                        }
                     
+                        
+                    }
                 }
-            }
-            .card{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-around;
-                align-items: center;
-
-                .saldos{
-                    height: 190px;
+                .card{
                     display: flex;
                     flex-direction: row;
-                    gap: 10px;
-                    background-color: #F6F6F6;
-                    border: 10px solid #07A09B;
-                    border-radius: 8px;
+                    justify-content: space-around;
                     align-items: center;
-                    padding: 10px;
-                    img{
-                        background-color: #07A09B;
-                        border-radius: 50px;
-                        height: 50px;
+    
+                    .saldos{
+                        height: 190px;
+                        display: flex;
+                        flex-direction: row;
+                        gap: 10px;
+                        background-color: #F6F6F6;
+                        border: 5px  solid #07A09B;
+                        box-shadow: -10px 0px 2px #07A09B;
+                        border-radius: 8px;
+                        align-items: center;
                         padding: 10px;
-                       
-                    }
-                    .saldoatual{
-                        h1{
-                            margin-left: 20px;
-                            font: 400 18px Inter;
+                        img{
+                            background-color: #07A09B;
+                            border-radius: 50px;
+                            height: 50px;
+                            padding: 10px;
+                           
                         }
-
-                        h2{
-                            margin-left: 20px;
-                            font: 400 40px Inter;
+                        .saldoatual{
+                            h1{
+                                margin-left: 20px;
+                                font: 400 18px Inter;
+                            }
+    
+                            h2{
+                                margin-left: 20px;
+                                font: 400 40px Inter;
+                            }
+                        }
+    
+                        .naopago{
+                            padding-top: 30%;
+                            padding-left: 50px;
+                            h1{
+                                font: 400 10px Inter;
+                             
+                            }
                         }
                     }
-
-                    .naopago{
-                        padding-top: 30%;
-                        padding-left: 50px;
-                        h1{
-                            font: 400 10px Inter;
-                         
+    
+                    .saldos1{
+                        height: 190px;
+                        display: flex;
+                        flex-direction: row;
+                        gap: 10px;
+                        background-color: #F6F6F6;
+                        border: 5px solid #1C7330;
+                        box-shadow: -10px 0px 2px#1C7330;
+                        border-radius: 8px;
+                        align-items: center;
+                        padding: 10px;
+                        img{
+                            background-color: #1C7330;
+                            border-radius: 58px;
+                            height: 50px;
+                            width: 60px;
+                            padding: 5px;
+    
+                           
+                        }
+                        .saldoatual{
+                            h1{
+                                color: #1C7330;
+                                margin-left: 20px;
+                                font: 400 18px Inter;
+                            }
+    
+                            h2{
+                                margin-left: 20px;
+                                font: 400 40px Inter;
+                            }
+                        }
+    
+                        .naopago{
+                            padding-top: 30%;
+                            padding-left: 50px;
+                            h1{
+                                font: 400 10px Inter;
+                             
+                            }
                         }
                     }
+    
                 }
-
-                .saldos1{
+    
+                .saldos2{
                     height: 190px;
                     display: flex;
                     flex-direction: row;
                     gap: 10px;
                     background-color: #F6F6F6;
-                    border: 10px solid #1C7330;
+                    border: 5px solid #F44336;
+                    box-shadow: -10px 0px 2px#F44336;
                     border-radius: 8px;
                     align-items: center;
                     padding: 10px;
                     img{
-                        background-color: #1C7330;
+                        background-color: #F44336;
                         border-radius: 58px;
                         height: 50px;
                         width: 60px;
                         padding: 5px;
-
+    
                        
                     }
                     .saldoatual{
                         h1{
-                            color: #1C7330;
+                            color: #F44336;
                             margin-left: 20px;
                             font: 400 18px Inter;
                         }
-
+    
                         h2{
                             margin-left: 20px;
                             font: 400 40px Inter;
                         }
                     }
-
+    
                     .naopago{
                         padding-top: 30%;
                         padding-left: 50px;
@@ -165,55 +218,66 @@
                          
                         }
                     }
+                
                 }
-
+    
             }
 
-            .saldos2{
-                height: 190px;
+            .filtros{
                 display: flex;
                 flex-direction: row;
-                gap: 10px;
-                background-color: #F6F6F6;
-                border: 10px solid #F44336;
-                border-radius: 8px;
-                align-items: center;
-                padding: 10px;
-                img{
-                    background-color: #F44336;
-                    border-radius: 58px;
-                    height: 50px;
-                    width: 60px;
-                    padding: 5px;
+                width: 100%;
+                justify-content: space-between;
+                padding: 30px 0px;
 
-                   
-                }
-                .saldoatual{
-                    h1{
-                        color: #F44336;
-                        margin-left: 20px;
-                        font: 400 18px Inter;
-                    }
+                .esquerda{
+                    display: flex;
+                    flex-direction: row;
+                    gap:20px ;
+                    align-items: center;
 
-                    h2{
-                        margin-left: 20px;
-                        font: 400 40px Inter;
+                    button{
+                        padding: 5px 20px 5px 10px;
+                        border: 1px solid rgb(197, 190, 190);
+                        border-radius: 5px;
+                        color: #1C7330;
+                        font: 400 16px roboto;
                     }
                 }
-
-                .naopago{
-                    padding-top: 30%;
-                    padding-left: 50px;
-                    h1{
-                        font: 400 10px Inter;
-                     
-                    }
-                }
-            
             }
 
+            .tabela{
+                display: flex;
+            flex-direction: column;
+            align-items: center;
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                
+            }
+            
+            table, th, td {
+                border: 1px solid #363636;
+                
+            }
+            
+            th, td {
+                padding: 12px;
+                text-align: left;
+            }
+            
+            th {
+                background-color: #FFFFFF;
+                color: #08B4AC;
+            }
+            td{
+                background-color: #D9D9D9;
+            }
+            }
+
+
         }
+      
     }
-  
     
 }
