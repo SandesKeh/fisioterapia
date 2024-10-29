@@ -112,7 +112,7 @@ export default function Landingpage() {
     return (
         <div className="landpage">
             <div className="cabecalho" ref={homeRef}>
-                <img src="assets/image/logo.webp" alt="nao foi" />
+                <img src="assets/image/logo.png" alt="nao foi" />
                 <div className="links">
                     <button onClick={() => homeRef.current.scrollIntoView({ behavior: 'smooth' })}>Home</button>
 

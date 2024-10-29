@@ -1,16 +1,35 @@
 import './index.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 import storage from 'local-storage';
+import axios from 'axios';
 
 
 
 
 export default function Login() {
-    
+    const navegate= useNavigate()
     const [email, setEmail] = useState('')
-    const [cpf, setCpf] = useState('')
-   
+    const [senha, setSenha] = useState('')
+
+    async function Entrar(){
+       try {
+        const link = 'http://localhost:5000/logincliente/';
+        const user= {
+            email: email,
+            senha: senha
+        };
+
+        const resposta= await axios.post(link, user);
+        storage('clientelogado', resposta.data);
+        
+        navegate('/telaCliente') 
+       } 
+       
+       catch (error) {
+        alert("errou a senha porra")
+       }
+    }
 
    
 
@@ -41,14 +60,14 @@ export default function Login() {
                                 </div>
                                 <div className="input">
                                     <h1>SENHA:</h1>
-                                    <input type="text"  placeholder=' Digite sua senha'   value={cpf} onChange={e => setCpf(e.target.value)}/>
+                                    <input type="text"  placeholder=' Digite sua senha'   value={senha} onChange={e => setSenha(e.target.value)}/>
                                 </div>
 
                             </div>
 
                             
 
-                            <button>Entrar</button>
+                            <button  onClick={Entrar} >Entrar</button>
                                 <div className="senha">
                                     <a href=""> Esqueceu a senha? </a>
                                 </div>
