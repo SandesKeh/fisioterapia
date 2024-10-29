@@ -3,16 +3,217 @@
     flex-direction: row;
     width: 100%;
     height: 100vh ;
-
+    background-color: #FFFFFF;
 
     .protecao{
         display: flex;
         flex-direction: column;
         height: 100vh;
-        background-color: #FFFFFF;
         gap: 30px;
     }
+    .cima1{
+        height: 45vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .cima{
+            width: 90%;
+            margin: 20px 0px 10px 0px;
+            display: flex;
+            flex-direction: column;
+            
+            
+            background-color: #F6F6F6;
 
-   
+            .periodo{
+                align-items: center;
+                display: flex;
+                flex-direction: row;
+                margin: 50px 0px 50px 50px;
+                gap: 20px;
+
+
+                h1{
+                    font: 600 20px Inter;
+                    color: #08B4AC;
+                }
+
+                select{
+                    height: 30px;
+                    width: 20%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .botao{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 30px;
+                    margin-left: 30%;
+
+                    
+                    #primeiro{
+                        font: 300 15px Inter;
+                        background-color: #1C7330;
+                        color: #F1F1F1;
+                    }
+
+                    #segundo{
+                        font: 300 15px Inter;
+                        background-color: #F44336;
+                        color: #F1F1F1;
+                        
+                    }
+
+                    #terceiro{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font: 300 15px Inter;
+                        background-color: #FFFFFF;
+                        border: 1px solid #08B4AC;
+                        color: #07A09B;
+                    }
+                
+                    
+                }
+            }
+            .card{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+
+                .saldos{
+                    height: 190px;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    background-color: #F6F6F6;
+                    border: 10px solid #07A09B;
+                    border-radius: 8px;
+                    align-items: center;
+                    padding: 10px;
+                    img{
+                        background-color: #07A09B;
+                        border-radius: 50px;
+                        height: 50px;
+                        padding: 10px;
+                       
+                    }
+                    .saldoatual{
+                        h1{
+                            margin-left: 20px;
+                            font: 400 18px Inter;
+                        }
+
+                        h2{
+                            margin-left: 20px;
+                            font: 400 40px Inter;
+                        }
+                    }
+
+                    .naopago{
+                        padding-top: 30%;
+                        padding-left: 50px;
+                        h1{
+                            font: 400 10px Inter;
+                         
+                        }
+                    }
+                }
+
+                .saldos1{
+                    height: 190px;
+                    display: flex;
+                    flex-direction: row;
+                    gap: 10px;
+                    background-color: #F6F6F6;
+                    border: 10px solid #1C7330;
+                    border-radius: 8px;
+                    align-items: center;
+                    padding: 10px;
+                    img{
+                        background-color: #1C7330;
+                        border-radius: 58px;
+                        height: 50px;
+                        width: 60px;
+                        padding: 5px;
+
+                       
+                    }
+                    .saldoatual{
+                        h1{
+                            color: #1C7330;
+                            margin-left: 20px;
+                            font: 400 18px Inter;
+                        }
+
+                        h2{
+                            margin-left: 20px;
+                            font: 400 40px Inter;
+                        }
+                    }
+
+                    .naopago{
+                        padding-top: 30%;
+                        padding-left: 50px;
+                        h1{
+                            font: 400 10px Inter;
+                         
+                        }
+                    }
+                }
+
+            }
+
+            .saldos2{
+                height: 190px;
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+                background-color: #F6F6F6;
+                border: 10px solid #F44336;
+                border-radius: 8px;
+                align-items: center;
+                padding: 10px;
+                img{
+                    background-color: #F44336;
+                    border-radius: 58px;
+                    height: 50px;
+                    width: 60px;
+                    padding: 5px;
+
+                   
+                }
+                .saldoatual{
+                    h1{
+                        color: #F44336;
+                        margin-left: 20px;
+                        font: 400 18px Inter;
+                    }
+
+                    h2{
+                        margin-left: 20px;
+                        font: 400 40px Inter;
+                    }
+                }
+
+                .naopago{
+                    padding-top: 30%;
+                    padding-left: 50px;
+                    h1{
+                        font: 400 10px Inter;
+                     
+                    }
+                }
+            
+            }
+
+        }
+    }
+  
     
 }
