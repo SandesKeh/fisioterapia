@@ -19,7 +19,7 @@ export default function TelaLogin() {
             senha: senha
         }
 
-        const link = `http://localhost:3000/login/`;
+        const link = `http://localhost:5000/login/`;
         const resposta = await axios.post(link, usuario);
         storage('adm-logado', resposta.data);
         navegate('/telaCadastrar');   
