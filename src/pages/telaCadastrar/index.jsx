@@ -32,9 +32,9 @@ export default function TelaCadastrar(){
                         </div>
                         <div className="botao">
                             
-                              
-                            <button> + Adicionar Cliente </button>
-                              
+                            <Link to='/' >  
+                                <button> + Adicionar Cliente </button>
+                            </Link> 
                             <button> <img src="/assets/image/bx-filter-alt.svg" alt="" /> Mais Filtros </button>
                         </div>
                     </div>
