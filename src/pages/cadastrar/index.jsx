@@ -1,13 +1,32 @@
 import './index.scss';
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
+import storage from 'local-storage';
+import axios from 'axios';
 
 export default function Cadastro() {
     const [email, setEmail] = useState('')
-    const [cpf, setCpf] = useState('')
-   
+    const [senha, setSenha] = useState('')
+    const [confirmarsenha, setConfirmarsenha] = useState('')
+    
+    const navagate= useNavigate();
+    async function Cadastrar(){
+     try {
+        const usuario = {
+            email: email,
+            senha: senha
+        }
+        let link= 'http://localhost:5000/cliente/'
 
+        const sla = await axios.post(link, usuario);
+        alert("foi")
+        navagate('/loginCliente')   
+     } 
+     catch (error) {
+        alert("nn foi")
+     }
+    }
    
 
 
@@ -37,18 +56,18 @@ export default function Cadastro() {
                                 </div>
                                 <div className="input">
                                     <h1>SENHA:</h1>
-                                    <input type="text"  placeholder=' Digite sua senha'   value={cpf} onChange={e => setCpf(e.target.value)}/>
+                                    <input type="text"  placeholder=' Digite sua senha'   value={senha} onChange={e => setSenha(e.target.value)}/>
                                 </div>
                                 <div className="input">
                                     <h1>CONFIRMAR SENHA:</h1>
-                                    <input type="text"  placeholder=' Digite sua senha novamente'   value={cpf} onChange={e => setCpf(e.target.value)}/>
+                                    <input type="text"  placeholder=' Digite sua senha novamente'   value={confirmarsenha} onChange={e => setConfirmarsenha(e.target.value)}/>
                                 </div>
 
                             </div>
 
                             
 
-                            <button>Cadastre-se</button>
+                            <button onClick={Cadastrar} > Cadastre-se</button>
                                 <div className="cadastroNovo"> 
                                     <Link to="/loginCliente">Já tem conta? <a href="">Faça seu login</a> </Link>
                                </div>
