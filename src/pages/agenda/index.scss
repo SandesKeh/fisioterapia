@@ -1,211 +1,131 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-}
+// index.scss
 
-.agenda-page {
+.pagina-agenda {
     display: flex;
-
-    .cabecalho {
+    /* Sidebar */
+    .sidebar {
+        width: 200px;
+        background-color: #002b36;
+        color: #7bb5a3;
+        padding: 10px;
         display: flex;
-        align-items: end;
-        justify-content: center;
-        position: fixed;
-        background-color: #001429;
+        flex-direction: column;
+        gap: 20px;
     }
 
-    .left {
-        margin-left: 125px;
-        height: 100vh;
-        width: 30vw;
-        border-right: 1px solid #00000050;
+    /* Content Area */
+    .content {
+        flex: 1;
+        padding: 20px;
 
-        .btns {
-            width: 80%;
-            height: 13%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0px auto;
-
-            .row {
-                display: flex;
-                gap: 20px;
-                flex-direction: column;
-                margin-top: 20px;
-
-                input {
-                    width: 65%;
-                    height: 30px;
-                    border-radius: 5px;
-                    box-shadow: 0px 0px 10px #00000025;
-                    border: 1px solid #00000025;
-                    outline: none;
-                    padding-left: 20px;
-                }
-
-                .nataly {
-                    display: flex;
-                    flex-direction: row;
-                    gap: 20px;
-
-                    button {
-                        width: 120px;
-                        height: 40px;
-                        border: none;
-                        border-bottom: 2px solid #6200ff;
-                        outline: none;
-                        border-radius: 5px;
-                        box-shadow: 0px 0px 10px #00000025;
-                        background-color: #f6f6f6;
-                        font: 400 14px arial;
-                    }
-                }
-            }
-        }
-
-        .calendario {
-            width: 100%;
-            height: 50%;
-            margin-top: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            .block {
-                width: 80%;
-                height: 90%;
-                border-radius: 3px;
-                border: 1px solid #00000025;
-                box-shadow: 0px 0px 10px #00000025;
-            }
-        }
-
-
-    }
-
-    .right {
-        width: calc(70vw - 125px);
-
+        /* Header with buttons */
         .header {
-            height: 13%;
             display: flex;
-            align-items: end;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
 
-            .row {
+            button {
+                padding: 5px 10px;
+                cursor: pointer;
+                transition: background-color 0.3s, color 0.3s;
+
+                &:hover {
+                    background-color: #005f73;
+                    color: white;
+                }
+
+                &.active {
+                    background-color: #007bff;
+                    color: white;
+                }
+            }
+        }
+
+        /* Agenda Header */
+        .agenda-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+
+            .add-event-button {
+                padding: 5px 10px;
+                cursor: pointer;
+                background-color: #007bff;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                transition: background-color 0.3s;
+
+                &:hover {
+                    background-color: #005f73;
+                }
+            }
+        }
+
+        /* Events Table */
+        .events {
+            table {
                 width: 100%;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 0px 50px;
+                border-collapse: collapse;
 
-                button {
-                    width: 120px;
-                    height: 40px;
-                    border: none;
-                    border-bottom: 2px solid #6200ff;
-                    outline: none;
-                    border-radius: 5px;
-                    box-shadow: 0px 0px 10px #00000025;
-                    background-color: #f6f6f6;
-                    font: 400 14px arial;
-
-                }
-
-                .more {
-                    width: 40px;
-                    height: 40px;
-                    border: none;
-                    border-bottom: 2px solid #6200ff;
-                    outline: none;
-                    border-radius: 5px;
-                    box-shadow: 0px 0px 10px #00000025;
-                    background-color: #f6f6f6;
-                    font: 400 14px arial;
-
+                th, td {
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    text-align: center;
                 }
             }
         }
 
-        .container {
-            border: 1px solid #00000010;
-            border-radius: 3px;
-            box-shadow: 0px 0px 10px #00000025;
-            width: 90%;
-            height: 70%;
-            margin: 0 auto;
-            margin-top: 20px;
-
-            .card {
-
-                .header-card {
-                    .grey {
-                        display: flex;
-                        flex-direction: row;
-                        padding: 10px 20px;
-                        gap: 20px;
-                        background-color: #EEEEEE;
-                    }
-
-                    .white {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        padding: 10px 30px;
-
-                        select {
-
-                            border: none;
-                            border-radius: 3px;
-                            padding: 5px 10px;
-                            background-color: #EEEEEE;
-                        }
-                    }
-                }
-
-                .items {
-                    width: 90%;
-                    height: 80%;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 15px;
-                    margin: 10px auto;
-
-                    .item {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
-                        align-items: center;
-                        padding: 10px 10px;
-                        border-radius: 5px;
-                        background-color: #EEEEEE;
-
-                        .mores {
-                            width: 20px;
-                            height: 20px;
-                            background-color: #D9D9D9;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            border: 1px solid #00000025;
-                            border-radius: 3px;
-
-                        }
-
-                        .status {
-                            border: 1px solid #00000025;
-                            padding: 1px 10px;
-                            border-radius: 3px;
-                            background-color: #FF0707;
-                            color: #ffffff;
-                            font: 600 14px arial;
-
-                        }
-                    }
-                }
-            }
+        /* Status Styles */
+        .status-pending {
+            color: red;
         }
+
+        .status-complete {
+            color: green;
+        }
+    }
+
+    /* Popup Modal */
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-content {
+            background: white;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .popup-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+    }
+
+    /* Form Label Styles */
+    label {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
     }
 }
