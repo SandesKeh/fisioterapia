@@ -43,7 +43,8 @@ export default function Agenda() {
                             </div>
                             <div className='white'>
                                 <p>local</p>
-                                <select name="" id="">
+                                <select name="Status" >
+                                    
                                     <option value="Status">Status
                                     </option>
                                     <option value="Status">Pendente
@@ -85,7 +86,8 @@ export default function Agenda() {
                                 </div>
                                 <p>Aculp. Maria</p>
                                 <p>09:00</p>
-                                <div className='mores'><p>...</p></div>
+                                <div className='mores'><p>...
+                                    </p></div>
                             </div>
                         </div>
                     </div>
