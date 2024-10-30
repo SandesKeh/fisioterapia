@@ -24,9 +24,14 @@ font-family: "Lilita";
             flex-direction: row;
             justify-content: space-around;
             background-color: #03989F;
-          
             align-items: center;
             width: 80%;
+
+            .contato{
+                display: flex;
+                align-items: baseline;
+
+            }
             
             
 
@@ -34,27 +39,51 @@ font-family: "Lilita";
                 font: 400 24px roboto;
                 color: #fff;
                 text-decoration: none;
-              
+                
             }
+            button {
+                font: 400 24px roboto;
+                color: #fff;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+
+            }
+
+            button:hover{
+
+                font: 400 24px roboto;
+                color: #000000;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+
+
+            }
+            
 
             #oloco{
                 color: #03989F; 
                 padding: 5px 10px;
                 border: 3px solid transparent;
-                border-radius: 2px;
+                border-radius: 5px;
                 font: 400 24px roboto;
                 background-color: #fff;
                 transition: .3s;
             }
 
-            button {
+            #oloco:hover{
+                transform: scale(1.1);
                 background-color: #03989F;
                 color: #ffffff;
-                border: none;
-                font: 400 24px roboto;
+                border: 3px solid #fff;
             }
 
-        
+            #oloco:active{
+                background-color: #fff;
+                color: #27C1C6;
+                border: none;
+            }
         }
        
     }
@@ -188,8 +217,9 @@ font-family: "Lilita";
         justify-content: space-between;
         margin: 15px;
         padding: 30px;
-        gap: 20px;
+        gap: 30px;
         align-items: center;
+        
 
         .primeiro{
             display: flex;
@@ -197,27 +227,26 @@ font-family: "Lilita";
             align-items: center;
             width: 100%;
             height: 30vh;
-            gap: 10vh;
-            padding: 10px;
+            gap: 30px;
+            padding-top: 40px;
             background-color: #03979f36;
+            border-radius: 15px;
               
                 p{
-                    font-weight: 300;
+                    font-weight: 200;
+                    color: #000000;
+                    font: 400 23px 'Roboto';
+                    width: 92%;
                 }
         }
-        .titulo{
-            text-align: center;
-            color: #03989F;
-            width: 100%;
-            background-color: #F9F4F4;
-            margin-top: 60px;
-            
-        }
+
+       
         .grup{
             display: flex;
             align-items: center;
             justify-content: space-evenly;
             flex-direction: row;
+
 
             
             .missao{
@@ -225,28 +254,49 @@ font-family: "Lilita";
                 align-items:safe;
                 flex-direction: column;
                 gap: 20px;
-                border-radius: 25px 25px 25px 0px;
                 background-color: #c0edf5;
                 width: 35%;
                 height: 20vh;
                 font-weight: 300;
+                border-radius: 25px;
+
                h1{
-                color: #000000;
-                border-radius: 25px 10px 10px 0px;
+                display: flex;
+                align-items: center;
+                color: #ffffff;
                 padding-left: 10px;
                 width: 100%;
                 font-size: 24px;
-                background-color: #06c0ca;
+                background-color: #03989F;
+                border-radius: 5px;
+                gap: 8px;
+                
+
+                img{
+                    width: 25px;
+                }
                }
+               
                p{
                 width: auto;
                 margin: 10px 0px 0px 10px;
+                font: 300 20px Lilita;
+                
                }
 
 
             }
             
         } 
+        
+        .titulo{
+            text-align: center;
+            color: #03989F;
+            width: 100%;
+            background-color: #000000;
+            margin-top: 60px;
+            
+        }
         .valores{
             display: flex;
             flex-direction: row;

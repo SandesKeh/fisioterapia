@@ -1,8 +1,8 @@
 import './index.scss';
 import React, { useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-
-
+import Olho from '../../assets/image/visao-estrategica.png';
+import Visao from '../../assets/image/meta.png'
 export default function Sobre() {
 
     const navegacao = useNavigate();
@@ -44,13 +44,13 @@ export default function Sobre() {
 
                 <div className='grup'>
                     <div className="missao">
-                        <h1>Visão</h1>
-                        <p>"Ser referência em atendimento fisioterapêutico domiciliar na Zona Sul de São Paulo, promovendo a saúde e o bem-estar de crianças e adultos com excelência e humanização."</p>
+                        <h1> <img src={Olho} alt="visao"/> Visão  </h1>
+                        <p> Ser referência em atendimento fisioterapêutico domiciliar na Zona Sul de São Paulo, promovendo a saúde e o bem-estar de crianças e adultos com excelência e humanização. </p>
                     </div>
 
                     <div className="missao">
-                        <h1>Missão</h1>
-                        <p>"Oferecer serviços de fisioterapia de alta qualidade, com foco em cuidados pediátricos e adultos, utilizando abordagens integrativas e personalizadas, sempre priorizando a saúde e o conforto dos nossos pacientes."</p>
+                        <h1> <img src={Visao} alt="visao"/> Missão  </h1>
+                        <p> Oferecer serviços de fisioterapia de alta qualidade, com foco em cuidados pediátricos e adultos, utilizando abordagens integrativas e personalizadas, sempre priorizando a saúde e o conforto dos nossos pacientes. </p>
                     </div>
 
 
