@@ -76,8 +76,31 @@ export default function Card(props) {
                 pacotes: planofinanceiro,
                 valor: valoesessao
             }
+            const linkendereco= 'http://localhost:5000/inserir/endereco';
+            const endereco={
+                pais: pais,
+                cep: cep,
+                cidade: cidade,
+                estado: estado,
+                endereco: endereço,
+                numero: numero,
+                bairro: bairro,
+                complemento: complemento
+            }
+            const linkresponsavel= 'http://localhost:5000/inserir/responsavel';
+            const responsavel={
+                nome: nomeresponsavel,
+                cpf: cpfresponsavel,
+                telefone: telefone
+            }
+
+            const resposta= await axios.post(linkpessoal, pessoal, linkfinanceiro, financeiro, linkendereco, endereco, linkresponsavel, responsavel);
+            storage('clientecadastrado', resposta.data);
+
+            alert('Cliente cadastrado ');
+            navagate('/telaCadastrar')
         } catch (error) {
-            
+           alert('erro') 
         }
 
     }
@@ -106,7 +129,7 @@ export default function Card(props) {
                 <div className="cont1">
                     <div className="inpute">
                         <h1>Nome: </h1>
-                        <input type="text" placeholder="Digite seu nome"/>
+                        <input type="text" placeholder="Digite seu nome" value={nome} onChange={e => setNome(e.target.value)} />
                     </div>
                 </div>    
                 
@@ -114,7 +137,7 @@ export default function Card(props) {
                     <div className="inpute">
                         <h1> Grupo: </h1>
 
-                        <select> 
+                        <select value={grupo} onChange={e => setGrupo(e.target.value)} > 
                             <option value=""> selecione </option>
                             <option value="Crianças"> Crianças</option>
                             <option value="Adolecentes">Adolecentes</option>
@@ -126,13 +149,13 @@ export default function Card(props) {
                     <div className="inpute">
                         <h1> Data de Nascimento:</h1>
 
-                        <input type="date" />
+                        <input type="date" value={data} onChange={e => setData(e.target.value)} />
                     </div>
 
                     <div className="inpute">
                         <h1> Idade: </h1>
 
-                        <input type="text" />
+                        <input type="text" value={idade} onChange={e => setIdade(e.target.value)} />
 
                     </div>
                 </div>
@@ -141,7 +164,7 @@ export default function Card(props) {
                     <div className="inpute">
                         <h1> Gênero: </h1>
 
-                        <select >
+                        <select value={genero} onChange={e => setGenero(e.target.value)} >
                             <option value=""> Selecione </option>
                             <option value="Masculino">Masculino</option>
                             <option value="Feminino">Feminino</option>
@@ -152,7 +175,7 @@ export default function Card(props) {
                     <div className="inpute">
                         <h1> E-mail: </h1>
 
-                        <input type="text" placeholder=" Digite seu email"/>
+                        <input type="text" placeholder=" Digite seu email" value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
 
                 </div>
@@ -161,16 +184,16 @@ export default function Card(props) {
 
                     <div className="inpute">
                         <h1> Celular: </h1>
-                        <input type="text" placeholder='+55' />
+                        <input type="text" placeholder='+55' value={celular} onChange={e => setcelular(e.target.value)} />
                     </div>
 
                     <div className="inpute">
                         <h1>CPF:</h1>
-                        <input type="text" placeholder="___.___.___.__" />
+                        <input type="text" placeholder="___.___.___.__" value={cpf} onChange={e => setCpf(e.target.value)} />
                     </div>
                     <div className="inpute">
                         <h1> RG: </h1>
-                        <input type="text" />
+                        <input type="text" value={rg} onChange={e => setRg(e.target.value)} />
                     </div>
                 </div>
             
@@ -193,7 +216,7 @@ export default function Card(props) {
                     <div className="inpute">
                         <h1> Valor Financeiro: </h1>
 
-                        <select>
+                        <select value={planofinanceiro} onChange={e => setPlanofinanceiro(e.target.value)} >
                             <option value="Por sessão"> Por sessão </option>
                             <option value="Por mês (mensalidade)">Por mês (mensalidade)</option>
                             <option value="Convênio">Convênio</option>
@@ -205,7 +228,7 @@ export default function Card(props) {
                     <div className="inpute">
                         <h1> Valor da Sessão: </h1>
 
-                        <input type="text" placeholder="R$: 0,00"/>
+                        <input type="text" placeholder="R$: 0,00" value={valoesessao} onChange={e => setValosessao(e.target.value)} />
                     </div>
 
                 </div>
@@ -229,7 +252,7 @@ export default function Card(props) {
 
                 <div className="inpute">
                     <h1> País: </h1>
-                    <select>
+                    <select value={pais} onChange={e => setPais(e.target.value)} >
                         <option value="">Selecione</option>
                         <option value="Afeganistão">Afeganistão</option>
                         <option value="África do Sul">África do Sul</option>
@@ -410,16 +433,16 @@ export default function Card(props) {
 
                 <div className="inpute">
                     <h1>CEP:</h1>
-                    <input type="text" placeholder="_____-___" />
+                    <input type="text" placeholder="_____-___" value={cep} onChange={e => setCep(e.target.value)} />
                 </div>
                 <div className="inpute">
                     <h1> Cidade: </h1>
-                    <input type="text" />
+                    <input type="text" value={cidade} onChange={e => setCidade(e.target.value)} />
                 </div>
             
                 <div className="inpute1">
                     <h1> Estado: </h1>
-                    <input type="text" />
+                    <input type="text" value={estado} onChange={e => setEstado(e.target.value)} />
                 </div>
             </div>
 
@@ -427,14 +450,14 @@ export default function Card(props) {
                     <div className="inpute1">
                         <h1> Endereço : </h1>
 
-                        <input type="text"  />
+                        <input type="text" value={endereço} onChange={e => setEndereço(e.target.value)} />
 
                     </div>
 
                     <div className="inpute2">
                         <h1> Numero: </h1>
 
-                        <input type="text" />
+                        <input type="text" value={numero} onChange={e => setNumero(e.target.value)} />
                     </div>
 
             </div>
@@ -443,14 +466,14 @@ export default function Card(props) {
                     <div className="inpute">
                         <h1> Bairro: </h1>
 
-                        <input type="text"  />
+                        <input type="text" value={bairro} onChange={e => setBairro(e.target.value)} />
 
                     </div>
 
                     <div className="inpute">
                         <h1> Complemento: </h1>
 
-                        <input type="text" />
+                        <input type="text" value={complemento} onChange={e => setComplemento(e.target.value)} />
                     </div>
 
                 </div>
@@ -473,7 +496,7 @@ export default function Card(props) {
              <div className="cont1">
                     <div className="inpute">
                         <h1>Nome do Responsável : </h1>
-                        <input type="text" placeholder="Digite seu nome"/>
+                        <input type="text" placeholder="Digite seu nome" value={nomeresponsavel} onChange={e => setNomeresponsavel(e.target.value)} />
                     </div>
                 </div>    
             
@@ -483,20 +506,20 @@ export default function Card(props) {
                     <div className="inpute">
                         <h1> CPF : </h1>
 
-                        <input type="text"  placeholder="___.___.___-__"/>
+                        <input type="text"  placeholder="___.___.___-__" value={cpfresponsavel} onChange={e => setCpfresponsavel(e.target.value)} />
 
                     </div>
             
                     <div className="inpute">
                         <h1> Telefone : </h1>
 
-                        <input type="text" placeholder="(__) _____-____"/>
+                        <input type="text" placeholder="(__) _____-____" value={telefone} onChange={e => setTenefone(e.target.value)} />
                     </div>
             </div>
         </div>     
 
         <div className="botao">
-            <button> <box-icon name='check' color='#ffffff' ></box-icon> Salvar </button>
+            <button onClick={Adicionarcliente} >   Salvar </button>
         </div>    
 
 
