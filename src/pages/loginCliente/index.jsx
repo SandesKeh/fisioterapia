@@ -24,7 +24,7 @@ export default function Login() {
         storage('clientelogado', resposta.data);
         
         navegate('/telaCliente') 
-       } 
+       }  
        
        catch (error) {
         alert("senha ou usuario invalido")
