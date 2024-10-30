@@ -27,7 +27,7 @@ export default function Login() {
        } 
        
        catch (error) {
-        alert("errou a senha porra")
+        alert("errou a senha")
        }
     }
 
