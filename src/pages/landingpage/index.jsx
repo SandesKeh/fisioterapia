@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Landingpage() {
-
+    const [menuOpen, setMenuOpen] = useState(false);
     const [mostrarPopup, setMostrarPopup] = useState(false);
 
         const abrirPopup = () => {
@@ -111,25 +111,25 @@ export default function Landingpage() {
 
     return (
         <div className="landpage">
-            <div className="cabecalho" ref={homeRef}>
-                <img src="assets/image/logo.png" alt="nao foi" />
-                <div className="links">
-                    <button onClick={() => homeRef.current.scrollIntoView({ behavior: 'smooth' })}>Home</button>
-
-                    <button onClick={() => sobreRef.current.scrollIntoView({ behavior: 'smooth' })}>Sobre Nós</button>
-
-                    <button onClick={() => especialidadesRef.current.scrollIntoView({ behavior: 'smooth' })}>Especialidades</button>
-                    
-                    <button onClick={() => curiosidadeRef.current.scrollIntoView({ behavior: 'smooth' })}>Curiosidades</button>
-                    
-                    <button>
-                    <Link className='contato' to="/">Contatos</Link>
-                    </button>
-                    
-                        <Link id='oloco' to='/loginCliente'> Login </Link>
-                       
-                </div> 
-            </div>
+           <div className="cabecalho" ref={homeRef}>
+    <img src="assets/image/logo.png" alt="nao foi" />
+    
+ 
+    <button className="hamburger-btn" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
+    </button>
+    
+    <div className={`links ${menuOpen ? 'open' : ''}`}>
+        <button onClick={() => homeRef.current.scrollIntoView({ behavior: 'smooth' })}>Home</button>
+        <button onClick={() => sobreRef.current.scrollIntoView({ behavior: 'smooth' })}>Sobre Nós</button>
+        <button onClick={() => especialidadesRef.current.scrollIntoView({ behavior: 'smooth' })}>Especialidades</button>
+        <button onClick={() => curiosidadeRef.current.scrollIntoView({ behavior: 'smooth' })}>Curiosidades</button>
+        <button>
+            <Link className='contato' to="/">Contatos</Link>
+        </button>
+        <Link id='oloco' to='/loginCliente'> Login </Link>
+    </div>
+</div>
 
             <div className="banner" style={{ backgroundImage: `URL(${imagem})` }}>
                 <div className='protecao'>   
@@ -146,7 +146,7 @@ export default function Landingpage() {
                     <p>Nosso objetivo é ir além de uma simples seção de fisioterapia e pilates, buscamos impulsionar a sáude dos nossos clientes. Entendemos que cada organização é única em sua estrutura e necessidade, por isso estamos comprometidos em oferecer soluções personalizadas e integradas à sua realidade, independente do seu porte.</p>
                     <p>Estamos prontos para ajudá-lo a alcançar seus objetivos. Nossa experiência e dedicação em transformar-lo uma nova pessoa são a base para o seu sucesso. 
                     Junte-se a nós e    descubra.</p>
-                    <button> <Link className='link' to="/sobre">Saiba mais</Link> </button>
+                    <Link className='link' to="/sobre">Saiba mais</Link> 
                 </div>
                 <img src="/assets/image/doutora.jpg" alt="Sobre nós" />
             </div>
@@ -154,6 +154,7 @@ export default function Landingpage() {
 
             <div className="especialidades" ref={especialidadesRef}>
                 <h1>Especialidades</h1>
+                <div className="protecao">
                 <div className="quatro">
                     <div className="info">
                         <img onClick={abrirPopup} src="/assets/image/acupuntura2.png" alt="" />
@@ -194,6 +195,7 @@ export default function Landingpage() {
                     </div>
                 </div>
 
+                </div>
             </div>
 
             {mostrarPopup && (
