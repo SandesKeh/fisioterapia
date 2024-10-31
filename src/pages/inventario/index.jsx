@@ -1,5 +1,6 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
+import { Link } from 'react-router-dom';
 
 export default function Inventario(){
     return(
@@ -8,29 +9,39 @@ export default function Inventario(){
                 <Cabecalho/>
                 <div className="t">
                 <div className="text">
-                    <h1>Usuarios</h1>
-                    <h2>Usuarios</h2>
-                </div>
+                            <Link to='/inserirProfissional' >
+                                <h1>Usuarios</h1>
+                                <h2>Usuarios</h2>
+                            </Link>
+                        </div>
 
-                <div className="text">
-                    <h1>Modelos</h1>
-                    <h2>Documentação</h2>
-                </div>
+                        <div className="text">
+                            <Link to='/inserirDocumento' >
+                                <h1>Modelos</h1>
+                                <h2>Documentação</h2>
+                            </Link>
+                        </div>
 
-                <div className="text">
-                    <h1>Finanças</h1>
-                    <h2>Pacotes </h2>
-                </div>
+                        <div className="text">
+                            <Link to='/inserirPacotes' >
+                                <h1>Finanças</h1>
+                                <h2>Pacotes </h2>
+                            </Link>
+                        </div>
 
-                <div className="text">
-                    <h1>Notificações</h1>
-                    <h2>Para Cliente</h2>
-                </div>
+                        <div className="text">
+                            <Link to='/notificacoes'>
+                                <h1>Notificações</h1>
+                                <h2>Para Cliente</h2>
+                            </Link>
+                        </div>
 
-                <div className="text">
-                    <h1>Inventario </h1>
+                        <div className="text">
+                            <Link to='/inventario'>
+                                <h1>Inventario </h1>
+                            </Link>
                     
-                </div>
+                        </div>
                 </div>
             </div>
             <div className="lado">

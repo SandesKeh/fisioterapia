@@ -11,28 +11,38 @@ export default function Notificacoes(){
                 </div>
 
                 <div className="t">
-                        <div className="text">
-                            <h1>Usuarios</h1>
-                            <h2>Usuarios</h2>
+                <div className="text">
+                            <Link to='/inserirProfissional' >
+                                <h1>Usuarios</h1>
+                                <h2>Usuarios</h2>
+                            </Link>
                         </div>
 
                         <div className="text">
-                            <h1>Modelos</h1>
-                            <h2>Documentação</h2>
+                            <Link to='/inserirDocumento' >
+                                <h1>Modelos</h1>
+                                <h2>Documentação</h2>
+                            </Link>
                         </div>
 
                         <div className="text">
-                            <h1>Finanças</h1>
-                            <h2>Pacotes </h2>
+                            <Link to='/inserirPacotes' >
+                                <h1>Finanças</h1>
+                                <h2>Pacotes </h2>
+                            </Link>
                         </div>
 
                         <div className="text">
-                            <h1>Notificações</h1>
-                            <h2>Para Cliente</h2>
+                            <Link to='/notificacoes'>
+                                <h1>Notificações</h1>
+                                <h2>Para Cliente</h2>
+                            </Link>
                         </div>
 
                         <div className="text">
-                            <h1>Inventario </h1>
+                            <Link to='/inventario'>
+                                <h1>Inventario </h1>
+                            </Link>
                     
                         </div>
                     </div>

@@ -1,7 +1,21 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function AddProfissional(){
+
+    const [mostrarprofissional, setMostrarProfissional] = useState(false);
+
+    const abrirProfissional = () => {
+        setMostrarProfissional(true);
+    };
+
+    const fecharPrpfissional = (e) => {
+        
+        setMostrarProfissional(false)
+        
+    };
     return(
         <div className="addprofissional">
             <div className="inserirpacotes">
@@ -9,27 +23,37 @@ export default function AddProfissional(){
                     <Cabecalho/>
                     <div className="t">
                         <div className="text">
-                            <h1>Usuarios</h1>
-                            <h2>Usuarios</h2>
+                            <Link to='/inserirProfissional' >
+                                <h1>Usuarios</h1>
+                                <h2>Usuarios</h2>
+                            </Link>
                         </div>
 
                         <div className="text">
-                            <h1>Modelos</h1>
-                            <h2>Documentação</h2>
+                            <Link to='/inserirDocumento' >
+                                <h1>Modelos</h1>
+                                <h2>Documentação</h2>
+                            </Link>
                         </div>
 
                         <div className="text">
-                            <h1>Finanças</h1>
-                            <h2>Pacotes </h2>
+                            <Link to='/inserirPacotes' >
+                                <h1>Finanças</h1>
+                                <h2>Pacotes </h2>
+                            </Link>
                         </div>
 
                         <div className="text">
-                            <h1>Notificações</h1>
-                            <h2>Para Cliente</h2>
+                            <Link to='/notificacoes'>
+                                <h1>Notificações</h1>
+                                <h2>Para Cliente</h2>
+                            </Link>
                         </div>
 
                         <div className="text">
-                            <h1>Inventario </h1>
+                            <Link to='/inventario'>
+                                <h1>Inventario </h1>
+                            </Link>
                     
                         </div>
                     </div>
@@ -49,7 +73,7 @@ export default function AddProfissional(){
 
                     <p> Usuários profissionais são os usuários que atendem em sua clínica e que poderão ou não utilizar o sistema </p>
 
-                    <button>+ Adicionar profissional</button>
+                    <button onClick={abrirProfissional} >+ Adicionar profissional</button>
 
                     <table>
                             <tr>
@@ -72,6 +96,39 @@ export default function AddProfissional(){
                             </tr>
                    
                         </table>
+
+                        {mostrarprofissional && (
+                        <div className="popup-background">
+                            <div className="popup">
+                                <div className="mensagem">
+                                    <h2>Adicionar Profissional  </h2>
+                                    <img onClick={fecharPrpfissional} src="/assets/image/bx-x.svg" alt="" />
+                                </div>
+                                <div className="mensage">
+                                    <h2> Nome: </h2>
+                                        <input type="text" placeholder='Ex: Seu nome ' />
+
+                                    <h2> E-mail:</h2>
+                                        <input type="text" placeholder='Ex: seuemailaqui07@gmail.com' />
+                                    <h2>Acesso ao sistema: </h2>
+                                    <select > 
+                                        <option value=""> Selecione </option>
+                                        <option value="Sim"> Sim</option>
+                                        <option value="Não"> Não </option>
+                                    </select>
+
+                                  
+                                </div>
+                                <div className="botao">
+                                   
+                                    <div className="button">
+                                        <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
+                                        <button> Salvar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
                 
             
