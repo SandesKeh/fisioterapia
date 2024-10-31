@@ -94,6 +94,45 @@
 
         }
 
+        .hamburger-btn {
+            display: none; 
+        
+           
+            font-size: 24px; 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+        }
+        
+        @media (max-width: 768px) { 
+            .hamburger-btn {
+                display: block; 
+            }
+        }
+        
+        .links {
+            display: flex; 
+            flex-direction: row; 
+        }
+        
+       
+        @media (max-width: 768px) {
+            .links {
+                display: none; 
+            }
+        
+            .links.open {
+                display: flex; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                background: white; 
+                width: 100%;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+            }
+        }
+        
+
         .links{
             display: flex;
             flex-direction: row;
@@ -207,7 +246,6 @@
 
         .tex {
             padding: 80px;
-            border-radius: 25px;
             border: 2px solid #03989F;
             display: flex;
             border-radius: 80px;
@@ -220,7 +258,7 @@
                 width: 50vh;
             }    
 
-            button {
+            a {
                 width: 120px;
                 padding: 10px 20px;
                 border: 1px solid #03989F;
@@ -228,15 +266,14 @@
                 border-radius: 5px;
                 font: 600 12px arial;
                 color: #03989F;
-                    .link{
-                        text-decoration: none;
-                        color: #000;
-                    }
-                        .link:hover{
-                            color: hsl(183, 78%, 18%);
-                        }
-            }
+                text-decoration: none;
+                       
                     
+                        
+            }
+            a:hover{
+                color: hsl(183, 78%, 18%);
+            }
         }
 
 
@@ -249,44 +286,108 @@
     }
 
 
-    .especialidades{
+    .especialidades {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin: 20px 0px;
         width: 100%;
         background-color: #03989F;
-
-        h1{
+    
+        h1 {
             font: 500 30px roboto;
             color: #FFF;
             margin: 40px 0px;
+            text-align: center; 
         }
-
-        .quatro{
+        
+        @media (max-width: 768px) {
             display: flex;
-            flex-direction: row;
-            
-
-            img{
-                width: 250px;
-                cursor: pointer;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0px;
+            width: 100%;
+            background-color: #03989F;
+            h1 {
+                font: 500 28px roboto;
+                color: #FFF;
+                margin: 40px 0px;
+                text-align: center; 
+            }
+        }
+        @media (max-width: 480px) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0px;
+            width: 100%;
+            background-color: #03989F;
+            h1 {
+                font: 500 30px roboto;
+                color: #FFF;
+                margin: 40px 0px;
+                text-align: center;
             }
         }
 
-        .tres{
+        .protecao {
             display: flex;
-            flex-direction: row;
-            margin: 30px 0px ;
-
-            img{
-                width: 250px;
-                cursor: pointer;
+            flex-direction:column; 
+            justify-content: center;
+            align-items: center; 
+            @media (max-width: 768px) {
+                display: flex;
+                flex-direction:row; 
+                justify-content: center;
+                align-items: center; 
             }
+            @media (max-width: 480px) {
+                display: flex;
+                flex-direction:row; 
+                justify-content: center;
+                align-items: center; 
+            }
+    
+            .quatro,
+            .tres {
+                display: flex;
+                flex-direction: row; 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                gap: 20px; 
 
+                @media (max-width: 768px) { 
+                    display: flex;
+                    flex-direction: column; 
+                    flex-wrap: wrap;
+                    justify-content: center; 
+                    gap: 20px
+                }
+
+                @media (max-width: 480px) { 
+                    display: flex;
+                    flex-direction: column; 
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 20px;
+                }
+    
+                img {
+                    width: 250px;
+                    cursor: pointer;
+    
+                    @media (max-width: 768px) {
+                        width: 200px;
+                    }
+    
+                    @media (max-width: 480px) {
+                        width: 150px;
+                    }
+                }
+            }
         }
     }
-
+    
     .popup-background {
         position: fixed;
         top: 0;
@@ -304,22 +405,31 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        width: 75%;
+        width: 90%;
+        max-width: 1200px; 
         height: auto;
         border-radius: 20px;
         background-color: white;
         box-shadow: 3px 3px 5px gray;
         padding: 20px 25px 20px 0px;
-
-        img{
+    
+        img {
             width: 55vh;
+    
+            @media (max-width: 768px) { 
+                width: 40vh; 
+            }
+    
+            @media (max-width: 480px) { 
+                width: 30vh; 
+            }
         }
     }
     
     .infos {
         display: flex;
         flex-direction: column;
-        width: 40%;
+        width: 50%; 
         gap: 5px;
     
         h1 {
@@ -327,7 +437,7 @@
             padding: 20px;
             border-radius: 20px 20px 20px 0px;
             color: #fff;
-            font: 400 40px roboto;
+            font: 400 30px roboto; 
         }
     
         .text {
@@ -335,13 +445,13 @@
             flex-direction: column;
             gap: 10px;
             padding: 20px;
-            
-            button{
+    
+            button {
                 margin-top: 30px;
             }
     
             p {
-                font: 400 20px roboto;
+                font: 400 18px roboto; 
             }
     
             button {
@@ -350,14 +460,10 @@
                 background-color: #03979f80;
                 border-radius: 5px;
                 border: 2px solid transparent;
-                font: 400 20px roboto;
+                font: 400 18px roboto; 
                 color: #000;
                 cursor: pointer;
-                
             }
-            
-           
-                
         }
     }
     
@@ -485,4 +591,255 @@
         }
     }
 
+  
+      
+    @media (max-width: 768px) {
+
+        .cabecalho {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        
+            .hamburger-btn {
+                display: none; 
+                font-size: 24px;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+        
+            .links {
+                display: flex;
+                gap: 15px;
+            }
+        
+           
+            @media (max-width: 768px) {
+                .hamburger-btn {
+                    display: block; 
+                }
+        
+                .links {
+                    display: none;
+                    flex-direction: column;
+                    gap: 10px;
+                    position: absolute;
+                    top: 60px;
+                    right: 0px;
+                    background-color: rgb(14, 231, 130);
+                    border: 1px solid #ccc;
+                    padding: 10px;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                }
+        
+                .links.open {
+                    display: flex; 
+                }
+
+                #oloco{
+                    display: none; 
+                    flex-direction: column;
+                    gap: 10px;
+                    position: absolute;
+                    top: 60px;
+                    right: 10px;
+                    background-color: rgb(14, 231, 130);
+                    border: 1px solid #ccc;
+                    padding: 10px;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+
+
+        .banner {
+            @media (max-width: 768px) {
+                .banner {
+                    height: 200px; 
+                }
+            
+                .car h1 {
+                    font-size: 1.5rem; 
+                }
+            
+                .agendamento {
+                    padding: 8px 16px; 
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .banner {
+                    height: 150px; 
+                }
+            
+                .car h1 {
+                    font-size: 1.2rem; 
+                }
+            }
+        }
+    
+        
+        .sobre {
+          flex-direction: row;
+          align-items: center;
+          padding: 10px;
+          
+          .tex {
+            width: 70%; 
+            padding: 10px;
+    
+            p {
+              font-size: 0.9rem;
+            }
+          }
+    
+          img {
+            width: 25%; 
+            height: auto;
+          }
+        }
+    
+        
+        .especialidades {
+          display: grid;
+          grid-template-columns: 1fr 1fr; 
+          gap: 10px;
+    
+          .especialidade-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+    
+            img {
+              width: 100%;
+              height: auto;
+            }
+          }
+        }
+    
+        
+        .curiosidades {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+    
+          img {
+            width: 80%; 
+            margin-bottom: 10px;
+          }
+        }
+      }
+
+      
+      @media (max-width: 768px) {
+        .banner {
+            height: 50vh;
+        }
+    
+        .protecao {
+            margin-left: 10%; 
+        }
+    
+        .car {
+            padding: 20px; 
+    
+            h1 {
+                width: 100%; 
+                font-size: 30px; 
+                
+                span {
+                    font-size: 40px; 
+                }
+            }
+    
+            .agendamento {
+                padding: 10px; 
+                height: 35px; 
+            }
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .banner {
+            height: 40vh; 
+        }
+    
+        .protecao {
+            margin-left: 0;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .car {
+            width: 90%;
+    
+            h1 {
+                font-size: 25px;
+                text-align: center;
+            }
+    
+            .agendamento {
+                width: auto;
+            }
+        }
+    }
+
+
+    @media (max-width: 768px) {
+        .sobre {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+    
+            .tex {
+                padding: 40px;
+                margin: 20px 0;
+                width: 90%;
+                border-radius: 40px;
+                p {
+                    width: auto; 
+                    font-size: 0.9rem;
+                }
+    
+                a {
+                    width: 100%;
+                    margin-left: 20px;
+                }
+            }
+    
+            img {
+                width: 60%;
+                height: auto;
+                margin-top: 20px;
+            }
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .sobre {
+            .tex {
+                padding: 30px; 
+                width: 100%;
+                border-radius: 40px;
+                p {
+                    font-size: 0.8rem; 
+                }
+    
+                a {
+                    width: 30%; 
+                }
+            }
+    
+            img {
+                width: 70%; 
+                height: auto; 
+            }
+        }
+    }
+
 }
+
