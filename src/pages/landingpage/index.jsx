@@ -198,6 +198,8 @@ export default function Landingpage() {
                 </div>
             </div>
 
+
+
             {mostrarPopup && (
                 <div className="popup-background" onClick={clicaFora}>
                     <div className="popup">
