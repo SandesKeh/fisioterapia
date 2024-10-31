@@ -7,6 +7,7 @@
 
 
     .banner{
+        margin-top: 165px;
         width: 100%;
         height: 60vh;
         background-size: cover;
@@ -78,12 +79,18 @@
     }
     .cabecalho{
         display: flex;
+        position: fixed;
         flex-direction: row;
         justify-content: space-around;
         background-color: #03989F;
         padding: 20px 0px;
         width: 100%;
-
+        .dois{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 7px;
+        }
         img{
             display: flex;
             justify-content: center;
@@ -96,7 +103,6 @@
 
         .hamburger-btn {
             display: none; 
-        
            
             font-size: 24px; 
             background: none; 
@@ -105,8 +111,10 @@
         }
         
         @media (max-width: 768px) { 
+          
             .hamburger-btn {
                 display: block; 
+                color: #000;
             }
         }
         
@@ -117,18 +125,56 @@
         
        
         @media (max-width: 768px) {
+           
             .links {
                 display: none; 
             }
-        
+
+   
             .links.open {
+                
                 display: flex; 
                 flex-direction: column; 
+                justify-items: last baseline;
+                align-items: last baseline;
                 position: absolute; 
                 top: 100%; 
-                background: white; 
-                width: 100%;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+                border-radius: 0px, 0px, 0px, 15px;
+                background: rgba(255, 255, 255, 0.644); 
+                width: 35%;
+                height: 90vh;
+                box-shadow: 0 2px 5px rgba(58, 54, 54, 0.1); 
+                  
+            button {
+                font: 400 24px roboto;
+                color: #2198ad;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+
+            }
+            button:hover{
+
+                font: 400 24px roboto;
+                color: #000000;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+
+
+            }
+            .dois{
+                display:flex;
+                flex-direction: column;
+                align-items:baseline;
+                gap: 8vh;
+                button{
+                    color: #506772;
+                } 
+                button:hover{
+                    color: #3e8285;
+                }
+            }
             }
         }
         
@@ -137,9 +183,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-around;
-            background-color: #03989F;
-          
-            
+            background-color: #03989F; 
             align-items: center;
             width: 80%;
             .contato{
@@ -158,7 +202,7 @@
             }
             button {
                 font: 400 24px roboto;
-                color: #fff;
+                color: #ffffff;
                 border: none;
                 background: transparent;
                 cursor: pointer;
@@ -375,6 +419,7 @@
         }
     }
     
+
     .especialidades {
         display: flex;
         flex-direction: column;
@@ -669,7 +714,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px;
         
             .hamburger-btn {
                 display: none; 
@@ -682,6 +726,7 @@
             .links {
                 display: flex;
                 gap: 15px;
+              
             }
         
            

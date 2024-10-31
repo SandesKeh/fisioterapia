@@ -37,6 +37,7 @@ export default function Rotas() {
                 <Route path="/inventario" element={<Inventario/>}/>
                 <Route path="/telaCliente" element={<TelaCliente/>}/>
                 <Route path="/financas" element={<Financas/>}/>
+
             </Routes>
         </BrowserRouter>
     )

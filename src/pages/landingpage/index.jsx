@@ -23,6 +23,7 @@ export default function Landingpage() {
         const curiosidadeRef = useRef(null);
         const sobreRef = useRef(null);
         const homeRef = useRef(null);
+        const foterRef = useRef(null);
         const location = useLocation();
     
         useEffect(() => {
@@ -119,19 +120,27 @@ export default function Landingpage() {
         ☰
     </button>
     
+
+
+    
     <div className={`links ${menuOpen ? 'open' : ''}`}>
         <button onClick={() => homeRef.current.scrollIntoView({ behavior: 'smooth' })}>Home</button>
         <button onClick={() => sobreRef.current.scrollIntoView({ behavior: 'smooth' })}>Sobre Nós</button>
         <button onClick={() => especialidadesRef.current.scrollIntoView({ behavior: 'smooth' })}>Especialidades</button>
         <button onClick={() => curiosidadeRef.current.scrollIntoView({ behavior: 'smooth' })}>Curiosidades</button>
-        <button>
-            <Link className='contato' to="/">Contatos</Link>
-        </button>
-        <Link id='oloco' to='/loginCliente'> Login </Link>
+        <div className='dois'>
+            <Link className='contato' to="" style={{ textDecoration: 'none' }}>
+                <button onClick={() => foterRef.current.scrollIntoView({ behavior: 'smooth' })}>Contatos</button>
+            </Link>
+            <Link id='oloko' to="/loginCliente" style={{ textDecoration: 'none' }}>
+                <button >Login</button>
+            </Link>
+            
+        </div>
     </div>
 </div>
 
-            <div className="banner" style={{ backgroundImage: `URL(${imagem})` }}>
+            <div className="banner" ref={homeRef} style={{ backgroundImage: `URL(${imagem})` }}>
                 <div className='protecao'>   
                     <div className="car">
                         <h1> O melhor para a sua <span>saúde</span></h1>
@@ -326,7 +335,7 @@ export default function Landingpage() {
         
         
 
-            <div className="rodape">
+            <div className="rodape" ref={foterRef}>
                 <div className="um">
                     <img id='logo' src="/assets/image/logo1.png" alt="logoRodape" />
                     <div className="redes">
