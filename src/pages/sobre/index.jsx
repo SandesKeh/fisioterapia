@@ -20,7 +20,7 @@ export default function Sobre() {
 
 
     return (
-        <div className="sobreMais">
+ <div className="sobreMais">
             <div className="cabecalho">
                 <img src="assets/image/logo.webp" alt="nao foi" />
                 <div className="links">
@@ -36,7 +36,7 @@ export default function Sobre() {
             </div>
 
 
-            <div className="sobre">
+<div className="sobre">
                 <div className="primeiro">
                     <h1>Sobre mim</h1>
                     <p>Me chamo Daniela Barbosa Rodrigues, tenho 36 anos, casada, mãe de 2 menina. Formada em Fisioterapia pela Universidade nove de Julho, POS Graduada em Fisioterapia Intensiva Pediátrica e Neonatal pela FABIC. Formação em Pilates pela VOLL Pilates, Curso de Neurociência da dor aplicada a prática clinica pelo TUDO SOBRE DOR. Trabalhei nas instituições de saúde da REDE DOR das unidades do Jabaquara e Morumbi. Atuando tanto em pediatria e adulto. Realizo atendimento domiciliar na região  da Zona Sul de São Paulo.</p>
@@ -52,44 +52,58 @@ export default function Sobre() {
                         <h1> <img src={Visao} alt="visao"/> Missão  </h1>
                         <p> Oferecer serviços de fisioterapia de alta qualidade, com foco em cuidados pediátricos e adultos, utilizando abordagens integrativas e personalizadas, sempre priorizando a saúde e o conforto dos nossos pacientes. </p>
                     </div>
-
-
                 </div>
 
                                 
                 <h1 className='titulo'> Valores </h1>
-
-                <div className="valores">
-
-                    <div className='mae'>
-                        <h3 className='topicos'>Excelência:</h3>
-                        <p>Compromisso com a qualidade no atendimento e resultados clínicos.</p>
-                    </div>
-                    <div className='mae'>
-                        <h3 className='topicos'>Humanização:</h3>
-                        <p>Atendimento acolhedor e empático, respeitando as necessidades de cada paciente.</p>
-
-                    </div>
-                    <div className='mae'>
-                        <h3 className='topicos'>Inovação:</h3>
-                        <p> Atualização constante em técnicas e conhecimentos, integrando as melhores práticas na fisioterapia.</p>
-
-                    </div>
-                    <div className='mae'>
-                        <h3 className='topicos'>Responsabilidade:</h3>
-                        <p>Compromisso com a saúde e segurança dos pacientes e suas famílias.</p>
-                    </div>
-                    <div className='mae'>
-                        <h3 className='topicos'>Empatia:</h3>
-                        <p>Compreensão e sensibilidade nas interações com pacientes e colaboradores.</p>
-
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div className="rodape">
+             <div className="valores">
+    <div className="carrossel">
+        <div className='mae'>
+            <h3 className='topicos'>Excelência:</h3>
+            <p>Compromisso com a qualidade no atendimento e resultados clínicos.</p>
+        </div>
+        <div className='mae'>
+            <h3 className='topicos'>Humanização:</h3>
+            <p>Atendimento acolhedor e empático, respeitando as necessidades de cada paciente.</p>
+        </div>
+        <div className='mae'>
+            <h3 className='topicos'>Inovação:</h3>
+            <p>Atualização constante em técnicas e conhecimentos, integrando as melhores práticas na fisioterapia.</p>
+        </div>
+        <div className='mae'>
+            <h3 className='topicos'>Responsabilidade:</h3>
+            <p>Compromisso com a saúde e segurança dos pacientes e suas famílias.</p>
+        </div>
+        <div className='mae'>
+            <h3 className='topicos'>Empatia:</h3>
+            <p>Compreensão e sensibilidade nas interações com pacientes e colaboradores.</p>
+        </div>
+   
+           
+        <div className='mae'>
+            <h3 className='topicos'>Excelência:</h3>
+            <p>Compromisso com a qualidade no atendimento e resultados clínicos.</p>
+        </div>
+        <div className='mae'>
+            <h3 className='topicos'>Humanização:</h3>
+            <p>Atendimento acolhedor e empático, respeitando as necessidades de cada paciente.</p>
+        </div>
+        <div className='mae'>
+            <h3 className='topicos'>Inovação:</h3>
+            <p>Atualização constante em técnicas e conhecimentos, integrando as melhores práticas na fisioterapia.</p>
+        </div>
+        <div className='mae'>
+            <h3 className='topicos'>Responsabilidade:</h3>
+            <p>Compromisso com a saúde e segurança dos pacientes e suas famílias.</p>
+        </div>
+        <div className='mae'>
+            <h3 className='topicos'>Empatia:</h3>
+            <p>Compreensão e sensibilidade nas interações com pacientes e colaboradores.</p>
+        </div>
+    </div>
+ </div>
+  </div>
+        <div className="rodape">
                 <div className="um">
                     <img id='logo' src="/assets/image/logo1.png" alt="logoRodape" />
                     <div className="redes">
@@ -120,7 +134,8 @@ export default function Sobre() {
                     <h1>FAQ</h1>
                 </div>
             </div>
-        </div>
+        </div>    
 
-    );
-}
+
+)
+};
