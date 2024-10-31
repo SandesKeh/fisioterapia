@@ -70,12 +70,15 @@ export default function Card(props) {
                 cpf: cpf,
                 rg: rg
             }
+            const resposta= await axios.post(linkpessoal, pessoal)
 
             const linkfinanceiro = 'http://localhost:5000/inserir/financeiro'
             const financeiro = {
                 pacotes: planofinanceiro,
                 valor: valoesessao
             }
+            const resposta2= await axios.post(linkfinanceiro, financeiro)
+
             const linkendereco= 'http://localhost:5000/inserir/endereco';
             const endereco={
                 pais: pais,
@@ -87,20 +90,20 @@ export default function Card(props) {
                 bairro: bairro,
                 complemento: complemento
             }
+            const resposta3= await axios.post(linkendereco, endereco)
+
             const linkresponsavel= 'http://localhost:5000/inserir/responsavel';
             const responsavel={
                 nome: nomeresponsavel,
                 cpf: cpfresponsavel,
                 telefone: telefone
             }
-
-            const resposta= await axios.post(linkpessoal, pessoal, linkfinanceiro, financeiro, linkendereco, endereco, linkresponsavel, responsavel);
-            storage('clientecadastrado', resposta.data);
-
+            const resposta4= await axios.post(linkresponsavel, responsavel)
             alert('Cliente cadastrado ');
             navagate('/telaCadastrar')
         } catch (error) {
            alert('erro') 
+           console.log(error.message)
         }
 
     }

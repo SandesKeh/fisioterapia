@@ -1,7 +1,8 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function AddDocumento(){
 
@@ -16,6 +17,30 @@ export default function AddDocumento(){
         setMostrarProfissional(false)
         
     };
+
+    const navegate = useNavigate();
+    const [tipo, setTipo] = useState('');
+    const [titulo, setTitulos]= useState('');
+    const [conteudo, setConteudo]= useState('');
+    const [data, setData]= useState('');
+
+    async function Adicionardocumento() {
+        try {
+            const link= 'http://localhost:5000/documentacao/'
+            const documento = {
+                tipo: tipo,
+                titulo: titulo,
+                conteudo: conteudo,
+                dataCadastro: data
+            }
+            const resposta = await axios.post(link, documento)
+            alert('Documento cadastrado com sucesso')
+            navegate('/inserirDocumento')
+        } catch (error) {
+            alert('erro, documento não cadastrado')
+        }
+    }
+    
 
     return(
         <div className="adddocumento">
@@ -110,12 +135,14 @@ export default function AddDocumento(){
                                 </div>
                                 <div className="mensage">
                                     <h2> Tipo: </h2>
-                                        <input type="text" placeholder='Ex: Atestado ' />
+                                        <input type="text" placeholder='Ex: Atestado ' value={tipo} onChange={e => setTipo(e.target.value)} />
 
                                     <h2> Titulo:</h2>
-                                        <input type="text" placeholder='Ex: Atestado modelo 1 ' />
+                                        <input type="text" placeholder='Ex: Atestado modelo 1 ' value={titulo} onChange={e => setTitulos(e.target.value)} />
+                                    <h2>Conteudo: </h2>
+                                        <input type="text" placeholder='Ex: Documento personalizado' value={conteudo} onChange={e => setConteudo(e.target.value)} />
                                     <h2>Data do cadastro : </h2>
-                                        <input type="text" placeholder='01/07/2024' />
+                                        <input type="text" placeholder='01/07/2024' value={data} onChange={e => setData(e.target.value)} />
 
                                   
                                 </div>
@@ -123,7 +150,7 @@ export default function AddDocumento(){
                                    
                                     <div className="button">
                                         <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
-                                        <button> Salvar </button>
+                                        <button onClick={Adicionardocumento} > Salvar </button>
                                     </div>
                                 </div>
                             </div>
