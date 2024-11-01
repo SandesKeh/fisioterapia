@@ -4,7 +4,6 @@ import Calendar from "react-calendar/dist/cjs/Calendar.js";
 
 // MyCalendar.js
 import React from "react";
-import "react-calendar/dist/Calendar.css";
 
  function MyCalendar({ events, selectedDate, onDateChange }) {
 

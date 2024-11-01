@@ -1,189 +1,332 @@
 .sobreMais {
     font-family: "Lilita";
 
-    .cabecalho {
+    .cabecalho{
         display: flex;
+
         flex-direction: row;
         justify-content: space-around;
         background-color: #03989F;
-        padding: 20px 0;
+        padding: 20px 0px;
         width: 100%;
-
-        img {
+        .dois{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 7px;
+        }
+        img{
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 125px;
             width: 145px;
             border-radius: 25px;
+
         }
 
+        .hamburger-btn {
+            display: none; 
+           
+            font-size: 24px; 
+            background: none; 
+            border: none; 
+            cursor: pointer; 
+        }
+        
+        @media (max-width: 768px) { 
+          
+            .hamburger-btn {
+                display: block; 
+                color: #000;
+            }
+        }
+        
         .links {
+            display: flex; 
+            flex-direction: row; 
+        }
+        
+       
+        @media (max-width: 768px) {
+           
+            .links {
+                display: none; 
+            }
+
+   
+            .links.open {
+                
+                display: flex; 
+                flex-direction: column; 
+                justify-items: end;
+                align-items: last baseline;
+                position: absolute; 
+                top: 100%; 
+                border-radius: 0px, 0px, 0px, 15px;
+                background: rgba(255, 255, 255, 0.644); 
+                width: 35%;
+                height: 70vh;
+                box-shadow: 0 2px 5px rgba(58, 54, 54, 0.1); 
+                
+            button {
+                font: 400 24px roboto;
+                color: #2198ad;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+
+            }
+            button:hover{
+
+                font: 400 24px roboto;
+                color: #000000;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+            }
+            .dois{
+                display:flex;
+                flex-direction: column;
+                align-items:baseline;
+                gap: 8vh;
+                button{
+                    color: #2198ad;
+                } 
+                button:hover{
+                    color: #0a0a0a;
+                }
+            
+            }
+            }
+        }
+        
+
+        .links{
             display: flex;
             flex-direction: row;
             justify-content: space-around;
+            background-color: #03989F; 
             align-items: center;
             width: 80%;
+          
+            
 
-            .contato {
-                display: flex;
-                align-items: baseline;
-            }
-
-            a, button {
-                font: 400 24px roboto;
-                color: #fff;
-                text-decoration: none;
-                background: transparent;
-                border: none;
-                cursor: pointer;
-                &:hover {
-                    color: #000;
+                display:flex;
+                flex-direction: row;
+                align-items:baseline;
+                gap: 8vh;
+                button{
+                    color: #ffffff;
+                } 
+                button:hover{
+                    color: #0c0c0c;
                 }
-            }
-
-            #oloco {
-                color: #03989F; 
+                
+            #login{
+                color: #03989F;
                 padding: 5px 10px;
                 border-radius: 5px;
                 font: 400 24px roboto;
                 background-color: #fff;
-                transition: .3s;
-                &:hover {
-                    transform: scale(1.1);
-                    background-color: #03989F;
-                    color: #fff;
-                    border: 3px solid #fff;
-                }
-                &:active {
-                    background-color: #fff;
-                    color: #27C1C6;
-                    border: none;
-                }
+                transition: 0.3s;
             }
-        }
+
+            #login:hover{
+                transform: scale(1.1);
+                background-color: #03989F;
+                color: #ffffff;
+                border: 3px solid #fff;
+            }
+
+            #login:active{
+                background-color: #ffffff;
+                color: #27C1C6;
+                border: none;
+            }
+            }
+
+            a{
+                font: 400 24px roboto;
+                color: #fff;
+                text-decoration: none;
+                
+            }
+            button {
+                font: 400 24px roboto;
+                color: #ffffff;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+
+            }
+
+            button:hover{
+
+                font: 400 24px roboto;
+                color: #000000;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+
+
+            }
+            
+
+        
+       
     }
 
-    .rodape{
+
+    @media (max-width: 480px) {
+        .cabecalho {
+            padding: 10px 0;
+
+            img {
+                height: 80px;
+                width: 100px;
+            }
+
+            .links {
+                button, a {
+                    font-size: 16px;
+                }
+            }
+        }}
+    .rodape {
         display: flex;
         flex-direction: row;
         width: 100%;
         background-color: #03989F;
-        justify-content: space-around;  
+        justify-content: space-around;
         padding: 60px 0px;
-        height: 40%;
+        height: auto; /* Ajusta para que o conteúdo se adapte */
         
-        .um{
+        .um, .dois, .tres, .quatro {
             display: flex;
             flex-direction: column;
             gap: 10px;
-
-            #logo{
+        }
+    
+        .um {
+            #logo {
                 width: 280px;
-                
             }
-
+    
             .redes {
-                display: flex ;
-                flex-direction: row;
+                display: flex;
+                gap: 15px;
                 align-items: center;
                 justify-content: space-around;
-
-                #a{
+    
+                #a, #b, #c {
                     width: 40px;
+                    height: 40px;
                     border-radius: 10px;
                     background-color: #F9F4F4;
                     cursor: pointer;
+                    transition: transform 0.2s ease, background-color 0.2s ease;
                 }
-                #a:hover{
+    
+                #a:hover, #b:hover, #c:hover {
                     transform: scale(1.1);
                     background-color: rgb(0, 217, 255);
                 }
-                #a:active{
-                    transform: scale(1.0);
-                    background-color: #F9F4F4;
-                }
-                #b{
-                    width: 40px;
-                    border-radius: 10px;
-                    cursor: pointer;
-                }
-                #b:hover{
-                    transform: scale(1.1);
-                    background-color: rgb(0, 217, 255);
-                }
-                #b:active{
-                    transform: scale(1.0);
-                    background-color: #F9F4F4;
-                }
-                #c{
-                    width: 40px;
-                    border-radius: 10px;
-                    cursor: pointer;
-                }
-                #c:hover{
-                    transform: scale(1.1);
-                    background-color: rgb(0, 217, 255);
-                }
-                #c:active{
+    
+                #a:active, #b:active, #c:active {
                     transform: scale(1.0);
                     background-color: #F9F4F4;
                 }
             }
         }
-
-        .dois{
+    
+        .dois h1, .tres h1, .quatro h1 {
+            color: #fff;
+            font-size: 25px;
+        }
+    
+        .tres .final {
+            background-color: #03989F;
+            color: #fff;
+            border: none;
+            font-size: 24px;
+            display: flex;
+            justify-items: center;
+        }
+    
+        .tres .links {
             display: flex;
             flex-direction: column;
-            margin-left: -5px;
-
-            h1{
-               
+            gap: 10px;
+    
+            a {
+                font-size: 24px;
                 color: #fff;
-                font: 500 25px Inter;
+                text-decoration: none;
             }
         }
-
-        .tres{
-            display: flex;
+    
+        .quatro h1 {
+            font-size: 30px;
+        }
+    
+        /* Responsividade para tablets */
+        @media (max-width: 1024px) {
             flex-direction: column;
-            gap: 20px;
-
-            h1{
-                color: #fff;
+            align-items: center;
+            text-align: center;
+            padding: 40px 0;
+    
+            .um, .dois, .tres, .quatro {
+                gap: 15px;
+                margin-bottom: 20px;
             }
-                .final {
-                background-color: #03989F;
-                color: #fff;
-                border: transparent;
-                font: 400 24px roboto;
-                    display: flex;
-                    justify-items: center;
+    
+            .um #logo {
+                width: 200px;
             }
-
-            .links{
-                display: flex;
-                flex-direction: column;
+    
+            .redes #a, .redes #b, .redes #c {
+                width: 35px;
+                height: 35px;
+            }
+    
+            .dois h1, .tres h1, .quatro h1 {
+                font-size: 22px;
+            }
+        }
+    
+        /* Responsividade para celulares */
+        @media (max-width: 600px) {
+            padding: 20px 0;
+            text-align: center;
+    
+            .um #logo {
+                width: 150px;
+            }
+    
+            .redes {
+                flex-direction: row;
                 gap: 10px;
-
-                a{
-                    font: 400 24px roboto;
-                    color: #fff;
-                    text-decoration: none;
-                }
-                
             }
-        }
-
-        .quatro{
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-
-            h1{
-                font: 400 30px roboto;
-                color: #fff;
+    
+            .dois h1, .tres h1, .quatro h1 {
+                font-size: 20px;
+            }
+    
+            .tres .links a, .tres .final {
+                font-size: 18px;
+            }
+    
+            .tres .links {
+                gap: 8px;
+            }
+    
+            .quatro h1 {
+                font-size: 24px;
             }
         }
     }
-
 
     .sobre {
         display: flex;
@@ -206,7 +349,26 @@
                 font-weight: 200;
             }
         }
-
+        @media (max-width: 768px) {
+            .cabecalho {
+                flex-direction: column;
+                align-items: center;
+    
+                img {
+                    height: 100px;
+                    width: 120px;
+                }
+    
+                .links {
+                    flex-direction: column;
+                    width: 100%;
+    
+                    button, a {
+                        font-size: 18px;
+                    }
+                }}}
+            
+    
         .grup {
             display: flex;
             justify-content: space-evenly;

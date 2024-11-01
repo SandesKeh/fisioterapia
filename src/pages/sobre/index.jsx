@@ -30,7 +30,7 @@ export default function Sobre() {
                     <button className='button' onClick={() => handleScrollToSection('secao2')}>Curiosidades</button>
                     <Link to="/">Contatos</Link>
 
-                    <Link id='oloco' to='/telaLogin'> Login </Link>
+                    <Link id='login' to='/telaLogin'> Login </Link>
 
                 </div>
             </div>
