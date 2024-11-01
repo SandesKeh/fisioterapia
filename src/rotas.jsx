@@ -14,6 +14,9 @@ import Notificacoes from "./pages/notificacoes";
 import Inventario from "./pages/inventario";
 import TelaCliente from "./pages/telaCliente";
 import Financas from "./pages/financas";
+
+
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -21,6 +24,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 export default function Rotas() {
     return (
         <BrowserRouter>
+
             <Routes>
                 <Route path="/" element={<Landingpage/>}/>
                 <Route path="/home" element={<Home/>}/>

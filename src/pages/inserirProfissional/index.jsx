@@ -1,7 +1,7 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
 import { Link} from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
@@ -23,6 +23,25 @@ export default function AddProfissional(){
     const [nome, setNome] = useState('');
     const [email, setEmail]= useState('');
     const [acesso, setAcesso]= useState('');
+    const [array, setArray]= useState([]);
+
+
+
+    async function profissionais() {
+        try {
+            const resposta = await axios.get('http://localhost:5000/usuario/profissional');
+            const value = resposta.data;
+            setArray(value);
+            console.log(array);
+        } 
+        catch (err) {
+            console.log(err.message);
+        }
+    }
+
+    useEffect(() => {
+        profissionais();
+    })
   
 
     async function Adicionar() {
@@ -110,16 +129,20 @@ export default function AddProfissional(){
                                 <th> Ações </th>
                             </tr>
 
-                            <tr>
-                                
-                                <td> Kevillyn Sandes</td>
-                                <td> Kevillynsandes07@gmail.com</td>
-                                <td> </td>
-                                <td> <img src="/assets/image/bx-edit.svg" alt="" /> 
-                                    <img src="/assets/image/bx-lock-open-alt.svg" alt="" />
-                                </td>
-                                
-                            </tr>
+
+                            {array.map(item => (
+                                    <tr>
+                                        
+                                        <td> {item.nome}</td>
+                                        <td> {item.email}</td>
+                                        <td> {item.temAcesso} </td>
+                                        <td> <img src="/assets/image/bx-edit.svg" alt="" /> 
+                                        <img src="/assets/image/bx-lock-open-alt.svg" alt="" />
+                                        </td>
+                                    
+                                    </tr>
+                           ))}
+
                    
                         </table>
 
