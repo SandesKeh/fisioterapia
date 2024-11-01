@@ -17,8 +17,26 @@
     background-color: #ffffff;
   }
 
- 
+/* index.scss */
+.client-event {
+  background-color: rgba(0, 0, 255, 0.3); /* Azul para eventos de Cliente */
+  border-radius: 50%;
+}
 
+.personal-event {
+  background-color: rgba(255, 105, 180, 0.3); /* Rosa para eventos de Pessoal */
+  border-radius: 50%;
+}
+
+.both-events {
+  background: linear-gradient(135deg, rgba(0, 0, 255, 0.3), rgba(255, 105, 180, 0.3));
+  border-radius: 50%;
+}
+
+.react-calendar__tile--active {
+  background-color: #0059ff;
+  color: white;
+}
   * {
     text-decoration: none;
   }

@@ -132,15 +132,15 @@ export default function Landingpage() {
             <Link className='contato' to="" style={{ textDecoration: 'none' }}>
                 <button onClick={() => foterRef.current.scrollIntoView({ behavior: 'smooth' })}>Contatos</button>
             </Link>
-            <Link id='oloko' to="/loginCliente" style={{ textDecoration: 'none' }}>
-                <button >Login</button>
+            <Link  to="/loginCliente">
+                <button id='login'>Login</button>
             </Link>
             
         </div>
     </div>
 </div>
-
-            <div className="banner" ref={homeRef} style={{ backgroundImage: `URL(${imagem})` }}>
+<div className='bannermae'  ref={homeRef}>
+<div className="banner" style={{ backgroundImage: `URL(${imagem})` }}>
                 <div className='protecao'>   
                     <div className="car">
                         <h1> O melhor para a sua <span>saúde</span></h1>
@@ -148,8 +148,9 @@ export default function Landingpage() {
                     </div> 
                 </div>
             </div>
-
-            <div className="sobre" ref={sobreRef}>
+</div>
+            <div className="sobremae" ref={sobreRef}>
+            <div className="sobre" >
                 <div className="tex"> 
                     <h1>Sobre nós</h1>
                     <p>Nosso objetivo é ir além de uma simples seção de fisioterapia e pilates, buscamos impulsionar a sáude dos nossos clientes. Entendemos que cada organização é única em sua estrutura e necessidade, por isso estamos comprometidos em oferecer soluções personalizadas e integradas à sua realidade, independente do seu porte.</p>
@@ -159,9 +160,14 @@ export default function Landingpage() {
                 </div>
                 <img src="/assets/image/doutora.jpg" alt="Sobre nós" />
             </div>
+            </div>
 
 
-            <div className="especialidades" ref={especialidadesRef}>
+
+            
+<div className="especialidadesmae"  ref={especialidadesRef}>
+
+<div className="especialidades">
                 <h1>Especialidades</h1>
                 <div className="protecao">
                 <div className="quatro">
@@ -207,6 +213,11 @@ export default function Landingpage() {
                 </div>
             </div>
 
+</div>
+
+
+
+          
 
 
             {mostrarPopup && (
@@ -321,7 +332,8 @@ export default function Landingpage() {
             )}
 
 
-            <div className='conteudoInformativos' ref={curiosidadeRef}>
+<div className="informativomae"  ref={curiosidadeRef}>
+<div className='conteudoInformativos'>
                     <h1> Curiosidades </h1>
                 <div className="card1">
                     <img src="/assets/image/10motivos.png" alt="" />
@@ -331,6 +343,9 @@ export default function Landingpage() {
                     <img src="/assets/image/Existem 3 tipos de dores (2) 1.png" alt="" />
                 </div>
             </div>
+</div>
+
+          
 
         
         

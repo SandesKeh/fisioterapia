@@ -5,7 +5,8 @@
         height: 100%;
         width: 100%;
 
-
+.bannermae{
+    width: 100%;
     .banner{
         margin-top: 165px;
         width: 100%;
@@ -20,8 +21,6 @@
             align-items: center;
             height: 50%;
             margin-left: 20%;
-        
-
             .car{
                 display: flex;
                 flex-direction: column;
@@ -77,6 +76,8 @@
         }
         
     }
+}
+   
     .cabecalho{
         display: flex;
         position: fixed;
@@ -142,9 +143,9 @@
                 border-radius: 0px, 0px, 0px, 15px;
                 background: rgba(255, 255, 255, 0.644); 
                 width: 35%;
-                height: 90vh;
+                height: 70vh;
                 box-shadow: 0 2px 5px rgba(58, 54, 54, 0.1); 
-                  
+                
             button {
                 font: 400 24px roboto;
                 color: #2198ad;
@@ -160,8 +161,6 @@
                 border: none;
                 background: transparent;
                 cursor: pointer;
-
-
             }
             .dois{
                 display:flex;
@@ -169,11 +168,12 @@
                 align-items:baseline;
                 gap: 8vh;
                 button{
-                    color: #506772;
+                    color: #2198ad;
                 } 
                 button:hover{
-                    color: #3e8285;
+                    color: #0a0a0a;
                 }
+            
             }
             }
         }
@@ -186,13 +186,47 @@
             background-color: #03989F; 
             align-items: center;
             width: 80%;
-            .contato{
+          
+            
+            .dois{
+                  .contato{
                 display: flex;
                 align-items: baseline;
 
             }
-            
-            
+                display:flex;
+                flex-direction: row;
+                align-items:baseline;
+                gap: 8vh;
+                button{
+                    color: #ffffff;
+                } 
+                button:hover{
+                    color: #0c0c0c;
+                }
+                
+            #login{
+                color: #03989F;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font: 400 24px roboto;
+                background-color: #fff;
+                transition: 0.3s;
+            }
+
+            #login:hover{
+                transform: scale(1.1);
+                background-color: #03989F;
+                color: #ffffff;
+                border: 3px solid #fff;
+            }
+
+            #login:active{
+                background-color: #ffffff;
+                color: #27C1C6;
+                border: none;
+            }
+            }
 
             a{
                 font: 400 24px roboto;
@@ -221,30 +255,12 @@
             }
             
 
-            #oloco{
-                color: #03989F; 
-                padding: 5px 10px;
-                border: 3px solid transparent;
-                border-radius: 5px;
-                font: 400 24px roboto;
-                background-color: #fff;
-                transition: .3s;
-            }
-
-            #oloco:hover{
-                transform: scale(1.1);
-                background-color: #03989F;
-                color: #ffffff;
-                border: 3px solid #fff;
-            }
-
-            #oloco:active{
-                background-color: #fff;
-                color: #27C1C6;
-                border: none;
-            }
         }
        
+    }
+
+    .informativomae{
+        padding-top: 10rem;
     }
     .conteudoInformativos {
         padding: 20px;
@@ -316,13 +332,16 @@
         }
     }
     
-
+.sobremae{
+    padding-top: 11rem;
+    margin: 15px;
     .sobre {
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 50px;
         padding: 20px;
+        
     
         .tex {
             padding: 80px;
@@ -330,7 +349,7 @@
             display: flex;
             border-radius: 80px;
             flex-direction: column;
-            margin: 50px 0;
+            margin: 50px ;
             gap: 20px;
             
             p {
@@ -371,6 +390,7 @@
             .tex {
                 padding: 40px;
                 border-radius: 40px;
+
     
                 p {
                     width: 60vw;
@@ -403,6 +423,7 @@
                 p {
                     width: 80vw;
                     font-size: 14px;
+                    margin: 10px;
                 }
     
                 a {
@@ -418,8 +439,17 @@
             }
         }
     }
-    
 
+}
+    
+   .especialidadesmae{
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+        width: 100%;
+        background-color: #03989F;
+        padding-top: 10rem;
     .especialidades {
         display: flex;
         flex-direction: column;
@@ -490,6 +520,10 @@
             }
         }
     }
+   } 
+
+   
+
     
     
     .popup-background {
