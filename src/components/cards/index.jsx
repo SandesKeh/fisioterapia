@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import storage from 'local-storage';
 import axios from "axios";
 import './index.scss';
 
@@ -11,11 +10,9 @@ export default function Card() {
         setExibir(!exibir);
     };
 
-    const [exibi, setExibi] = useState(false);
+   
 
-    const colocar = () => {
-        setExibi(!exibi);
-    };
+ 
 
     const [visualizar, setVisualizar] = useState(false);
 
@@ -23,11 +20,9 @@ export default function Card() {
         setVisualizar (!visualizar);
     }
 
-    const [coloca, setColoca] = useState(false);
+   ;
 
-    const enderec = () => {
-        setColoca(!coloca);
-    }
+  
 
     const navagate= useNavigate();
     const [nome, setNome] = useState('');
@@ -40,9 +35,6 @@ export default function Card() {
     const [cpf, setCpf]= useState('');
     const [rg, setRg]= useState('');
 
-    const [planofinanceiro, setPlanofinanceiro]= useState('');
-    const [valoesessao, setValosessao]= useState('');
-
     const [pais, setPais]= useState('');
     const [cep,setCep]= useState('');
     const [cidade,setCidade]= useState('');
@@ -52,8 +44,6 @@ export default function Card() {
     const [bairro, setBairro]= useState('');
     const [complemento, setComplemento]= useState('');
     
-    const [nomeresponsavel, setNomeresponsavel]= useState('');
-    const [cpfresponsavel, setCpfresponsavel]= useState('');
     const [telefone, setTenefone]= useState('');
 
     async function Adicionarcliente() {
@@ -68,19 +58,8 @@ export default function Card() {
                 email: email, 
                 celular: celular,
                 cpf: cpf,
-                rg: rg
-            }
-             await axios.post(linkpessoal, pessoal)
-
-            const linkfinanceiro = 'http://localhost:5000/inserir/financeiro'
-            const financeiro = {
-                pacotes: planofinanceiro,
-                valor: valoesessao
-            }
-             await axios.post(linkfinanceiro, financeiro)
-
-            const linkendereco= 'http://localhost:5000/inserir/endereco';
-            const endereco={
+                rg: rg,
+                telefone: telefone,
                 pais: pais,
                 cep: cep,
                 cidade: cidade,
@@ -90,15 +69,7 @@ export default function Card() {
                 bairro: bairro,
                 complemento: complemento
             }
-             await axios.post(linkendereco, endereco)
-
-            const linkresponsavel= 'http://localhost:5000/inserir/responsavel';
-            const responsavel={
-                nome: nomeresponsavel,
-                cpf: cpfresponsavel,
-                telefone: telefone
-            }
-             await axios.post(linkresponsavel, responsavel)
+             await axios.post(linkpessoal, pessoal)
             alert('Cliente cadastrado ')
             
             navagate('/telaCadastrar')
@@ -187,7 +158,7 @@ export default function Card() {
                 <div className="cont4">
 
                     <div className="inpute">
-                        <h1> Celular: </h1>
+                        <h1> Celular Responsavel: </h1>
                         <input type="text" placeholder='+55' value={celular} onChange={e => setcelular(e.target.value)} />
                     </div>
 
@@ -199,45 +170,19 @@ export default function Card() {
                         <h1> RG: </h1>
                         <input type="text" value={rg} onChange={e => setRg(e.target.value)} />
                     </div>
+
+                    <div className="inpute">
+                        <h1> Telefone : </h1>
+
+                        <input type="text" placeholder="(__) _____-____" value={telefone} onChange={e => setTenefone(e.target.value)} />
+                    </div>
                 </div>
             
         </div>
 
 
-        <div className="cabecalho">
-            <h1> 2. Informações Financeiras</h1>
-            
-            <button onClick={colocar} className="i">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z"/>
-                </svg>
-             </button>  
-            
-        </div>  
+      
 
-        <div className={`contener ${exibi ? "show" : "hide"}`}>  
-        <div className="cont3">
-                    <div className="inpute">
-                        <h1> Valor Financeiro: </h1>
-
-                        <select value={planofinanceiro} onChange={e => setPlanofinanceiro(e.target.value)} >
-                            <option value="Por sessão"> Por sessão </option>
-                            <option value="Por mês (mensalidade)">Por mês (mensalidade)</option>
-                            <option value="Convênio">Convênio</option>
-                            <option value="Isento">Isento</option>
-                        </select>
-
-                    </div>
-
-                    <div className="inpute">
-                        <h1> Valor da Sessão: </h1>
-
-                        <input type="text" placeholder="R$: 0,00" value={valoesessao} onChange={e => setValosessao(e.target.value)} />
-                    </div>
-
-                </div>
-
-        </div>
         
         <div className="cabecalho">
             <h1> 3. Endereço </h1>
@@ -482,45 +427,7 @@ export default function Card() {
 
                 </div>
             
-        </div>
-
-        <div className="cabecalho">
-            <h1> 4. Responsavel </h1>
-            
-            <button onClick={enderec} className="i">
-                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z"/>
-                </svg>
-             </button>  
-            
-        </div>  
-
-        <div className={`contener ${ coloca ? "show" : "hide"}`}>  
-
-             <div className="cont1">
-                    <div className="inpute">
-                        <h1>Nome do Responsável : </h1>
-                        <input type="text" placeholder="Digite seu nome" value={nomeresponsavel} onChange={e => setNomeresponsavel(e.target.value)} />
-                    </div>
-                </div>    
-            
-
-            <div className="cont3">
-
-                    <div className="inpute">
-                        <h1> CPF : </h1>
-
-                        <input type="text"  placeholder="___.___.___-__" value={cpfresponsavel} onChange={e => setCpfresponsavel(e.target.value)} />
-
-                    </div>
-            
-                    <div className="inpute">
-                        <h1> Telefone : </h1>
-
-                        <input type="text" placeholder="(__) _____-____" value={telefone} onChange={e => setTenefone(e.target.value)} />
-                    </div>
-            </div>
-        </div>     
+        </div>    
 
         <div className="botao">
             <button onClick={Adicionarcliente} >   Salvar </button>

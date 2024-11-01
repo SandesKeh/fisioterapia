@@ -1,12 +1,13 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Value } from 'sass';
 
 export default function TelaCadastrar(){
 
     const [mostrarMensagem, setMostrarMensagem] = useState(false);
-
     const abrirMensagem = () => {
         setMostrarMensagem(true);
     };
@@ -16,6 +17,31 @@ export default function TelaCadastrar(){
         setMostrarMensagem(false)
         
     };
+
+    async function Deletar() {
+        try {
+            const resposta = await axios.delete(`http://localhost:5000/deletar/infoPessoas/`)
+        } catch (error) {
+            
+        }
+    }
+    const [array, setArray] = useState([]);
+
+    async function consultar() {
+        try {
+            const resposta= await axios.get('http://localhost:5000/consultar/infoPessoas');
+            const valor = resposta.data;
+            setArray(valor)
+           
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    useEffect(() => {
+        consultar();
+    })
+
     return(
         <div className="telacadastrar">
             <div className="protecao">
@@ -42,27 +68,27 @@ export default function TelaCadastrar(){
                     <div className="baixo">
                         <table>
                             <tr>
-                                <th> </th>
+                                <th> ID </th>
                                 <th> Nome Cliente </th>
-                                <th>Status</th>
                                 <th> Data De Nascimento</th>
                                 <th> E-mail </th>
                                 <th>Telefone </th>
                                 <th> Ações </th>
                             </tr>
 
-                            <tr>
-                                <td> </td>
-                                <td> Kevillyn Sandes</td>
-                                <td> Ativo </td>
-                                <td> 01/07/2006 </td>
-                                <td> Kevillynsandes07@gmail.com</td>
-                                <td> (11) 978471285 </td>
+                    {array.map(item => (
+                                <tr>
+                                <td> {item.id_informacoes_pessoais} </td>
+                                <td> {item.nome} </td>
+                                <td> {item.data_nascimento} </td>
+                                <td> {item.email} </td>
+                                <td> {item.celular} </td>
                                 <td> <img src="/assets/image/bx-edit.svg" alt="" /> 
-                                    <img onClick={abrirMensagem} src="/assets/image/bx-message-alt-minus.svg" alt="" />
+                                    <img onClick={abrirMensagem} src="/assets/image/bx-trash.svg" alt="" />
                                 </td>
                                 
                             </tr>
+                    ) )}
                    
                         </table>
 
@@ -82,7 +108,7 @@ export default function TelaCadastrar(){
                                     <h1> Tem certeza que deseja desativar esse cliente? </h1>
                                     <div className="button">
                                         <button className='botao' onClick={fecharMensagem} > Cancelar </button>
-                                        <button> Salvar </button>
+                                        <button onClick={Deletar} > Deletar </button>
                                     </div>
                                 </div>
                             </div>

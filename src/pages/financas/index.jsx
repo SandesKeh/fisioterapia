@@ -1,6 +1,7 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 
@@ -18,17 +19,48 @@ export default function Financas(){
         
     };
 
-    const [mostrarReceita1, setMostrarReceita1] = useState(false);
+    const [propriedade, setPropriedade] = useState('');
+    const [categoria, setCategoria] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [valor, setValor] = useState('');
+    const [data, setData] = useState('');
 
-    const abrirReceita1 = () => {
-        setMostrarReceita1(true);
-    };
 
-    const fecharReceita1 = (e) => {
-        
-        setMostrarReceita1(false)
-        
-    };
+    async function addDespesa() {
+        try {
+            const link = 'http://localhost:5000/inserir/despesas/';
+            const despesa = {
+                propriedade: propriedade,
+                categoriaFinanceira: categoria,
+                descricao: descricao,
+                valor: valor,
+                dataPagamento: data
+            }
+             await axios.post(link, despesa);
+             alert('Despesa cadastrada com sucesso')
+        } catch (error) {
+            alert('não foi cadastrado')
+        }
+    }
+
+
+
+    
+
+    const [array, setArray]= useState([]);
+    async function financas() {
+        try {
+            const resposta = await axios.get('http://localhost:5000/despesas/');
+            const valor = resposta.data;
+            setArray(valor)
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    useEffect(( ) => {
+        financas()
+    })
     return(
         <div className="financas">
             
@@ -42,9 +74,8 @@ export default function Financas(){
                     <h1> Período: </h1>
                     <select name="" id=""> <option value="text"> Ago/2024</option> </select>
                     <div className="botao">
-                        <button id='primeiro' onClick={abrirReceita} > + Adicionar receita </button>
-
-                        <button id='segundo' onClick={abrirReceita1} >+ Adicionar despesa </button>
+                        
+                        <button id='segundo' onClick={abrirReceita} >+ Adicionar despesa </button>
 
                         <button id='terceiro'> <img src="/assets/image/bxs-brightness.svg" alt="" /> Opções  </button>
                     </div>
@@ -65,20 +96,6 @@ export default function Financas(){
                         </div>
                     </div>
 
-                    <div className="saldos1"> 
-                        <div className="saldo">
-                            <img src="/assets/image/Icon.png" alt="" />
-                        </div>
-
-                        <div className="saldoatual">
-                            <h1>Receita Prevista</h1>
-                            <h2>R$ 0,00</h2>
-                        </div>
-
-                        <div className="naopago">
-                            <h1> Não pago: R$ 0,00</h1>
-                        </div>
-                    </div>
 
                     <div className="saldos2"> 
                         <div className="saldo">
@@ -110,104 +127,47 @@ export default function Financas(){
                 <div className="tabela">
                 <table>
                             <tr>
-                                <th> Situação</th>
+                                
                                 <th> Propiedade</th>
                                 <th>Categoria Financeira</th>
                                 <th> Descrição</th>
-                                <th> Cliente </th>
-                                <th> Data de Vencimento </th>
-                                <th> Valor a receber </th>
-                                <th> Valor a receber </th>
-                                <th> Valor Pago </th>
+                                <th> Valor  </th>
                                 <th> Data pagamento </th>
                                 <th> Ações </th>
                             </tr>
 
-                            <tr>
-                               
-                            </tr>
+                    {array.map(item => (
+                        <tr>
+                          <td> {item.propriedade} </td>
+                          <td> {item.categoria_financeira} </td>
+                          <td> {item.descricao} </td>
+                          <td> {item.valor} </td>
+                          <td> {item.data_pagamento} </td>
+                          <td> <img src="/assets/image/bx-edit.svg" alt="" /> 
+                          <img src="/assets/image/bx-message-alt-minus.svg" alt="" /></td>
+                       </tr>
+                    ))}
                    
                         </table>
                 </div>
 
-                {mostrarReceita && (
-                        <div className="popup-background">
-                            <div className="popup">
-                                <div className="mensagem">
-                                    <h1>Adicionar Receita  </h1>
-                                    <img onClick={fecharReceita} src="/assets/image/bx-x.svg" alt="" />
-                                </div>
-                                <div className="mensage">
-                                    <h1> Propriedade: </h1>
-                                    <select> 
-                                        <option value=""> Selecione </option>
-                                        <option value="convênio "> Convênio </option>
-                                        <option value="público "> Público  </option>
-                                    </select>
-
-                                    <h1> Categoria financeira:</h1>
-                                    <select >
-                                        <option value=""> Selecione </option>
-                                        <option value=""> Cobrança avulsa </option>     
-                                        <option value=""> Depósito  </option>     
-                                        <option value=""> Mensalidade  </option>   
-                                    </select>
-                                    <h1>Descrição: </h1>
-                                    <input type="text" placeholder='Digite aqui' />
-
-                                    <div className="row">
-                                        <div className="valor">
-                                            <h1>Valor: </h1>
-                                            <input type="text" placeholder='R$ 0.00' />
-                                        </div>
-                                        <div className="data">
-                                            <h1>Data de pagamento:</h1>
-                                            <input type="date" placeholder='__/__/____' />
-                                        </div>
-                                    </div>
-
-                                    <h1>Forma de pagamento:</h1>
-                                    <select> 
-                                        <option value=""> Selecione </option>
-                                        <option value="Crédito"> Crédito </option>
-                                        <option value="Débito"> Débito </option>
-                                        <option value="Dinheiro"> Dinheiro </option>
-                                    </select>
-
-                                    <div className="observacao">
-                                        <h1>Observações:</h1>
-
-                                        <input type="text" placeholder='Digite aqui' />
-                                    </div>
-                                </div>
-                                <div className="botao">
-                                   
-                                    <div className="button">
-                                        <button className='botao' onClick={fecharReceita} > Cancelar </button>
-                                        <button> Salvar </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {mostrarReceita1 && (
+                    {mostrarReceita && (
                         <div className="popup-background">
                             <div className="popup">
                                 <div className="mensagem">
                                     <h1>Adicionar Despesa  </h1>
-                                    <img onClick={fecharReceita1} src="/assets/image/bx-x.svg" alt="" />
+                                    <img onClick={fecharReceita} src="/assets/image/bx-x.svg" alt="" />
                                 </div>
                                 <div className="mensage">
                                     <h1> Propriedade: </h1>
-                                    <select> 
+                                    <select value={propriedade} onChange={e => setPropriedade(e.target.value)} > 
                                         <option value=""> Selecione </option>
                                         <option value="convênio "> Convênio </option>
                                         <option value="público "> Público  </option>
                                     </select>
 
                                     <h1> Categoria financeira:</h1>
-                                    <select>
+                                    <select value={categoria} onChange={e => setCategoria(e.target.value)} >
                                         <option value="">Selecione</option>
                                         <option value="13_salari">13° salário</option>
                                         <option value="adiantamento">Adiantamento</option>
@@ -255,38 +215,32 @@ export default function Financas(){
                                     </select>
 
                                     <h1>Descrição: </h1>
-                                    <input type="text" placeholder='Digite aqui' />
+                                    <input type="text" placeholder='Digite aqui' value={descricao} onChange={e => setDescricao(e.target.value)} />
 
                                     <div className="row">
                                         <div className="valor">
                                             <h1>Valor: </h1>
-                                            <input type="text" placeholder='R$ 0.00' />
+                                            <input type="text" placeholder='R$ 0.00' value={valor} onChange={e => setValor(e.target.value)} />
                                         </div>
                                         <div className="data">
                                             <h1>Data de pagamento:</h1>
-                                            <input type="date" placeholder='__/__/____' />
+                                            <input type="date" value={data} onChange={e => setData(e.target.value)} />
                                         </div>
                                     </div>
 
                                     <h1>Forma de pagamento:</h1>
-                                    <select> 
+                                    <select onChange={e => setValor(e.target.value)} > 
                                         <option value=""> Selecione </option>
                                         <option value="Crédito"> Crédito </option>
                                         <option value="Débito"> Débito </option>
                                         <option value="Dinheiro"> Dinheiro </option>
                                     </select>
-
-                                    <div className="observacao">
-                                        <h1>Observações:</h1>
-
-                                        <input type="text" placeholder='Digite aqui' />
-                                    </div>
                                 </div>
                                 <div className="botao">
                                    
                                     <div className="button">
-                                        <button className='botao' onClick={fecharReceita1} > Cancelar </button>
-                                        <button> Salvar </button>
+                                        <button className='botao' onClick={fecharReceita} > Cancelar </button>
+                                        <button onClick={addDespesa} > Salvar </button>
                                     </div>
                                 </div>
                             </div>
