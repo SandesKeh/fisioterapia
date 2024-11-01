@@ -185,7 +185,7 @@ export default function Agenda() {
 
     return (
         <div className="pagina-agenda">
-            <Cabecalho />
+            <Cabecalho className="cabecalho" />
             <div className="content">
                 <div className="header">
                     <button onClick={() => setViewMode("Pessoal")} className={viewMode === "Pessoal" ? "active" : ""}>
