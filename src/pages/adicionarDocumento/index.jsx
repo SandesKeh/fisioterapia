@@ -1,9 +1,9 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 export default function AddDocumento(){
 
     const [mostrarprofissional, setMostrarProfissional] = useState(false);
@@ -23,6 +23,22 @@ export default function AddDocumento(){
     const [titulo, setTitulos]= useState('');
     const [conteudo, setConteudo]= useState('');
     const [data, setData]= useState('');
+    const [ array, setArray] = useState([])
+    async function Documentos() {
+        try {
+            const resposta = await axios.get('http://localhost:5000/documentacao/');
+            const value = resposta.data;
+            setArray(value);
+            console.log(array);
+        } 
+        catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    useEffect(() => {
+        Documentos()
+    })
 
     async function Adicionardocumento() {
         try {
@@ -33,11 +49,18 @@ export default function AddDocumento(){
                 conteudo: conteudo,
                 dataCadastro: data
             }
-            const resposta = await axios.post(link, documento)
-            alert('Documento cadastrado com sucesso')
+             await axios.post(link, documento)
+            toast.success('Documento cadastrado com sucesso');
+            setConteudo('');
+            setTipo('');
+            setTitulos('');
+            setData('');
+
+
             navegate('/inserirDocumento')
         } catch (error) {
             alert('erro, documento não cadastrado')
+            
         }
     }
     
@@ -112,17 +135,19 @@ export default function AddDocumento(){
                                 <th> Ações </th>
                             </tr>
 
-                            <tr>
-                                
-                                <td> Atestado</td>
-                                <td> Atestado- Modelo 1</td>
-                                <td> Documento personalizado </td>
-                                <td> 17/09/2024 </td>
-                                <td> <img src="/assets/image/bx-edit.svg" alt="" /> 
-                                    <img src="/assets/image/bx-trash.svg" alt="" />
-                                </td>
-                                
-                            </tr>
+                           {array.map(item => (
+                                    <tr>
+                                        
+                                        <td> {item.tipo}</td>
+                                        <td> {item.titulo}</td>
+                                        <td> {item.conteudo} </td>
+                                        <td> {item.dataCadastro}</td>
+                                        <td> <img src="/assets/image/bx-edit.svg" alt="" /> 
+                                            <img src="/assets/image/bx-trash.svg" alt="" />
+                                        </td>
+                                    
+                                    </tr>
+                           ))}
                    
                         </table>
 
@@ -150,7 +175,7 @@ export default function AddDocumento(){
                                    
                                     <div className="button">
                                         <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
-                                        <button onClick={Adicionardocumento} > Salvar </button>
+                                        <button onClick={Adicionardocumento}  > Salvar </button>
                                     </div>
                                 </div>
                             </div>

@@ -4,7 +4,7 @@ import storage from 'local-storage';
 import axios from "axios";
 import './index.scss';
 
-export default function Card(props) {
+export default function Card() {
     const [exibir, setExibir] = useState(false);
 
     const mostrar = () => {
@@ -70,14 +70,14 @@ export default function Card(props) {
                 cpf: cpf,
                 rg: rg
             }
-            const resposta= await axios.post(linkpessoal, pessoal)
+             await axios.post(linkpessoal, pessoal)
 
             const linkfinanceiro = 'http://localhost:5000/inserir/financeiro'
             const financeiro = {
                 pacotes: planofinanceiro,
                 valor: valoesessao
             }
-            const resposta2= await axios.post(linkfinanceiro, financeiro)
+             await axios.post(linkfinanceiro, financeiro)
 
             const linkendereco= 'http://localhost:5000/inserir/endereco';
             const endereco={
@@ -90,7 +90,7 @@ export default function Card(props) {
                 bairro: bairro,
                 complemento: complemento
             }
-            const resposta3= await axios.post(linkendereco, endereco)
+             await axios.post(linkendereco, endereco)
 
             const linkresponsavel= 'http://localhost:5000/inserir/responsavel';
             const responsavel={
@@ -98,8 +98,9 @@ export default function Card(props) {
                 cpf: cpfresponsavel,
                 telefone: telefone
             }
-            const resposta4= await axios.post(linkresponsavel, responsavel)
-            alert('Cliente cadastrado ');
+             await axios.post(linkresponsavel, responsavel)
+            alert('Cliente cadastrado ')
+            
             navagate('/telaCadastrar')
         } catch (error) {
            alert('erro') 

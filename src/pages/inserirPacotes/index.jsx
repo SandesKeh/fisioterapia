@@ -1,7 +1,9 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 export default function InserirPacotes(){
@@ -17,6 +19,39 @@ export default function InserirPacotes(){
         
     };
 
+    const [nome, setNome]= useState('');
+    const [valor, setValor] = useState('');
+    const [array, setArray] = useState([]);
+
+    async function pacotes() {
+        try {
+            const resposta = await axios.get('http://localhost:5000/consultar/pacotes');
+            const value = resposta.data;
+            setArray(value);
+            console.log(array);
+        } 
+        catch (err) {
+            console.log(err.message)
+            alert(err.message)
+        }
+    }
+
+    useEffect(() => {
+        pacotes()
+    })
+
+
+
+    async function Cadastrar() {
+     try {
+        await axios.post(`http://localhost:5000/insert/pacotes/${nome}/${valor}`);
+        alert('foi');
+     } 
+     catch (err) {
+        console.log(err.message)
+        alert(err.message)
+     }
+    }
 
     return(
         <div className="inserirpacotes">
@@ -77,10 +112,10 @@ export default function InserirPacotes(){
                                 </div>
                                 <div className="mensage">
                                     <h2> Quantas sessões : </h2>
-                                        <input type="text" placeholder=' ex: 4 ' />
+                                        <input type="text" placeholder=' ex: 4 ' value={nome} onChange={e => setNome(e.target.value)} />
 
                                     <h2> Valor :</h2>
-                                        <input type="text" placeholder='Ex: R$ 400,00  ' />
+                                        <input type="text" placeholder='Ex: R$ 400,00  ' value={valor} onChange={e => setValor(e.target.value)} />
                                     
 
                                   
@@ -89,7 +124,7 @@ export default function InserirPacotes(){
                                    
                                     <div className="button">
                                         <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
-                                        <button> Salvar </button>
+                                        <button onClick={Cadastrar} > Salvar </button>
                                     </div>
                                 </div>
                             </div>
