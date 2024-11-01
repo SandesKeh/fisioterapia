@@ -2,6 +2,8 @@ import './index.scss';
 import Cabecalho from '../../components/cabecalho';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 export default function InserirPacotes(){
@@ -17,6 +19,25 @@ export default function InserirPacotes(){
         
     };
 
+    const [pacote, setPacote]= useState('');
+    const [valor, setValor] = useState('');
+
+    async function Cadastrar() {
+        try {
+            const link = 'http://localhost:5000/insert/pacotes'
+            const obj={
+                nome: pacote,
+                valor: valor
+            }
+
+            await axios.post(link, obj)
+            alert('pacote adicionado')
+        } catch (erro) {
+            alert('deu errado')
+        }
+   
+        
+    }
 
     return(
         <div className="inserirpacotes">
@@ -77,10 +98,10 @@ export default function InserirPacotes(){
                                 </div>
                                 <div className="mensage">
                                     <h2> Quantas sessões : </h2>
-                                        <input type="text" placeholder=' ex: 4 ' />
+                                        <input type="text" placeholder=' ex: 4 ' value={pacote} onChange={e => setPacote(e.target.value)} />
 
                                     <h2> Valor :</h2>
-                                        <input type="text" placeholder='Ex: R$ 400,00  ' />
+                                        <input type="text" placeholder='Ex: R$ 400,00  ' value={valor} onChange={e => setValor(e.target.value)} />
                                     
 
                                   
@@ -89,7 +110,7 @@ export default function InserirPacotes(){
                                    
                                     <div className="button">
                                         <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
-                                        <button> Salvar </button>
+                                        <button onClick={Cadastrar} > Salvar </button>
                                     </div>
                                 </div>
                             </div>

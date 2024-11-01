@@ -33,8 +33,9 @@ export default function AddDocumento(){
                 conteudo: conteudo,
                 dataCadastro: data
             }
-            const resposta = await axios.post(link, documento)
-            alert('Documento cadastrado com sucesso')
+             await axios.post(link, documento)
+            alert('Documento cadastrado com sucesso');
+
             navegate('/inserirDocumento')
         } catch (error) {
             alert('erro, documento não cadastrado')
@@ -150,7 +151,7 @@ export default function AddDocumento(){
                                    
                                     <div className="button">
                                         <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
-                                        <button onClick={Adicionardocumento} > Salvar </button>
+                                        <button onClick={Adicionardocumento}  > Salvar </button>
                                     </div>
                                 </div>
                             </div>

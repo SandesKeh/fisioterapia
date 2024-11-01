@@ -1,7 +1,9 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
+
 
 export default function AddProfissional(){
 
@@ -16,6 +18,30 @@ export default function AddProfissional(){
         setMostrarProfissional(false)
         
     };
+
+    
+    const [nome, setNome] = useState('');
+    const [email, setEmail]= useState('');
+    const [acesso, setAcesso]= useState('');
+  
+
+    async function Adicionar() {
+        try {
+            const link= 'http://localhost:5000/usuario/profissional'
+            const documento = {
+                nome: nome,
+                email: email,
+                temAcesso: acesso
+            }
+             await axios.post(link, documento)
+            alert('Profissional cadastrado com sucesso');
+
+            
+        } catch (error) {
+            alert('erro, Profissional não cadastrado')
+        }
+    }
+
     return(
         <div className="addprofissional">
             <div className="inserirpacotes">
@@ -106,16 +132,12 @@ export default function AddProfissional(){
                                 </div>
                                 <div className="mensage">
                                     <h2> Nome: </h2>
-                                        <input type="text" placeholder='Ex: Seu nome ' />
+                                        <input type="text" placeholder='Ex: Seu nome ' value={nome} onChange={e => setNome(e.target.value)} />
 
                                     <h2> E-mail:</h2>
-                                        <input type="text" placeholder='Ex: seuemailaqui07@gmail.com' />
+                                        <input type="text" placeholder='Ex: seuemailaqui07@gmail.com' value={email} onChange={e => setEmail(e.target.value)} />
                                     <h2>Acesso ao sistema: </h2>
-                                    <select > 
-                                        <option value=""> Selecione </option>
-                                        <option value="Sim"> Sim</option>
-                                        <option value="Não"> Não </option>
-                                    </select>
+                                        <input type="text" value={acesso} onChange={e => setAcesso(e.target.value)}  placeholder='true ou false' />
 
                                   
                                 </div>
@@ -123,7 +145,7 @@ export default function AddProfissional(){
                                    
                                     <div className="button">
                                         <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
-                                        <button> Salvar </button>
+                                        <button onClick={Adicionar} > Salvar </button>
                                     </div>
                                 </div>
                             </div>
