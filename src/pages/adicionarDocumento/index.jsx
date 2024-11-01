@@ -3,7 +3,7 @@ import Cabecalho from '../../components/cabecalho';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 export default function AddDocumento(){
 
     const [mostrarprofissional, setMostrarProfissional] = useState(false);
@@ -50,11 +50,17 @@ export default function AddDocumento(){
                 dataCadastro: data
             }
              await axios.post(link, documento)
-            alert('Documento cadastrado com sucesso');
+            toast.success('Documento cadastrado com sucesso');
+            setConteudo('');
+            setTipo('');
+            setTitulos('');
+            setData('');
+
 
             navegate('/inserirDocumento')
         } catch (error) {
             alert('erro, documento não cadastrado')
+            
         }
     }
     
