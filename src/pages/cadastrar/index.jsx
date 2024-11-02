@@ -17,7 +17,7 @@ export default function Cadastro() {
             email: email,
             senha: senha
         }
-        let link= 'http://localhost:5000/cliente/'
+        let link= 'http://4.172.207.208:5004/cliente/'
 
         const sla = await axios.post(link, usuario);
         alert("foi")

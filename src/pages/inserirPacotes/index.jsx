@@ -25,7 +25,7 @@ export default function InserirPacotes(){
 
     async function pacotes() {
         try {
-            const resposta = await axios.get('http://localhost:5000/consultar/pacotes');
+            const resposta = await axios.get('http://4.172.207.208:5004/consultar/pacotes');
             const value = resposta.data;
             setArray(value);
             console.log(array);
@@ -44,7 +44,7 @@ export default function InserirPacotes(){
 
     async function Cadastrar() {
      try {
-        await axios.post(`http://localhost:5000/insert/pacotes/${nome}/${valor}`);
+        await axios.post(`http://4.172.207.208:5004/insert/pacotes/${nome}/${valor}`);
         alert('foi');
      } 
      catch (err) {

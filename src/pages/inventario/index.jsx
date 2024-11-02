@@ -30,7 +30,7 @@ export default function Inventario(){
 
     async function inventario() {
         try {
-            const resposta = await axios.get('http://localhost:5000/inventario/');
+            const resposta = await axios.get('http://4.172.207.208:5004/inventario/');
             const value = resposta.data;
             setArray(value);
             console.log(array);
@@ -47,7 +47,7 @@ export default function Inventario(){
 
     async function CadastrarProduto() {
         try {
-            const link = `http://localhost:5000/inserir/inventario?produto=${nomeproduto}&categoria=${categoria}&estoque=${estoque}&local=${ondecomprou}&precoUnitario=${unitário}&valorTotal=${total}&data=${data}`;
+            const link = `http://4.172.207.208:5004/inserir/inventario?produto=${nomeproduto}&categoria=${categoria}&estoque=${estoque}&local=${ondecomprou}&precoUnitario=${unitário}&valorTotal=${total}&data=${data}`;
             
             await axios.post(link);
             

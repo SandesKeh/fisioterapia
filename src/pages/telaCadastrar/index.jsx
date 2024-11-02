@@ -20,7 +20,7 @@ export default function TelaCadastrar(){
 
     async function Deletar() {
         try {
-            const resposta = await axios.delete(`http://localhost:5000/deletar/infoPessoas/`)
+            const resposta = await axios.delete(`http://4.172.207.208:5004/deletar/infoPessoas/`)
         } catch (error) {
             
         }
@@ -29,7 +29,7 @@ export default function TelaCadastrar(){
 
     async function consultar() {
         try {
-            const resposta= await axios.get('http://localhost:5000/consultar/infoPessoas');
+            const resposta= await axios.get('http://4.172.207.208:5004/consultar/infoPessoas');
             const valor = resposta.data;
             setArray(valor)
            

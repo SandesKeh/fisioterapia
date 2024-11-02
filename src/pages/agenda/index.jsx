@@ -39,8 +39,8 @@ export default function Agenda() {
     // Função para buscar eventos de Cliente e Pessoal
     const fetchEvents = () => {
         Promise.all([
-            axios.get("http://localhost:5000/consulta/agendaCliente"),
-            axios.get("http://localhost:5000/consulta/agendaPessoal")
+            axios.get("http://4.172.207.208:5004/consulta/agendaCliente"),
+            axios.get("http://4.172.207.208:5004/consulta/agendaPessoal")
         ])
         .then(([clienteResp, pessoalResp]) => {
             console.log("Resposta Cliente:", clienteResp.data);
@@ -99,8 +99,8 @@ export default function Agenda() {
         };
 
         const endpoint = viewMode === "Geral" 
-            ? "http://localhost:5000/inserir/agendaCliente" 
-            : "http://localhost:5000/inserir/agendaPessoal";
+            ? "http://4.172.207.208:5004/inserir/agendaCliente" 
+            : "http://4.172.207.208:5004/inserir/agendaPessoal";
 
         axios.post(endpoint, newEvent)
             .then(response => {
@@ -119,8 +119,8 @@ export default function Agenda() {
         const updatedStatus = event.status === "pendente" ? "concluído" : "pendente";
 
         const endpoint = viewMode === "Geral" 
-            ? `http://localhost:5000/atualizar/agendaCliente/${id}` 
-            : `http://localhost:5000/atualizar/agendaPessoal/${id}`;
+            ? `http://4.172.207.208:5004/atualizar/agendaCliente/${id}` 
+            : `http://4.172.207.208:5004/atualizar/agendaPessoal/${id}`;
 
         axios.put(endpoint, {status: updatedStatus })
             .then(() => {
@@ -134,8 +134,8 @@ export default function Agenda() {
 
     const handleDeleteEvent = (id) => {
         const endpoint = viewMode === "Geral" 
-            ? `http://localhost:5000/deleta/agendaCliente/${id}` 
-            : `http://localhost:5000/deleta/agendaPessoal/${id}`;
+            ? `http://4.172.207.208:5004/deleta/agendaCliente/${id}` 
+            : `http://4.172.207.208:5004/deleta/agendaPessoal/${id}`;
 
         axios.delete(endpoint)
             .then(() => {

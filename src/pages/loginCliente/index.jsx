@@ -14,7 +14,7 @@ export default function Login() {
 
     async function Entrar(){
        try {
-        const link = 'http://localhost:5000/logincliente/';
+        const link = 'http://4.172.207.208:5004/logincliente/';
         const user= {
             email: email,
             senha: senha

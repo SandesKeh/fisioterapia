@@ -28,7 +28,7 @@ export default function Financas(){
 
     async function addDespesa() {
         try {
-            const link = 'http://localhost:5000/inserir/despesas/';
+            const link = 'http://4.172.207.208:5004/inserir/despesas/';
             const despesa = {
                 propriedade: propriedade,
                 categoriaFinanceira: categoria,
@@ -50,7 +50,7 @@ export default function Financas(){
     const [array, setArray]= useState([]);
     async function financas() {
         try {
-            const resposta = await axios.get('http://localhost:5000/despesas/');
+            const resposta = await axios.get('http://4.172.207.208:5004/despesas/');
             const valor = resposta.data;
             setArray(valor)
         } catch (err) {

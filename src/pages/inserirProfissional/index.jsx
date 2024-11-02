@@ -29,7 +29,7 @@ export default function AddProfissional(){
 
     async function profissionais() {
         try {
-            const resposta = await axios.get('http://localhost:5000/usuario/profissional');
+            const resposta = await axios.get('http://4.172.207.208:5004/usuario/profissional');
             const value = resposta.data;
             setArray(value);
             console.log(array);
@@ -46,7 +46,7 @@ export default function AddProfissional(){
 
     async function Adicionar() {
         try {
-            const link= 'http://localhost:5000/usuario/profissional'
+            const link= 'http://4.172.207.208:5004/usuario/profissional'
             const documento = {
                 nome: nome,
                 email: email,
