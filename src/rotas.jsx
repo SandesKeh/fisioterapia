@@ -17,6 +17,7 @@ import Financas from "./pages/financas";
 
 
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -24,7 +25,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 export default function Rotas() {
     return (
         <BrowserRouter>
-
+              <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover  
+                    theme="dark"
+                />
             <Routes>
                 <Route path="/" element={<Landingpage/>}/>
                 <Route path="/home" element={<Home/>}/>

@@ -3,7 +3,7 @@ import Cabecalho from '../../components/cabecalho';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 export default function Inventario(){
 
     const [mostrarinventario, setMostrarinventario] = useState(false);
@@ -61,9 +61,9 @@ export default function Inventario(){
     async function CadastrarProduto() {
         try {
             await axios.post(`http://localhost:5004/inserir/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitário}/${total}/${data}`);
-            alert('Produto inserido no inventário com sucesso');
+            toast.success('Produto inserido no inventário com sucesso');
         } catch (err) {
-            alert('Erro ao cadastrar o inventário');
+            toast.error('Erro ao cadastrar o inventário');
             console.log(err.message)
         }
     }
@@ -71,11 +71,11 @@ export default function Inventario(){
     async function atualizarPacotes() {
         try {
             await axios.put(`http://localhost:5004/atualizar/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitário}/${total}/${data}/${id}`);
-            alert('foi')
+            toast.success('atualizado com sucesso')
             setMostrareditar(false)
         } 
         catch (err) {
-            alert( 'nop')
+            toast.error( 'erro ao atualizar')
             console.log(err.message)    
         }
     }
