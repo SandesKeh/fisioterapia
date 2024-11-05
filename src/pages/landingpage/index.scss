@@ -128,16 +128,17 @@
         @media (max-width: 768px) {
            
             .links {
-                display: none; 
+                display: none;
+
             }
 
-   
+
             .links.open {
                 
                 display: flex; 
                 flex-direction: column; 
-                justify-items: last baseline;
                 align-items: last baseline;
+                align-content: center;
                 position: absolute; 
                 top: 100%; 
                 border-radius: 0px, 0px, 0px, 15px;
@@ -146,8 +147,9 @@
                 height: 70vh;
                 box-shadow: 0 2px 5px rgba(58, 54, 54, 0.1); 
                 
+                
             button {
-                font: 400 24px roboto;
+                font: 400 18px roboto;
                 color: #2198ad;
                 border: none;
                 background: transparent;

@@ -1,54 +1,49 @@
-.tela-login{
-   
+.tela-login {
     display: flex;
     flex-direction: column;
     height: 100vh;
     background-color: #03989F;
     position: relative;
-    .tela{
+
+    .tela {
         display: flex;
         flex-direction: row;
         justify-content: center;
         width: 100%;
 
-
-
-        .esquerda{
+        .esquerda {
             display: flex;
             flex-direction: column;
             gap: 10px;
             width: 50%;
 
-
-            img{
-                width: 250px;
-                margin-left: 90px;
+            img {
+                width: 200px;
+                margin-left: 40px;
                 padding: 20px 0px 0px 20px;
             }
 
-            .textos{
+            .textos {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 2px;
-                margin: 60px 0px 0px 180px ;
-                
+                margin: 60px 0px 0px 40px;
 
-                h1{
-                    font: 700 38px Inter;
+                h1 {
+                    font: 700 28px Inter;
                     color: #fff;
                 }
-                
-                p{
-                    
-                    font: 700 20px Inter;
+
+                p {
+                    font: 700 16px Inter;
                     color: #000000;
-                    width: 270px;
+                    width: 100%;
                 }
             }
         }
 
-        .direita{
+        .direita {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -56,128 +51,168 @@
             width: 50%;
             height: 100vh;
 
-            .cartao{
+            .cartao {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: space-between;
                 background-color: #fffffff5;
                 border-radius: 12px;
-                padding: 100px 60px 200px 60px;
-                height: 600px;
+                padding: 60px 40px;
+                height: auto; //tipo um elastico
                 gap: 10px;
                 z-index: 1;
-                .text{
-                    h1{
-                        font: 700 40px Inter;
+
+                .text {
+                    h1 {
+                        font: 700 32px Inter;
                     }
                 }
 
-                .senha{
+                .senha {
                     display: flex;
-                    margin-left: 45%;
-                
-                        a{
-                            text-decoration: none;
-                            font: 700 16px Inter;
-                            color: #000000;
-                        }
-                    
+                    margin-left: auto;
+                    a {
+                        text-decoration: none;
+                        font: 700 14px Inter;
+                        color: #000000;
+                    }
                 }
-                
-                .cadastroNovo{
+
+                .cadastroNovo {
                     display: flex;
                     text-align: center;
-                    a{
-                        margin-top: 60px;
-                        font: 500 20px/20px roboto;
+                    a {
+                        margin-top: 20px;
+                        font: 500 16px Roboto;
                         text-decoration: none;
                         color: #000000;
-                            a{
-                                text-decoration: none;
-                                color: #03989F;
-                            }
                     }
                 }
-                
 
-                h1{
-                    font: 600 34px poppins;
+                h1 {
+                    font: 600 24px Poppins;
                     color: #000000;
                 }
 
-                .perguntas{
+                .perguntas {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     gap: 10px;
 
-                    .input{
+                    .input {
                         padding: 5px;
-                        input{
+
+                        input {
                             border: 1px solid rgb(233, 231, 231);
                             border-color: hsl(0, 0%, 89%);
                             padding: 10px 5px;
-                            width: 380px;
+                            width: 100%;
+                            max-width: 300px;
                             border-radius: 25px;
                             font: 400 12px Inter;
                             color: #777777;
                             background-color: #E3E3E3;
                             padding-left: 10px;
-                           box-shadow: 1px 1px 15px hsl(0, 0%, 89%);
+                            box-shadow: 1px 1px 15px hsl(0, 0%, 89%);
                         }
-                        h1{
+
+                        h1 {
                             font: 900 15px Inter;
                             padding: 10px;
                         }
                     }
-               
                 }
 
-
-                button{
-                    padding: 12px 45px;
-                    font: 500 18px Inter;
+                button {
+                    padding: 10px 30px;
+                    font: 500 16px Inter;
                     border-radius: 25px;
                     cursor: pointer;
                     align-self: self-end;
-                    margin:20px 37px 0px 0px;
                     background-color: #222222;
-                    border: 2px solid transparent ;
+                    border: 2px solid transparent;
                     color: rgb(255, 255, 255);
-                    transition: .5s;
-                
-                 
-        
+                    transition: 0.5s;
                 }
-                button:hover{
+
+                button:hover {
                     transform: scaleX(1.05);
                     background-color: #ffffff;
                     color: #17d1b8;
-                    border: 2px solid #17d1b8 ;
+                    border: 2px solid #17d1b8;
                 }
-                button:active{
+
+                button:active {
                     transform: scaleX(1);
                     background-color: #05a5ad;
                     color: #fff;
                 }
-
             }
         }
     }
-    
 
-
-
-    .risco{
-        background-color:#ffff ;
+    .risco {
+        background-color: #ffff;
         width: 100%;
         height: 200px;
         position: absolute;
         z-index: 0;
         top: 400px;
     }
-
-
 }
 
+// responsividade
+@media (max-width: 1024px) {
+    .tela-login .tela .esquerda, .tela-login .tela .direita {
+        width: 100%; 
+    }
+    .tela-login .tela .esquerda .logo img{
+        width: 10rem;
+        margin-left: 10px;
+    }
+    .tela-login .tela .direita{
+       height:840px ;
+       background-color: #03989F;
+    }
+}
+
+@media (max-width: 768px) {
+    .tela-login .tela {
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+    }
+    .tela-login .tela .direita{
+        height:840px ;
+     }
+    .tela-login .tela .esquerda .textos {
+        margin: 20px 0 0 20px;
+    }
+
+    .tela-login .tela .direita .cartao {
+        padding: 20px 10px;
+    }
+    .tela-login .tela .esquerda .logo img{
+        width: 10rem;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tela-login .tela .esquerda .logo img{
+        width: 7rem;
+        margin-left: 10px;
+    }
+    .tela-login .tela .direita{
+        height:840px ;
+     }
+    .tela-login .tela .direita .cartao {
+        padding: 20px 10px;
+    }
+
+    .tela-login .tela .direita .cartao .input input {
+        width: 100%;
+    }
+}

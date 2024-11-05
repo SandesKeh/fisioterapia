@@ -39,7 +39,9 @@ export default function Login() {
         <div className="tela-login">
            <div className="tela">
                 <div className="esquerda">
+                    <div className="logo">
                     <img src="/assets/image/logo1.png" alt="banner da empresa" />
+                    </div>
 
                         <div className="textos">
                             <h1>Bem-vindo a FisioSaúde</h1>
