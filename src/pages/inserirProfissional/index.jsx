@@ -3,7 +3,7 @@ import Cabecalho from '../../components/cabecalho';
 import { Link} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { toast } from 'react-toastify';
 
 export default function AddProfissional(){
 
@@ -20,14 +20,29 @@ export default function AddProfissional(){
     };
 
     
+    const [alterarprofissional, setAlterarProfissional] = useState(false);
+
+    const abrirProfissional1 = (id) => {
+        setAlterarProfissional(true);
+        idEdit(id)
+    };
+
+    const fecharPrpfissional1 = (e) => {
+        
+        setAlterarProfissional(false)
+        
+    };
+
+    
     const [nome, setNome] = useState('');
     const [email, setEmail]= useState('');
     const [acesso, setAcesso]= useState('');
     const [array, setArray]= useState([]);
+    const [idEdit, setIdEdit] = useState(null);
+    const [idDelet, setIdDelet] = useState(null);
 
 
-
-    async function profissionais() {
+    async function Consultarprofissionais() {
         try {
             const resposta = await axios.get('http://localhost:5004/usuario/profissional');
             const value = resposta.data;
@@ -40,24 +55,28 @@ export default function AddProfissional(){
     }
 
     useEffect(() => {
-        profissionais();
+        Consultarprofissionais();
     })
-  
+    
 
     async function Adicionar() {
         try {
-            const link= 'http://localhost:5004/usuario/profissional'
-            const documento = {
-                nome: nome,
-                email: email,
-                temAcesso: acesso
-            }
-             await axios.post(link, documento)
-            alert('Profissional cadastrado com sucesso');
+        
+
+             await axios.post(`http://localhost:5004/inseir/usuario/profissional/${nome}/${email}/${acesso}`)
+            toast.success('Profissional cadastrado com sucesso');
 
             
         } catch (error) {
-            alert('erro, Profissional não cadastrado')
+            toast.error('erro, Profissional não cadastrado')
+        }
+    }
+
+    async function alterar(){
+        try {
+            await axios.post()
+        } catch (error) {
+            
         }
     }
 
@@ -118,6 +137,7 @@ export default function AddProfissional(){
                     <table>
                             <tr>
                                 
+                                <th> ID </th>
                                 <th> Nome </th>
                                 <th> E-mail </th>
                                 <th>Acesso ao sistema </th>
@@ -128,10 +148,11 @@ export default function AddProfissional(){
                             {array.map(item => (
                                     <tr>
                                         
+                                        <td> {item.id_adicionar_profissional}</td>
                                         <td> {item.nome}</td>
                                         <td> {item.email}</td>
-                                        <td> {item.temAcesso} </td>
-                                        <td> <img src="/assets/image/bx-edit.svg" alt="" /> 
+                                        <td> {item.acesso} </td>
+                                        <td> <img onClick={abrirProfissional1(item.id_adicionar_profissional)} src="/assets/image/bx-edit.svg" alt="" /> 
                                         <img src="/assets/image/bx-lock-open-alt.svg" alt="" />
                                         </td>
                                     
@@ -163,6 +184,37 @@ export default function AddProfissional(){
                                    
                                     <div className="button">
                                         <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
+                                        <button onClick={Adicionar} > Salvar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+
+                    
+                        {alterarprofissional&& (
+                        <div className="popup-background">
+                            <div className="popup">
+                                <div className="mensagem">
+                                    <h2>Alterar Profissional  </h2>
+                                    <img onClick={fecharPrpfissional1} src="/assets/image/bx-x.svg" alt="" />
+                                </div>
+                                <div className="mensage">
+                                    <h2> Nome: </h2>
+                                        <input type="text" placeholder='Ex: Seu nome ' value={nome} onChange={e => setNome(e.target.value)} />
+
+                                    <h2> E-mail:</h2>
+                                        <input type="text" placeholder='Ex: seuemailaqui07@gmail.com' value={email} onChange={e => setEmail(e.target.value)} />
+                                    <h2>Acesso ao sistema: </h2>
+                                        <input type="text" value={acesso} onChange={e => setAcesso(e.target.value)}  placeholder='true ou false' />
+
+                                  
+                                </div>
+                                <div className="botao">
+                                   
+                                    <div className="button">
+                                        <button className='botao' onClick={fecharPrpfissional1} > Cancelar </button>
                                         <button onClick={Adicionar} > Salvar </button>
                                     </div>
                                 </div>
