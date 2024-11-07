@@ -14,7 +14,10 @@ export default function AddProfissional() {
     const [acesso, setAcesso] = useState('');
     const [array, setArray] = useState([]);
     const [idDelet, setIdDelet] = useState(null);
-
+    const [nomeed, setNomeed] = useState('');
+    const [emailed, setEmailed] = useState('');
+    const [acessoed, setAcessoed] = useState('');
+    
 
     const abrirProfissional = () => {
         setMostrarProfissional(true);
@@ -36,12 +39,12 @@ export default function AddProfissional() {
             const profissional = resposta.data;
 
             // Preencher os campos com as informações do profissional
-            setNome(profissional.nome);
-            setEmail(profissional.email);
-            setAcesso(profissional.acesso);
+            setNomeed(profissional.nome);
+            setEmailed(profissional.email);
+            setAcessoed(profissional.acesso);
 
         } catch (err) {
-            toast.error('Erro ao carregar os dados do profissional');
+            
             console.log(err);
         }
     };
@@ -49,10 +52,9 @@ export default function AddProfissional() {
     // Função para fechar o popup de edição
     const fecharProfissionalEditar = () => {
         setAlterarProfissional(false);
+        setIdEdit(null)
         // Resetar os campos de edição
-        setNome('');
-        setEmail('');
-        setAcesso('');
+        
     };
 
     async function ConsultarProfissionais() {
@@ -66,7 +68,7 @@ export default function AddProfissional() {
 
     useEffect(() => {
         ConsultarProfissionais();
-    }, []);
+    });
 
  
     async function Adicionar() {
@@ -83,12 +85,12 @@ export default function AddProfissional() {
 
     async function Alterar() {
         try {
-            await axios.post(`http://localhost:5004/alterar/usuario/profissional/${nome}/${email}/${acesso}`);
+            await axios.put(`http://localhost:5004/update/profissional/${nomeed}/${emailed}/${acessoed}/${idEdit}`);
             toast.success('Profissional alterado com sucesso');
             setAlterarProfissional(false);
-            ConsultarProfissionais(); 
-        } catch (error) {
-            toast.error('Erro ao alterar profissional');
+            
+        } catch (err) {
+            toast.error("erro cowboy");
         }
     }
 
@@ -219,33 +221,28 @@ export default function AddProfissional() {
                                     <img onClick={fecharProfissionalEditar} src="/assets/image/bx-x.svg" alt="Fechar" />
                                 </div>
                                 <div className="mensage">
-                                    <h2>ID:</h2>
-                                    <input
-                                        type="text"
-                                        value={idEdit}
-                                        readOnly
-                                    />
+                                  
                                     <h2>Nome:</h2>
                                     <input
                                         type="text"
                                         placeholder="Ex: Seu nome"
-                                        value={nome}
-                                        onChange={e => setNome(e.target.value)}
+                                        value={nomeed}
+                                        onChange={e => setNomeed(e.target.value)}
                                     />
 
                                     <h2>E-mail:</h2>
                                     <input
                                         type="text"
                                         placeholder="Ex: seuemailaqui07@gmail.com"
-                                        value={email}
-                                        onChange={e => setEmail(e.target.value)}
+                                        value={emailed}
+                                        onChange={e => setEmailed(e.target.value)}
                                     />
 
                                     <h2>Acesso ao sistema:</h2>
                                     <input
                                         type="text"
-                                        value={acesso}
-                                        onChange={e => setAcesso(e.target.value)}
+                                        value={acessoed}
+                                        onChange={e => setAcessoed(e.target.value)}
                                         placeholder="true ou false"
                                     />
                                 </div>
