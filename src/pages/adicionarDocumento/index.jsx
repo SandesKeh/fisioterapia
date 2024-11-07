@@ -26,7 +26,7 @@ export default function AddDocumento(){
     const [ array, setArray] = useState([])
     async function Documentos() {
         try {
-            const resposta = await axios.get('http://4.172.207.208:5004/documentacao/');
+            const resposta = await axios.get('http://localhost:5004/documentacao/');
             const value = resposta.data;
             setArray(value);
             console.log(array);
@@ -42,7 +42,7 @@ export default function AddDocumento(){
 
     async function Adicionardocumento() {
         try {
-            const link= 'http://4.172.207.208:5004/documentacao/'
+            const link= 'http://localhost:5004/documentacao/'
             const documento = {
                 tipo: tipo,
                 titulo: titulo,
