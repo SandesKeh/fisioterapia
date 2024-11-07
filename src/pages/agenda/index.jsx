@@ -39,8 +39,8 @@ export default function Agenda() {
     // Função para buscar eventos de Cliente e Pessoal
     const fetchEvents = () => {
         Promise.all([
-            axios.get("http://4.172.207.208:5004/consulta/agendaCliente"),
-            axios.get("http://4.172.207.208:5004/consulta/agendaPessoal")
+            axios.get("http://localhost:5004/consulta/agendaCliente"),
+            axios.get("http://localhost:5004/consulta/agendaPessoal")
         ])
         .then(([clienteResp, pessoalResp]) => {
             console.log("Resposta Cliente:", clienteResp.data);
@@ -99,8 +99,8 @@ export default function Agenda() {
         };
 
         const endpoint = viewMode === "Geral" 
-            ? "http://4.172.207.208:5004/inserir/agendaCliente" 
-            : "http://4.172.207.208:5004/inserir/agendaPessoal";
+            ? "http://localhost:5004/inserir/agendaCliente" 
+            : "http://localhost:5004/inserir/agendaPessoal";
 
         axios.post(endpoint, newEvent)
             .then(response => {
@@ -119,8 +119,8 @@ export default function Agenda() {
         const updatedStatus = event.status === "pendente" ? "concluído" : "pendente";
 
         const endpoint = viewMode === "Geral" 
-            ? `http://4.172.207.208:5004/atualizar/agendaCliente/${id}` 
-            : `http://4.172.207.208:5004/atualizar/agendaPessoal/${id}`;
+            ? `http://localhost:5004/atualizar/agendaCliente/${id}` 
+            : `http://localhost:5004/atualizar/agendaPessoal/${id}`;
 
         axios.put(endpoint, {status: updatedStatus })
             .then(() => {
@@ -134,8 +134,8 @@ export default function Agenda() {
 
     const handleDeleteEvent = (id) => {
         const endpoint = viewMode === "Geral" 
-            ? `http://4.172.207.208:5004/deleta/agendaCliente/${id}` 
-            : `http://4.172.207.208:5004/deleta/agendaPessoal/${id}`;
+            ? `http://localhost:5004/deleta/agendaCliente/${id}` 
+            : `http://localhost:5004/deleta/agendaPessoal/${id}`;
 
         axios.delete(endpoint)
             .then(() => {
@@ -185,6 +185,8 @@ export default function Agenda() {
 
     return (
         <div className="pagina-agenda">
+
+            <div className="filha">
             <Cabecalho className="cabecalho" />
             <div className="content">
                 <div className="header">
@@ -234,15 +236,15 @@ export default function Agenda() {
                         <tbody>
                             {filteredEvents.map(event => (
                                 <tr key={event.id}>
-                                    <td>{event.modo || "Local não disponível"}</td>
+                                    <td>{event.mode || "Local não disponível"}</td>
                                     <td>
                                         <span className={event.status === "pendente" ? "status-pending" : "status-complete"}>
                                             {event.status}
                                         </span>
                                     </td>
-                                    <td>{event.nome || "Nome não disponível"}</td>
-                                    <td>{event.data || "Data não disponível"}</td>
-                                    <td>{event.horario || "Horário não disponível"}</td>
+                                    <td>{event.name || "Nome não disponível"}</td>
+                                    <td>{event.date || "Data não disponível"}</td>
+                                    <td>{event.time || "Horário não disponível"}</td>
                                     <td>
                                         <button onClick={() => handleStatusChange(event.id)}>Atualizar</button>
                                         <button onClick={() => handleDeleteEvent(event.id)}>Excluir</button>
@@ -298,6 +300,8 @@ export default function Agenda() {
                     </div>
                 )}
             </div>
+            </div>
+            
         </div>
     );
 }
