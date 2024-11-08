@@ -32,13 +32,12 @@ export default function AddProfissional() {
     const abrirProfissionalEditar = async (id) => {
         try {
             setAlterarProfissional(true);
-            setIdEdit(id);  // Definir o ID do profissional a ser editado
+            setIdEdit(id);  
 
-            // Buscar os dados do profissional
             const resposta = await axios.get(`http://localhost:5004/consultar/usuario/profissional/${id}`);
             const profissional = resposta.data;
 
-            // Preencher os campos com as informações do profissional
+          
             setNomeed(profissional.nome);
             setEmailed(profissional.email);
             setAcessoed(profissional.acesso);
@@ -49,11 +48,11 @@ export default function AddProfissional() {
         }
     };
 
-    // Função para fechar o popup de edição
+  
     const fecharProfissionalEditar = () => {
         setAlterarProfissional(false);
         setIdEdit(null)
-        // Resetar os campos de edição
+       
         
     };
 
@@ -90,7 +89,7 @@ export default function AddProfissional() {
             setAlterarProfissional(false);
             
         } catch (err) {
-            toast.error("erro cowboy");
+            toast.error("erro ");
         }
     }
 
@@ -164,7 +163,7 @@ export default function AddProfissional() {
                                     <td>{item.acesso}</td>
                                     <td>
                                         <img onClick={() => abrirProfissionalEditar(item.id_adicionar_profissional, item.nome, item.email, item.acesso)} src="/assets/image/bx-edit.svg" alt="Editar" />
-                                        <img src="/assets/image/bx-lock-open-alt.svg" alt="Bloquear" />
+                                        <img src="/assets/image/bx-trash.svg" alt="Bloquear" />
                                     </td>
                                 </tr>
                             ))}
@@ -200,7 +199,7 @@ export default function AddProfissional() {
                                         type="text"
                                         value={acesso}
                                         onChange={e => setAcesso(e.target.value)}
-                                        placeholder="true ou false"
+                                        placeholder="Sim ou Não"
                                     />
                                 </div>
                                 <div className="botao">

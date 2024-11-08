@@ -3,11 +3,20 @@ import Cabecalho from '../../components/cabecalho';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
 export default function InserirPacotes(){
     const [mostrarprofissional, setMostrarProfissional] = useState(false);
+    const [alterarProfissional, setAlterarProfissional] = useState(false);
+    const [idEdit, setIdEdit] = useState(null); 
+
+    const [nome, setNome]= useState('');
+    const [valor, setValor] = useState('');
+    const [nomeed, setNomeed]= useState('');
+    const [valored, setValored] = useState('');
+    const [array, setArray] = useState([]);
 
     const abrirProfissional = () => {
         setMostrarProfissional(true);
@@ -18,14 +27,35 @@ export default function InserirPacotes(){
         setMostrarProfissional(false)
         
     };
+    const abrirPacotesEditar = async (id) => {
+        try {
+            setAlterarProfissional(true);
+            setIdEdit(id);  
 
-    const [nome, setNome]= useState('');
-    const [valor, setValor] = useState('');
-    const [array, setArray] = useState([]);
+            const resposta = await axios.get(`http://localhost:5004/consultar/pacote/${id}`);
+            const profissional = resposta.data;
+
+          
+            setNomeed(profissional.nome);
+            setValored(profissional.valor);
+          setAlterarProfissional(false)
+
+        } catch (err) {
+            
+            console.log(err);
+        }
+    };
+    const fecharProfissionalEditar = () => {
+        setAlterarProfissional(false);
+        setIdEdit(null)
+       
+        
+    };
+
 
     async function pacotes() {
         try {
-            const resposta = await axios.get('http://4.172.207.208:5004/consultar/pacotes');
+            const resposta = await axios.get('http://localhost:5004/consultar/pacotes');
             const value = resposta.data;
             setArray(value);
             console.log(array);
@@ -44,15 +74,28 @@ export default function InserirPacotes(){
 
     async function Cadastrar() {
      try {
-        await axios.post(`http://4.172.207.208:5004/insert/pacotes/${nome}/${valor}`);
+        await axios.post(`http://localhost:5004/insert/pacotes/${nome}/${valor}`);
         alert('foi');
+        setMostrarProfissional(false);
+        pacotes();
      } 
      catch (err) {
         console.log(err.message)
         alert(err.message)
      }
     }
-
+    
+    
+    async function Alterar() {
+        try {
+            await axios.put(`http://localhost:5004/update/pacotes/${nomeed}/${valored}/${idEdit}`);
+            toast.success('Pacote alterado com sucesso');
+            setAlterarProfissional(false);
+            
+        } catch (err) {
+            toast.error("erro ");
+        }
+    }
     return(
         <div className="inserirpacotes">
             <div className="protecao">
@@ -102,6 +145,29 @@ export default function InserirPacotes(){
 
                 <button onClick={abrirProfissional} >+ Inserir pacote</button>
 
+                <table>
+                    <tr >
+                        <th> Id </th>
+                        <th> Sessões </th>
+                        <th> Valor </th>
+                        <th> Ações </th>
+
+                    </tr>       
+                    {array.map(item => (
+                                    <tr key={item.id_pacotes} >   
+                                        <td> {item.id_pacotes}</td>
+                                        <td> {item.nome}</td>
+                                        <td> {item.valor}</td>
+                                        <td> <img onClick={ () => abrirPacotesEditar(item.id_pacotes, item.nome, item.valor)} src="/assets/image/bx-edit.svg" alt="" /> 
+                                        <img src="/assets/image/bx-trash.svg" alt="" /></td>
+
+                                    </tr>
+                           ))}
+
+      
+
+                </table>
+
 
                 {mostrarprofissional && (
                         <div className="popup-background">
@@ -125,6 +191,34 @@ export default function InserirPacotes(){
                                     <div className="button">
                                         <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
                                         <button onClick={Cadastrar} > Salvar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+{alterarProfissional && (
+                        <div className="popup-background">
+                            <div className="popup">
+                                <div className="mensagem">
+                                    <h2>Adicionar pacotes  </h2>
+                                    <img onClick={fecharProfissionalEditar} src="/assets/image/bx-x.svg" alt="" />
+                                </div>
+                                <div className="mensage">
+                                    <h2> Quantas sessões : </h2>
+                                        <input type="text" placeholder=' ex: 4 ' value={nomeed} onChange={e => setNomeed(e.target.value)} />
+
+                                    <h2> Valor :</h2>
+                                        <input type="text" placeholder='Ex: R$ 400,00  ' value={valored} onChange={e => setValored(e.target.value)} />
+                                    
+
+                                  
+                                </div>
+                                <div className="botao">
+                                   
+                                    <div className="button">
+                                        <button className='botao' onClick={fecharProfissionalEditar} > Cancelar </button>
+                                        <button onClick={Alterar} > Salvar </button>
                                     </div>
                                 </div>
                             </div>

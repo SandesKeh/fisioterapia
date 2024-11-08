@@ -62,6 +62,7 @@ export default function Inventario(){
         try {
             await axios.post(`http://localhost:5004/inserir/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitário}/${total}/${data}`);
             toast.success('Produto inserido no inventário com sucesso');
+            setMostrarinventario(false)     
         } catch (err) {
             toast.error('Erro ao cadastrar o inventário');
             console.log(err.message)
@@ -176,7 +177,7 @@ export default function Inventario(){
                                     <h2>Valor total</h2>
                                         <input type="text" placeholder='R$ 803' value={total} onChange={e => setTotal(e.target.value)} />
                                     <h2>Data da Compra</h2> 
-                                        <input type="text" placeholder='07/07/2024' value={data} onChange={e => setData(e.target.value)} />
+                                        <input type="date" placeholder='07/07/2024' value={data} onChange={e => setData(e.target.value)} />
                                 </div>
                                 <div className="botao">
                                    
@@ -212,7 +213,7 @@ export default function Inventario(){
                                     <h2>Valor total</h2>
                                         <input type="text" placeholder='R$ 803' value={total} onChange={e => setTotal(e.target.value)} />
                                     <h2>Data da Compra</h2> 
-                                        <input type="text" placeholder='07/07/2024' value={data} onChange={e => setData(e.target.value)} />
+                                        <input type="date" placeholder='07/07/2024' value={data} onChange={e => setData(e.target.value)} />
                                 </div>
                                 <div className="botao">
                                    
