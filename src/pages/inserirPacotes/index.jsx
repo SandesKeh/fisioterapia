@@ -38,7 +38,7 @@ export default function InserirPacotes(){
           
             setNomeed(profissional.nome);
             setValored(profissional.valor);
-          setAlterarProfissional(false)
+          
 
         } catch (err) {
             

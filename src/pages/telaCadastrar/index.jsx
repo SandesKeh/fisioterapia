@@ -20,7 +20,7 @@ export default function TelaCadastrar(){
 
     async function Deletar() {
         try {
-            const resposta = await axios.delete(`http://4.172.207.208:5004/deletar/infoPessoas/`)
+            const resposta = await axios.delete(`http://localhost:5004/deletar/infoPessoas/`)
         } catch (error) {
             
         }
@@ -29,7 +29,7 @@ export default function TelaCadastrar(){
 
     async function consultar() {
         try {
-            const resposta= await axios.get('http://4.172.207.208:5004/consultar/infoPessoas');
+            const resposta= await axios.get('http://localhost:5004/consultar/infoPessoas');
             const valor = resposta.data;
             setArray(valor)
            
@@ -58,10 +58,12 @@ export default function TelaCadastrar(){
                         </div>
                         <div className="botao">
                             
+                            <div className="fim">
                             <Link to='/home' >  
                                 <button> + Adicionar Cliente </button>
                             </Link> 
-                            <button> <img src="/assets/image/bx-filter-alt.svg" alt="" /> Mais Filtros </button>
+                           
+                            </div>
                         </div>
                     </div>
 

@@ -48,7 +48,7 @@ export default function Card() {
 
     async function Adicionarcliente() {
         try {
-            const linkpessoal = 'http://localhost:5000/inserir/infoPessoal';
+            const linkpessoal = 'http://localhost:5004/inserir/infoPessoal';
             const pessoal = {
                 nome: nome,
                 grupo: grupo,
