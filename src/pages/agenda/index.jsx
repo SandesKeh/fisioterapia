@@ -19,9 +19,10 @@ export default function Agenda() {
         name: "",
         date: "",
         time: "",
-        repeat: "não",
+        retun: "não",
         mode: "online",
-        service: ""
+        service: "",
+        status:"pendente"
     });
     useEffect(() => {
         fetchEvents();
@@ -89,10 +90,10 @@ export default function Agenda() {
     };
 
     const handleAddEvent = () => {
-        const repeatValue = formData.repeat === "sim" ? 1 : 0;
+        const repeatValue = formData.retun === "sim" ? 1 : 0;
         const newEvent = {
             ...formData,
-            repeat: repeatValue,
+            retun: repeatValue,
             location: formData.mode === "online" ? "online" : "presencial",
             status: "pendente",
             type: viewMode,
@@ -106,7 +107,7 @@ export default function Agenda() {
             .then(response => {
                 setEvents([...events, { ...newEvent, id: response.data.novoId }]);
                 setShowPopup(false);
-                setFormData({ name: "", date: "", time: "", repeat: "não", mode: "online", service: "" });
+                setFormData({ name: "", date: "", time: "", retun: "não", mode: "online", service: "", status:"" });
             })
             .catch(error => {
                 console.error("Erro ao adicionar evento:", error);
@@ -271,7 +272,7 @@ export default function Agenda() {
                                     <input type="time" name="time" value={formData.time} onChange={handleInputChange} />
                                 </label>
                                 <label>Repetir:
-                                    <select name="repeat" value={formData.repeat} onChange={handleInputChange}>
+                                    <select name="repeat" value={formData.retun} onChange={handleInputChange}>
                                         <option value="não">Não</option>
                                         <option value="sim">Sim</option>
                                     </select>
