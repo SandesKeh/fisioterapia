@@ -1,67 +1,30 @@
 .pagina-agenda {
-    font-family: Arial, sans-serif;
-    color: #333;
-    background-color: #F9F9F9;
-    min-height: 100vh;
     display: flex;
-    flex-direction: row;
-    align-items:end;
-    justify-content:left;
-    margin: 0;
-    padding: 0;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh auto;
+    align-items: center;
     .filha{
-        display: contents;
+        display: flex;
         flex-direction: row;
-        .cabecalho{
-            display: flex;
-            align-items:flex-end;
-            justify-content: end;
+        width: 100%;
+        height: 150vh  auto;
+        background-color: #FFFFFF;
+
+        .esquerda{
             position: fixed;
-            .menu{
-                display: flex;
-                flex-direction: column ;
-                align-items: flex-end;
-                background-color: #001429;
-                width: 16rem;
-                height: 100vh;
-                
-                border-radius: 0px 0px 0px 0px;
-                
-                .picons {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    cursor: pointer;
-                    align-items: center;
-                    height: 150px;
-                    transition: .3s;
-                    width: 100%;
-                    text-decoration: none;
-                
-                    img{
-                        background-color: #08B4AC;
-                    }
-                    
-                    h1{
-                        font: 400 28px Roboto ;
-                        color: #08B4AC;
-                        
-                    }
-                }
-                .picons:hover{
-                    background-color: #08b4abaf;
-                    
-                }
-            }
-        }   
-    
+            width: 10%;
+            
+
+        }  
+   
         .content {
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
             max-width: 1200px;
-            padding:0vh 0px 0px 40vh;
+            padding:0vh 0px 0px 20vh;
             gap: 20px;
             .react-calendar{
                 margin: 60px;
