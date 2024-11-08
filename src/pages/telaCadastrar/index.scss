@@ -126,7 +126,13 @@
 
                 .botao{
                     display: flex;
-                    flex-direction: column;
+                    flex-direction: row;
+
+                    .fim{ 
+                        display: flex;
+                        flex-direction: row;
+                        gap:20px ;
+                    }
                     
                     h1{
                         font: 900 15px Inter;

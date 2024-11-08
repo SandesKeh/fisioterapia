@@ -81,7 +81,7 @@ export default function AddDocumento(){
 
           
             setTipoo(documento.tipo);
-            setTitulos(documento.titulo);
+            setTituloss(documento.titulo);
             setConteudoo(documento.conteudo);
             setDataa(documento.dt_cadastro);
 
@@ -184,13 +184,13 @@ export default function AddDocumento(){
                         </thead>
                         <tbody>
                            {array.map(item => (
-                                    <tr key={item.id_adicionar_documento} >
-                                        <td> {item.id_adicionar_documento}</td>
+                                    <tr key={item.id} >
+                                        <td> {item.id}</td>
                                         <td> {item.tipo}</td>
                                         <td> {item.titulo}</td>
                                         <td> {item.conteudo} </td>
                                         <td> {item.dataCadastro}</td>
-                                        <td> <img onClick={ () => abrirDocumentolEditar(item.id_adicionar_documento, item.tipo, item.titulo, item.conteudo, item.dataCadastro)} src="/assets/image/bx-edit.svg" alt="" /> 
+                                        <td> <img onClick={ () => abrirDocumentolEditar(item.id, item.tipo, item.titulo, item.conteudo, item.dataCadastro)} src="/assets/image/bx-edit.svg" alt="" /> 
                                             <img src="/assets/image/bx-trash.svg" alt="" />
                                         </td>
                                     
