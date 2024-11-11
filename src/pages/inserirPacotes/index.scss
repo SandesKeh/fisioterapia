@@ -2,19 +2,25 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100vh ;
+    height: auto;
+    background-color: #F9F4F4;
+
+    .cabecalho{
+        position: fixed;
+    }
 
     .protecao{
         display: flex;
         flex-direction: row;
         width: 25%;
-        height: 100vh;
-        background-color: #F9F4F4;
-        gap: 30px;
+        padding-left: 9%;
+     
         .t{
-            display: flex;
+             display: flex;
             flex-direction: column;
             gap: 20px;
+            background-color: #F9F4F4;
+            padding-left: 10px;
             padding-top: 40px;
             
             .text{
@@ -43,7 +49,7 @@
         display: flex;
         flex-direction: column;
         width: 190%;
-        height: 100vh;
+        height: auto;
         background-color: #FFFFFF;
         padding: 50px 30px;
         gap: 20px;
@@ -82,11 +88,12 @@
             background-color: #08b4ab67;
             color: #03857F;
             font: 600 20px Inter;
-            width: 10%;
+            width: 16%;
             display: flex;
             align-items: center;
             justify-content: center;
            border-bottom: 4px solid #03857F;
+           
         }
 
         p{

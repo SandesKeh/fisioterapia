@@ -95,9 +95,11 @@ export default function AddProfissional() {
 
     return (
         <div className="addprofissional">
-            <div className="inserirpacotes">
-                <div className="protecao">
+              <div className="cabecalho">
                     <Cabecalho />
+                </div>
+                <div className="protecao">
+                 
                     <div className="t">
                         <div className="text">
                             <Link to='/inserirProfissional'>
@@ -261,8 +263,6 @@ export default function AddProfissional() {
                 
 
     
-            </div>
-
             
        
         </div>

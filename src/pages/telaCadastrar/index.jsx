@@ -7,7 +7,7 @@ import { Value } from 'sass';
 
 export default function TelaCadastrar(){
 
-    const [mostrarMensagem, setMostrarMensagem] = useState(false);
+    const [mostrarMensagem, setMostrarMensagem] = useState('');
     const abrirMensagem = () => {
         setMostrarMensagem(true);
     };
@@ -18,6 +18,14 @@ export default function TelaCadastrar(){
         
     };
 
+    const [alterarCliente, setAlterarCliente] = useState('');
+    const abrirAlterar = () => {
+        setAlterarCliente(true);
+    };
+
+    const fecharAlterar = () => {
+        setAlterarCliente(true)
+    }
     async function Deletar() {
         try {
             const resposta = await axios.delete(`http://localhost:5004/deletar/infoPessoas/`)
@@ -44,12 +52,13 @@ export default function TelaCadastrar(){
 
     return(
         <div className="telacadastrar">
-            <div className="protecao">
-                <div className="menu">
+               <div className="menu">
                     <Cabecalho/>
                 </div>
+            <div className="protecao">
+             
 
-
+                
                 <div className="direita">
                     <div className="cima">
                         <div className="inputes">
@@ -109,13 +118,15 @@ export default function TelaCadastrar(){
                                 <div className="botao">
                                     <h1> Tem certeza que deseja desativar esse cliente? </h1>
                                     <div className="button">
-                                        <button className='botao' onClick={fecharMensagem} > Cancelar </button>
+                                        <button className='fim' onClick={fecharMensagem} > Cancelar </button>
                                         <button onClick={Deletar} > Deletar </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )}
+
+                    
                 </div>
             </div>
         </div>

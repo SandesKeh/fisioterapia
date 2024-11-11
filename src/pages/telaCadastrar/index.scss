@@ -2,20 +2,26 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100vh ;
+    background-color: #F9F4F4;
+    .menu{
+        position: fixed;
+        width: 9%;
+    }
+    
     .protecao{
         display: flex;
         flex-direction: row;
+        justify-content: center;
         width: 100%;
-        height: 100vh;
         background-color: #F9F4F4;
-        gap: 100px;
-       
+        
+  
 
         .direita{
             display: flex;
             flex-direction: column;
-            width: 100%;
+            margin-left: 10%;
+            width: 85%;
             height: 100vh;
             background-color: #FFFFFF;
 
@@ -91,7 +97,7 @@
                 flex-direction: column;
                 justify-content: center;
                 justify-content: space-between;
-                width: 40%;
+                width: 55%;
                 height: auto;
                 background-color: white;
                 box-shadow: 3px 3px 5px gray;
@@ -131,7 +137,9 @@
                     .fim{ 
                         display: flex;
                         flex-direction: row;
+                        display: flex;
                         gap:20px ;
+                        align-items: center ;
                     }
                     
                     h1{

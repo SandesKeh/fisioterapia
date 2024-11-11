@@ -83,9 +83,12 @@ export default function Inventario(){
 
     
     return(
-        <div className="inventario">
+        <div className="inventarioo">
+            <div className="cabecalho">
+            <Cabecalho/>
+            </div>
              <div className="protecao">
-                <Cabecalho/>
+             
                 <div className="t">
                 <div className="text">
                             <Link to='/inserirProfissional' >

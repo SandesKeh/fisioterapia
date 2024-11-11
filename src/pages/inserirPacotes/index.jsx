@@ -98,8 +98,11 @@ export default function InserirPacotes(){
     }
     return(
         <div className="inserirpacotes">
+            <div className="cabecalho">
+            <Cabecalho/>
+            </div>
             <div className="protecao">
-                <Cabecalho/>
+            
                 <div className="t">
                         <div className="text">
                             <Link to='/inserirProfissional' >

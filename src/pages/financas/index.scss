@@ -3,14 +3,18 @@ display: flex;
 flex-direction: column;
 width: 100%;
 height: 100vh auto;
-align-items: center;
+
+
+    .cabecalho{
+        position: fixed;
+    }
     .all{
         display: flex;
         flex-direction: row;
         width: 100%;
-        height: 100vh auto;
+      
         background-color: #FFFFFF;
-    
+      
         .protecao{
             display: flex;
             flex-direction: column;
@@ -23,8 +27,8 @@ align-items: center;
             display: flex;
             justify-content: center;
             .cima{
-                width: 90%;
-                margin: 20px 0px 10px 0px;
+                width: 85%;
+                margin-left: 10%;
                 display: flex;
                 flex-direction: column;
                 

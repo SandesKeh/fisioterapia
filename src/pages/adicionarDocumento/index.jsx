@@ -113,9 +113,13 @@ export default function AddDocumento(){
 
     return(
         <div className="adddocumento">
-                <div className="inserirpacotes">
-                <div className="protecao">
+               
+                    <div className="cabecalho">
                     <Cabecalho/>
+                    </div>
+                    <div className="protecao">
+
+                    
                     <div className="t">
                         <div className="text">
                             <Link to='/inserirProfissional' >
@@ -266,7 +270,7 @@ export default function AddDocumento(){
                 
 
     
-            </div>
+     
         </div>
     )
 }

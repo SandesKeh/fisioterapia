@@ -115,11 +115,14 @@ export default function Financas(){
     }
     return(
         <div className="financas">
-            
+            <div className="cabecalho">
+                <Cabecalho/>
+            </div>
           <div className="all">
-          <Cabecalho/>
+                
+                
 
-        <div className="cima1">    
+            <div className="cima1">    
 
             <div className="cima">
                 <div className="periodo">
@@ -197,7 +200,7 @@ export default function Financas(){
                           <td> {item.valor} </td>
                           <td> {item.data_pagamento} </td>
                           <td> <img onClick={ () => abrirProfissionalEditar(item.id_adicionar_despesa, item.propriedade, item.categoria_financeira, item.descricao, item.valor, item.data_pagamento)} src="/assets/image/bx-edit.svg" alt="" /> 
-                          <img src="/assets/image/bx-message-alt-minus.svg" alt="" /></td>
+                          <img src="/assets/image/bx-trash.svg" alt="" /></td>
                        </tr>
                     ))}
                    
