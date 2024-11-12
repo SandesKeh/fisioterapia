@@ -90,9 +90,122 @@
                 justify-content: center;
                 align-items: center;
                 z-index: 999;
+    
+                .popup{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    width: 40%;
+                    height: auto;
+                    background-color: white;
+                    box-shadow: 3px 3px 5px gray;
+                    padding: 40px 40px 40px 40px;
+                    gap: 20px;
+               
+                    .one{
+                        width: 50%;
+                        height: 20px;
+                        //outline: none;
+                        align-self: center;
+                    }
+
+                    
+                    h3{
+                        font: 400 18px Inter;
+                        color: #07A09B;
+                        align-self: center;
+                       
+                    }
+
+    
+                    .mensagem{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 50%;
+    
+                        h2{
+                            font: 400 30px Inter;
+                            color: #08B4AC;
+                            padding-bottom: 40px;
+                        }
+                    }
+                    .men{
+                        display: flex;
+                        flex-direction: row;
+                        gap: 20px;
+                        justify-content: center;
+                        .mensage{
+                            display: flex;
+                            flex-direction: column;
+                            gap: 15px;
+                            h2{
+                                font: 400 18px Inter;
+                                color: #07A09B;
+                            }
+                            
+        
+                            .row{
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-around;
+                            }
+        
+                            .observacao{
+                                display: flex;
+                                flex-direction: column;
+                                gap: 20px;
+                                input{
+                                    width: 100%;
+                                    height: 100px;
+                                }
+                            }
+                        }
+                    }
+      
+    
+                    .botao{
+                        display: flex;
+                        flex-direction: column;
+                        
+                        h1{
+                            font: 900 15px Inter;
+                            margin-left: 50px;
+                        }
+                        .button{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center ;
+                            gap: 10px;
+                            
+                            padding-top: 20px;
+                            button{
+                                display: flex;
+                                justify-content: center;
+                                align-items: center ;
+                                width: 17%;
+                                border-radius: 6px;
+                                background-color: #08B4AC;
+                            }
+                        }
+                    }
+                }
+            }
+            .popup-backgroundd {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.5); 
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 999;
             }
             
-            .popup {
+            .popupp {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -103,7 +216,7 @@
                 box-shadow: 3px 3px 5px gray;
                 padding: 20px 0px 20px 0px;
 
-                .mensagem{
+                .mensagemm{
                     display: flex;
                     flex-direction: row;
                     h1{
@@ -116,7 +229,7 @@
                     }
 
                 }
-                .mensage{
+                .mensagee{
                     margin: 30px;
                     display: flex;
                     justify-content: center;
@@ -130,11 +243,11 @@
                     }
                 }
 
-                .botao{
+                .botaoo{
                     display: flex;
                     flex-direction: row;
 
-                    .fim{ 
+                    .fimm{ 
                         display: flex;
                         flex-direction: row;
                         display: flex;
@@ -146,7 +259,7 @@
                         font: 900 15px Inter;
                         margin-left: 50px;
                     }
-                    .button{
+                    .buttonn{
                         display: flex;
                         justify-content: center;
                         align-items: center ;
