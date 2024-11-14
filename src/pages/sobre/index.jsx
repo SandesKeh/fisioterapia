@@ -1,5 +1,6 @@
 import './index.scss';
-import React, { useRef } from 'react';
+
+import React, { useRef, useState, useEffect} from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Olho from '../../assets/image/visao-estrategica.png';
 import Visao from '../../assets/image/meta.png'
@@ -12,30 +13,140 @@ export default function Sobre() {
 
     };
 
-    const especialidadesRef = useRef(null);
-    const curiosidadeRef = useRef(null);
-    const sobreRef = useRef(null);
-    const homeRef = useRef(null);
-    const location = useLocation();
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [mostrarPopup, setMostrarPopup] = useState(false);
+
+        const abrirPopup = () => {
+            setMostrarPopup(true);
+        };
+
+        const clicaFora = (e) => {
+            if (e.target.classList.contains('popup-background')) {
+                setMostrarPopup(false)
+            }
+        };
+    
+
+        const especialidadesRef = useRef(null);
+        const curiosidadeRef = useRef(null);
+        const sobreRef = useRef(null);
+        const homeRef = useRef(null);
+        const foterRef = useRef(null);
+        const location = useLocation();
+    
+        useEffect(() => {
+            if (location.state?.sectionId) {
+                const sectionMap = {
+                    secao1: especialidadesRef,
+                    secao2: curiosidadeRef,
+                    secao3: sobreRef,
+                    secao4: homeRef,
+                };
+                const ref = sectionMap[location.state.sectionId];
+                ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, [location]);
+
+    const [mostrarPopup2, setMostrarPopup2] = useState(false);
+
+        const abrirPopup2 = () => {
+            setMostrarPopup2(true);
+        };
+
+        const clicaFora2 = (e) => {
+            if (e.target.classList.contains('popup-background')) {
+                setMostrarPopup2(false);
+            }
+        };
+
+    const [mostrarPopup3, setMostrarPopup3] = useState(false);
+        const abrirPopup3 = () => {
+            setMostrarPopup3(true)
+        }
+        const clicaFora3 = (e) => {
+            if(e.target.classList.contains('popup-background')) {
+                setMostrarPopup3(false)
+            }
+        }   
+
+
+    const [mostrarPopup4, setMostrarPopup4] = useState(false);
+        
+        const abrirPopup4 = () => {
+            setMostrarPopup4(true)
+        }
+
+        const clicaFora4 = (e) => {
+            if(e.target.classList.contains('popup-background')) {
+                setMostrarPopup4(false)
+            }
+        }
+
+    const [mostrarPopup5, setMostrarPopup5] = useState(false);
+
+        const abrirPopup5 = () => {
+            setMostrarPopup5(true)
+        }
+
+        const clicarFora5 = (e) => {
+            if(e.target.classList.contains('popup-background')) {
+                setMostrarPopup5(false)
+            }
+    }
+    const [mostrarPopup6, setMostrarPopup6] = useState(false);
+
+        const abrirPopup6 = () => {
+            setMostrarPopup6(true)
+        }
+
+        const clicarFora6 = (e) => {
+            if(e.target.classList.contains('popup-background')) {
+                setMostrarPopup6(false)
+            }
+        }
+    const [mostrarPopup7, setMostrarPopup7] = useState(false);
+
+        const abrirPopup7 = () => {
+            setMostrarPopup7(true)
+        }
+
+        const clicarFora7 = (e) => {
+            if(e.target.classList.contains('popup-background')) {
+                setMostrarPopup7(false)
+            }
+        }
+
 
 
     return (
  <div className="sobreMais">
-            <div className="cabecalho">
-                <img src="assets/image/logo.webp" alt="nao foi" />
-                <div className="links">
-                    <button className='button' onClick={() => handleScrollToSection('secao4')}>Home</button>
-                    <button className='button' onClick={() => handleScrollToSection('secao3')}>Sobre Nós</button>
-                    <button className='button' onClick={() => handleScrollToSection('secao1')}>Especialidades</button>
-                    <button className='button' onClick={() => handleScrollToSection('secao2')}>Curiosidades</button>
-                    <Link to="/">Contatos</Link>
-
-                    <Link id='login' to='/telaLogin'> Login </Link>
-
-                </div>
-            </div>
+                 <div className="cabecalho" ref={homeRef}>
+    <img src="assets/image/logo.png" alt="nao foi" />
+    
+ 
+    <button className="hamburger-btn" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
+    </button>
+    
 
 
+    
+    <div className={`links ${menuOpen ? 'open' : ''}`}>
+        <button onClick={() => homeRef.current.scrollIntoView({ behavior: 'smooth' })}>Home</button>
+        <button onClick={() => sobreRef.current.scrollIntoView({ behavior: 'smooth' })}>Sobre Nós</button>
+        <button onClick={() => especialidadesRef.current.scrollIntoView({ behavior: 'smooth' })}>Especialidades</button>
+        <button onClick={() => curiosidadeRef.current.scrollIntoView({ behavior: 'smooth' })}>Curiosidades</button>
+        <div className='dois'>
+            <Link className='contato' to="" style={{ textDecoration: 'none' }}>
+                <button onClick={() => foterRef.current.scrollIntoView({ behavior: 'smooth' })}>Contatos</button>
+            </Link>
+            <Link  to="/loginCliente">
+                <button id='login'>Login</button>
+            </Link>
+            
+        </div>
+    </div>
+</div>
 <div className="sobre">
                 <div className="primeiro">
                     <h1>Sobre mim</h1>
