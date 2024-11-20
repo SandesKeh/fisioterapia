@@ -22,7 +22,7 @@ export default function Login() {
             const resposta= await axios.post(link, user);
             storage('clientelogado', resposta.data.token);
             
-            navegate('/telaCliente') 
+            navegate('/telaCliente');
             }  
     
         catch (error) {
@@ -30,8 +30,6 @@ export default function Login() {
             alert("senha ou usuario invalido")
         }
     }
-
-
 
 
     return (
@@ -62,7 +60,7 @@ export default function Login() {
                                 </div>
                                 <div className="input">
                                     <h1>SENHA:</h1>
-                                    <input type="text"  placeholder=' Digite sua senha'   value={senha} onChange={e => setSenha(e.target.value)}/>
+                                    <input type="password"  placeholder=' Digite sua senha'   value={senha} onChange={e => setSenha(e.target.value)}/>
                                 </div>
 
                             </div>

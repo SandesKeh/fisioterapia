@@ -9,19 +9,15 @@ export default function TelaCliente(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        let usu = localStorage.getItem('clientelogado');
-        setToken(usu)
-
+        const usu = localStorage.getItem('clientelogado');
         if (usu) {
             const usuario = JSON.parse(usu);
             setToken(usuario.token);
-            setNome(usuario.nome);
+            setNome(usuario.nome); 
+        } else {
+            navigate('/loginCliente'); 
         }
-
-        if (!usu || !token) {
-            navigate('/loginCliente');
-        }
-    }, [token, navigate]);
+    }, [navigate]);
 
 
     const handleScrollToSection = (sectionId) => {
