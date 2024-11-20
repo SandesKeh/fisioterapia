@@ -35,7 +35,7 @@ export default function AddDocumento(){
 
     async function Documentos() {
         try {
-            const resposta = await axios.get('http://localhost:5004/documentacao/');
+            const resposta = await axios.get(`http://localhost:5004/documentacao/?acesso-ao-token=${token}`);
             setArray(resposta.data);
         } 
         catch (err) {
@@ -49,7 +49,7 @@ export default function AddDocumento(){
 
     async function Adicionardocumento() {
         try {
-            const link= 'http://localhost:5004/documentacao/'
+            const link= `http://localhost:5004/documentacao/?acesso-ao-token=${token}`
             const documento = {
                 tipo: tipo,
                 titulo: titulo,
@@ -76,7 +76,7 @@ export default function AddDocumento(){
             setAlterarDocumento(true);
             setIdEdit(id);  
 
-            const resposta = await axios.get(`http://localhost:5004/consultar/usuario/documento/${id}`);
+            const resposta = await axios.get(`http://localhost:5004/consultar/usuario/documento/${id}?acesso-ao-token=${token}`);
             const documento = resposta.data;
 
           
@@ -101,7 +101,7 @@ export default function AddDocumento(){
     
     async function Alterar() {
         try {
-            await axios.put(`http://localhost:5004/update/documento/${tipoo}/${tituloo}/${conteudoo}/${dataa}/${idEdit}`);
+            await axios.put(`http://localhost:5004/update/documento/${tipoo}/${tituloo}/${conteudoo}/${dataa}/${idEdit}?acesso-ao-token=${token}`);
             toast.success('Documento alterado com sucesso');
             setAlterarDocumento(false);
             

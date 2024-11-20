@@ -17,14 +17,15 @@ export default function Cadastro() {
             email: email,
             senha: senha
         }
-        let link= 'http://localhost:5004/cliente/'
-
+        let link= `http://localhost:5004/cliente/`
         const sla = await axios.post(link, usuario);
-        alert("foi")
+
+
+        alert("Cadastro realizado com sucesso")
         navagate('/loginCliente')   
      } 
      catch (error) {
-        alert("nn foi")
+        alert("Cadastro não realizado com sucesso")
      }
     }
    
@@ -52,7 +53,7 @@ export default function Cadastro() {
                             <div className="perguntas">
                                 <div className="input">
                                     <h1> EMAIL: </h1>
-                                    <input type="text" placeholder='Ex: Daniela@gmail.com'   value={email} onChange={e => setEmail(e.target.value)} />
+                                    <input type="text" placeholder='Ex: exemplo@exemplo.com'   value={email} onChange={e => setEmail(e.target.value)} />
                                 </div>
                                 <div className="input">
                                     <h1>SENHA:</h1>

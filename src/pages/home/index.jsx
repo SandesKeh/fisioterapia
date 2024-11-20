@@ -9,7 +9,7 @@ export default function Home() {
         <div className="home">
             <div className="all">
             <div className="esquerda">
-                 <Cabecalho/>
+                <Cabecalho/>
             </div>
             <div className="people">
 

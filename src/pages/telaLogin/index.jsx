@@ -21,7 +21,7 @@ export default function TelaLogin() {
 
         const link = `http://localhost:5004/login/`;
         const resposta = await axios.post(link, usuario);
-        storage('adm-logado', resposta.data);
+        storage('adm-logado', resposta.data.token);
         navegate('/telaCadastrar');   
     }
 
@@ -40,18 +40,18 @@ export default function TelaLogin() {
                         <div className="perguntas">
                             <h1>E-mail:</h1>
                             <div className="inputes">
-                                <input  type="text" placeholder='Usuario@gmail.com'  value={email} onChange={e=>setEmail(e.target.value)}/>
+                                <input  type="text" placeholder='exemplo@exemplo.com'  value={email} onChange={e=>setEmail(e.target.value)}/>
                                 <img id='email' src="/assets/image/envelope.svg" alt="envelope" />
                     
                             </div>
-                          
+                        
                         </div>
                         <div className="perguntas">
                             <h1>Senha:</h1>
-                           <div className="inputes">
+                            <div className="inputes">
                                 <input type="password" placeholder=' Sua senha' value={senha} onChange={e=>setSenha(e.target.value)}/>
                                 <img id='cadeado' src="/assets/image/lock-fill.svg" alt="envelope" />
-                           </div>
+                            </div>
                                     
                         </div>
                         

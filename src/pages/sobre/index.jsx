@@ -140,7 +140,7 @@ export default function Sobre() {
             <Link className='contato' to="" style={{ textDecoration: 'none' }}>
                 <button onClick={() => foterRef.current.scrollIntoView({ behavior: 'smooth' })}>Contatos</button>
             </Link>
-            <Link  to="/loginCliente">
+            <Link  to="/telaLogin">
                 <button id='login'>Login</button>
             </Link>
             

@@ -14,14 +14,14 @@ export default function Login() {
 
     async function Entrar(){
        try {
-        const link = 'http://localhost:5004/logincliente/';
+        const link = `http://localhost:5004/logincliente/`;
         const user= {
             email: email,
             senha: senha
         };
 
         const resposta= await axios.post(link, user);
-        storage('clientelogado', resposta.data);
+        storage('clientelogado', resposta.data.token);
         
         navegate('/telaCliente') 
        }  
@@ -59,7 +59,7 @@ export default function Login() {
                             <div className="perguntas">
                                 <div className="input">
                                     <h1> EMAIL: </h1>
-                                    <input type="text" placeholder='Ex: Daniela@gmail.com'   value={email} onChange={e => setEmail(e.target.value)} />
+                                    <input type="text" placeholder='Ex: exemplo@exemplo.com'   value={email} onChange={e => setEmail(e.target.value)} />
                                 </div>
                                 <div className="input">
                                     <h1>SENHA:</h1>

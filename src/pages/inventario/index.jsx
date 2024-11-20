@@ -43,7 +43,7 @@ export default function Inventario(){
 
     async function inventario() {
         try {
-            const resposta = await axios.get('http://Localhost:5004/inventario/');
+            const resposta = await axios.get(`http://Localhost:5004/inventario/?acesso-ao-token=${token}`);
             const value = resposta.data;
             setArray(value);
             console.log(array);
@@ -60,7 +60,7 @@ export default function Inventario(){
 
     async function CadastrarProduto() {
         try {
-            await axios.post(`http://localhost:5004/inserir/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitário}/${total}/${data}`);
+            await axios.post(`http://localhost:5004/inserir/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitário}/${total}/${data}?acesso-ao-token=${token}`);
             toast.success('Produto inserido no inventário com sucesso');
             setMostrarinventario(false)     
         } catch (err) {
@@ -71,7 +71,7 @@ export default function Inventario(){
     
     async function atualizarPacotes() {
         try {
-            await axios.put(`http://localhost:5004/atualizar/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitário}/${total}/${data}/${id}`);
+            await axios.put(`http://localhost:5004/atualizar/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitário}/${total}/${data}/${id}?acesso-ao-token=${token}`);
             toast.success('atualizado com sucesso')
             setMostrareditar(false)
         } 

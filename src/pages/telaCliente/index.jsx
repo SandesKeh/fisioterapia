@@ -26,8 +26,8 @@ export default function TelaCliente(){
                     <button className='button' onClick={() => handleScrollToSection('secao3')}>Sobre Nós</button>
                     <button className='button' onClick={() => handleScrollToSection('secao1')}>Especialidades</button>
                     <button className='button' onClick={() => handleScrollToSection('secao2')}>Curiosidades</button>
-                  
-                       
+                
+                    
                 </div> 
             </div>
             <div className="informacoes">
@@ -42,14 +42,14 @@ export default function TelaCliente(){
                             <th> Semana </th>
                             <th>Categoria</th>
                             <th> Horario</th>
-                          
+                        
                         </tr>                   
                         <tr>
                             <td> 31/10/2024 </td>
                             <td> Quinta-Feira</td>
                             <td> Pilates </td>
                             <td> 15:00 </td>
-                       
+                    
 
                         </tr>
 

@@ -39,7 +39,7 @@ export default function Financas(){
             setAlterarProfissional(true);
             setIdEdit(id);  
 
-            const resposta = await axios.get(`http://localhost:5004/consultar/despesas/${id}`);
+            const resposta = await axios.get(`http://localhost:5004/consultar/despesas/${id}?acesso-ao-token=${token}`);
             const profissional = resposta.data;
 
           
@@ -67,7 +67,7 @@ export default function Financas(){
 
     async function addDespesa() {
         try {
-            const link = 'http://localhost:5004/inserir/despesas/';
+            const link = `http://localhost:5004/inserir/despesas/?acesso-ao-token=${token}`;
             const despesa = {
                 propriedade: propriedade,
                 categoriaFinanceira: categoria,
@@ -91,7 +91,7 @@ export default function Financas(){
     const [array, setArray]= useState([]);
     async function financas() {
         try {
-            const resposta = await axios.get('http://localhost:5004/despesas/');
+            const resposta = await axios.get(`http://localhost:5004/despesas/?acesso-ao-token=${token}`);
             const valor = resposta.data;
             setArray(valor)
         } catch (err) {
@@ -105,7 +105,7 @@ export default function Financas(){
 
     async function Alterar() {
         try {
-            await axios.put(`http://localhost:5004/update/despesa/${propriedadeed}/${categoriaed}/${descricaoed}/${valored}/${dataed}/${idEdit}`);
+            await axios.put(`http://localhost:5004/update/despesa/${propriedadeed}/${categoriaed}/${descricaoed}/${valored}/${dataed}/${idEdit}?acesso-ao-token=${token}`);
             toast.success('Despesas alterado com sucesso');
             setAlterarProfissional(false);
             

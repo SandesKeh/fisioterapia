@@ -32,7 +32,7 @@ export default function InserirPacotes(){
             setAlterarProfissional(true);
             setIdEdit(id);  
 
-            const resposta = await axios.get(`http://localhost:5004/consultar/pacote/${id}`);
+            const resposta = await axios.get(`http://localhost:5004/consultar/pacote/${id}?acesso-ao-token=${token}`);
             const profissional = resposta.data;
 
           
@@ -55,7 +55,7 @@ export default function InserirPacotes(){
 
     async function pacotes() {
         try {
-            const resposta = await axios.get('http://localhost:5004/consultar/pacotes');
+            const resposta = await axios.get(`http://localhost:5004/consultar/pacotes?acesso-ao-token=${token}`);
             const value = resposta.data;
             setArray(value);
             console.log(array);
@@ -74,7 +74,7 @@ export default function InserirPacotes(){
 
     async function Cadastrar() {
      try {
-        await axios.post(`http://localhost:5004/insert/pacotes/${nome}/${valor}`);
+        await axios.post(`http://localhost:5004/insert/pacotes/${nome}/${valor}?acesso-ao-token=${token}`);
         alert('foi');
         setMostrarProfissional(false);
         pacotes();
@@ -88,7 +88,7 @@ export default function InserirPacotes(){
     
     async function Alterar() {
         try {
-            await axios.put(`http://localhost:5004/update/pacotes/${nomeed}/${valored}/${idEdit}`);
+            await axios.put(`http://localhost:5004/update/pacotes/${nomeed}/${valored}/${idEdit}?acesso-ao-token=${token}`);
             toast.success('Pacote alterado com sucesso');
             setAlterarProfissional(false);
             
