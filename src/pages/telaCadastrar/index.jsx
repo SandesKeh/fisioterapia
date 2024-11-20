@@ -160,33 +160,6 @@ export default function TelaCadastrar(){
                                 value={pesquisa}
                                 onChange={(e) => setPesquisa(e.target.value)}
                             />
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nome Cliente</th>
-                                        <th>Data de Nascimento</th>
-                                        <th>Email</th>
-                                        <th>Telefone</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {clientesFiltrados.map(item => (
-                                        <tr key={item.id_informacoes_pessoais}>
-                                            <td>{item.id_informacoes_pessoais}</td>
-                                            <td>{item.nome}</td>
-                                            <td>{item.data_nascimento}</td>
-                                            <td>{item.email}</td>
-                                            <td>{item.celular}</td>
-                                            <td>
-                                                <img onClick={() => abrirAlterar(item.id_informacoes_pessoais)} src="/assets/image/bx-edit.svg" alt="Editar" />
-                                                <img onClick={() => abrirMensagem(item.id_informacoes_pessoais)} src="/assets/image/bx-trash.svg" alt="Deletar" />
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>                     
                         </div>
 
                         <div className="botao">
@@ -202,32 +175,35 @@ export default function TelaCadastrar(){
 
                     <div className="baixo">
                         <table>
-                            <tr>
-                                <th> ID </th>
-                                <th> Nome Cliente </th>
-                                <th> Data De Nascimento</th>
-                                <th> E-mail </th>
-                                <th>Telefone </th>
-                                <th> Ações </th>
-                            </tr>
-
-                    {array.map(item => (
-                                <tr key={item.id_informacoes_pessoais} >
-                                <td> {item.id_informacoes_pessoais} </td>
-                                <td> {item.nome} </td>
-                                <td> {item.data_nascimento} </td>
-                                <td> {item.email} </td>
-                                <td> {item.celular} </td>
-                                <td> <img onClick={ () => abrirAlterar(item.id_informacoes_pessoais, item.nome, item.email, item.celular, item.cpf, item.rg, item.pais, item.cep, item.cidade, item.estado, item.endereco, item.numero, item.bairro)} src="/assets/image/bx-edit.svg" alt="" /> 
-                                    <img onClick= { () => abrirMensagem(item.id_informacoes_pessoais)} src="/assets/image/bx-trash.svg" alt="" />
-                                </td>
-                                
-                            </tr>
-                    ) )}
-                
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome Cliente</th>
+                                    <th>Data de Nascimento</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {/* Renderizando os clientes filtrados, ou todos os clientes caso a pesquisa esteja vazia */}
+                                {(pesquisa ? clientesFiltrados : array).map(item => (
+                                    <tr key={item.id_informacoes_pessoais}>
+                                        <td>{item.id_informacoes_pessoais}</td>
+                                        <td>{item.nome}</td>
+                                        <td>{item.data_nascimento}</td>
+                                        <td>{item.email}</td>
+                                        <td>{item.celular}</td>
+                                        <td>
+                                            <img onClick={() => abrirAlterar(item.id_informacoes_pessoais)} src="/assets/image/bx-edit.svg" alt="Editar" />
+                                            <img onClick={() => abrirMensagem(item.id_informacoes_pessoais)} src="/assets/image/bx-trash.svg" alt="Deletar" />
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </table>
-
                     </div>
+
 
                     {mostrarMensagem && (
                         <div className="popup-backgroundd">

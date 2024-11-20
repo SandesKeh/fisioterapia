@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import InputMask from 'react-input-mask';
@@ -6,6 +6,20 @@ import InputMask from 'react-input-mask';
 import './index.scss';
 
 export default function Card() {
+    const [token, setToken] = useState(null);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let usu = localStorage.getItem('adm-logado')
+        setToken(usu)
+
+        if (usu == 'undefined' || usu == 'null' || !usu) {
+            navigate('/telaLogin')
+        }
+    }, []);
+
+
     const [exibir, setExibir] = useState(false);
     const [visualizar, setVisualizar] = useState(false);
 
@@ -58,9 +72,10 @@ export default function Card() {
         setIdade(calcularIdade(novaData)); 
     };
 
+    const cpfSemMascara = cpf.replace(/\D/g, '');
     async function Adicionarcliente() {
         try {
-            const linkpessoal = 'http://localhost:5004/inserir/infoPessoal';
+            const linkpessoal = `http://localhost:5004/inserir/infoPessoal?acesso-ao-token=${token}`;
             const pessoal = {
                 nome: nome,
                 grupo: grupo,
@@ -69,7 +84,7 @@ export default function Card() {
                 genero: genero,
                 email: email, 
                 celular: celular,
-                cpf: cpf,
+                cpf: cpfSemMascara,
                 rg: rg,
                 telefone: telefone,
                 pais: pais,
@@ -86,8 +101,8 @@ export default function Card() {
             
             navagate('/telaCadastrar')
         } catch (error) {
-            alert('erro') 
-            console.log(error.message)
+            console.error('Erro ao salvar cliente:', error.response ? error.response.data : error.message);
+            alert('Erro');
         }
 
     }
