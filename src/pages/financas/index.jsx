@@ -3,11 +3,11 @@ import Cabecalho from '../../components/cabecalho';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 export default function Financas(){
- 
+
     const [mostrarReceita, setMostrarReceita] = useState(false);
     const [alterarProfissional, setAlterarProfissional] = useState(false);
     const [idEdit, setIdEdit] = useState(null);
@@ -23,6 +23,20 @@ export default function Financas(){
     const [valored, setValored] = useState('');
     const [dataed, setDataed] = useState('');
     const [pagamentoed, setPagamentoed] = useState('');
+    const [token, setToken] = useState(null);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let usu = localStorage.getItem('adm-logado')
+        setToken(usu)
+
+        if (usu == 'undefined' || usu == 'null' || !usu) {
+            navigate('/telaLogin')
+        }
+    }, []);
+
+
 
     const abrirReceita = () => {
         setMostrarReceita(true);
@@ -42,7 +56,7 @@ export default function Financas(){
             const resposta = await axios.get(`http://localhost:5004/consultar/despesas/${id}?acesso-ao-token=${token}`);
             const profissional = resposta.data;
 
-          
+        
             setPropriedadeed(profissional.propriedade);
             setCategoriaed(profissional.categoria_financeira);
             setDescricaoed(profissional.descricao);
@@ -55,14 +69,14 @@ export default function Financas(){
         }
     };
 
-      
+    
     const fecharProfissionalEditar = () => {
         setAlterarProfissional(false);
         setIdEdit(null)
-       
+    
         
     };
- 
+
 
 
     async function addDespesa() {
@@ -75,18 +89,15 @@ export default function Financas(){
                 valor: valor,
                 dataPagamento: data
             }
-             await axios.post(link, despesa);
-             toast.success('Despesas cadastrada com sucesso');
-             setMostrarReceita(false)
-             financas()
+            await axios.post(link, despesa);
+            toast.success('Despesas cadastrada com sucesso');
+            setMostrarReceita(false)
+            financas()
         } catch (error) {
             toast.error('não foi cadastrado')
         }
     }
 
-
-
-    
 
     const [array, setArray]= useState([]);
     async function financas() {
@@ -113,12 +124,16 @@ export default function Financas(){
             toast.error("Erro ao atualizar os dados ");
         }
     }
+
+
+
+
     return(
         <div className="financas">
             <div className="cabecalho">
                 <Cabecalho/>
             </div>
-          <div className="all">
+        <div className="all">
                 
                 
 

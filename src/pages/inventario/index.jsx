@@ -1,10 +1,27 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
+
 export default function Inventario(){
+
+    const [token, setToken] = useState(null);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let usu = localStorage.getItem('adm-logado')
+        setToken(usu)
+
+        if (usu == 'undefined' || usu == 'null' || !usu) {
+            navigate('/telaLogin')
+        }
+    }, []);
+
+
 
     const [mostrarinventario, setMostrarinventario] = useState(false);
 

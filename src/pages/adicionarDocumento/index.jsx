@@ -5,7 +5,24 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
+
+
 export default function AddDocumento(){
+
+    const [token, setToken] = useState(null);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let usu = localStorage.getItem('adm-logado')
+        setToken(usu)
+
+        if (usu == 'undefined' || usu == 'null' || !usu) {
+            navigate('/telaLogin')
+        }
+    }, []);
+
 
     const [mostrarprofissional, setMostrarProfissional] = useState(false);
     const [alterarDocumento, setAlterarDocumento] = useState(false);
@@ -44,19 +61,23 @@ export default function AddDocumento(){
     }
 
     useEffect(() => {
-        Documentos()
-    } )
+        Documentos();
+    }, []);
 
     async function Adicionardocumento() {
+        if (!tipo || !titulo || !conteudo || !data) {
+            toast.error('Preencha todos os campos!');
+            return;
+        }
         try {
-            const link= `http://localhost:5004/documentacao/?acesso-ao-token=${token}`
+            const link= `http://localhost:5004/documentacao/?acesso-ao-token=${token}`;
             const documento = {
                 tipo: tipo,
                 titulo: titulo,
                 conteudo: conteudo,
                 dataCadastro: data
             }
-             await axios.post(link, documento)
+            await axios.post(link, documento)
             toast.success('Documento cadastrado com sucesso');
             setConteudo('');
             setTipo('');
@@ -66,7 +87,7 @@ export default function AddDocumento(){
             setMostrarProfissional(false)
             Documentos()
         } catch (error) {
-            alert('erro, documento não cadastrado')
+            alert('Erro ao cadastrar documento')
             
         }
     }
@@ -79,7 +100,7 @@ export default function AddDocumento(){
             const resposta = await axios.get(`http://localhost:5004/consultar/usuario/documento/${id}?acesso-ao-token=${token}`);
             const documento = resposta.data;
 
-          
+        
             setTipoo(documento.tipo);
             setTituloss(documento.titulo);
             setConteudoo(documento.conteudo);
@@ -91,11 +112,11 @@ export default function AddDocumento(){
         }
     };
 
-  
+
     const fecharDocymentoEditar = () => {
         setAlterarDocumento(false);
         setIdEdit(null)
-       
+    
         
     };
     
@@ -111,9 +132,23 @@ export default function AddDocumento(){
     }
     
 
+    const excluirDocumento = async (id) => {
+        const confirmar = window.confirm('Tem certeza que deseja excluir este documento?');
+        if (confirmar) {
+            try {
+                await axios.delete(`http://localhost:5004/delete/documento/${id}?acesso-ao-token=${token}`);
+                toast.success('Documento excluído com sucesso');
+                Documentos();
+            } catch (err) {
+                toast.error('Erro ao excluir documento');
+            }
+        }
+    };
+    
+
     return(
         <div className="adddocumento">
-               
+            
                     <div className="cabecalho">
                     <Cabecalho/>
                     </div>
@@ -187,19 +222,19 @@ export default function AddDocumento(){
                             </tr>
                         </thead>
                         <tbody>
-                           {array.map(item => (
+                            {array.map(item => (
                                     <tr key={item.id} >
                                         <td> {item.id}</td>
                                         <td> {item.tipo}</td>
                                         <td> {item.titulo}</td>
                                         <td> {item.conteudo} </td>
                                         <td> {item.dataCadastro}</td>
-                                        <td> <img onClick={ () => abrirDocumentolEditar(item.id, item.tipo, item.titulo, item.conteudo, item.dataCadastro)} src="/assets/image/bx-edit.svg" alt="" /> 
-                                            <img src="/assets/image/bx-trash.svg" alt="" />
+                                        <td> <img onClick={ () => abrirDocumentolEditar(item.id, item.tipo, item.titulo, item.conteudo, item.dataCadastro)} src="/assets/image/bx-edit.svg" alt="Editar" /> 
+                                             <img onClick={() => excluirDocumento(item.id)} src="/assets/image/bx-trash.svg" alt="Excluir" />
                                         </td>
                                     
                                     </tr>
-                           ))}
+                            ))}
                         </tbody>
                         </table>
 
@@ -221,10 +256,10 @@ export default function AddDocumento(){
                                     <h2>Data do cadastro : </h2>
                                         <input type="date" placeholder='01/07/2024' value={data} onChange={e => setData(e.target.value)} />
 
-                                  
+                                
                                 </div>
                                 <div className="botao">
-                                   
+                                
                                     <div className="button">
                                         <button className='botao' onClick={fecharPrpfissional} > Cancelar </button>
                                         <button onClick={Adicionardocumento}  > Salvar </button>

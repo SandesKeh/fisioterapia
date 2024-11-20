@@ -4,11 +4,23 @@ import axios from "axios";
 import Cabecalho from "../../components/cabecalho";
 import MyCalendar from "../../components/calendar";
 import "react-calendar/dist/Calendar.css";
-
+import { useNavigate } from "react-router-dom";
 
 export default function Agenda() {
 
-  
+    const [token, setToken] = useState(null);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let usu = localStorage.getItem('adm-logado')
+        setToken(usu)
+
+        if (usu == 'undefined' || usu == 'null' || !usu) {
+            navigate('/telaLogin')
+        }
+    }, []);
+
     
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [events, setEvents] = useState([]);
@@ -50,7 +62,7 @@ export default function Agenda() {
             const clienteEvents = clienteResp.data.map(event => ({ ...event, type: "Geral" }));
             const pessoalEvents = pessoalResp.data.map(event => ({ ...event, type: "Pessoal" }));
             const allEvents = [...clienteEvents, ...pessoalEvents];
-             
+            
             console.log("Eventos recebidos:", allEvents);
             setEvents(allEvents);
         })
@@ -105,7 +117,7 @@ export default function Agenda() {
 
         axios.post(endpoint, newEvent)
             .then(response => {
-                setEvents([...events, { ...newEvent, id: response.data.novoId }]);
+                setEvents(prevEvents => [...prevEvents, { ...newEvent, id: response.data.novoId }]);
                 setShowPopup(false);
                 setFormData({ name: "", date: "", time: "", retun: "não", mode: "online", service: "", status:"" });
             })

@@ -1,39 +1,51 @@
 import './index.scss';
-
 import { useState } from 'react';
 import { Link, useNavigate} from 'react-router-dom';
-import storage from 'local-storage';
 import axios from 'axios';
 
 export default function Cadastro() {
-    const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState('')
-    const [confirmarsenha, setConfirmarsenha] = useState('')
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [confirmarsenha, setConfirmarsenha] = useState('');
+    const [loading, setLoading] = useState(false);
     
     const navagate= useNavigate();
-    async function Cadastrar(){
-     try {
-        const usuario = {
-            email: email,
-            senha: senha
+
+    async function Cadastrar() {
+        if (senha !== confirmarsenha) {
+            alert("As senhas não coincidem.");
+            return;
         }
-        let link= `http://localhost:5004/cliente/`
-        const sla = await axios.post(link, usuario);
 
+        const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!isValidEmail) {
+            alert("Por favor, insira um email válido.");
+            return;
+        }
 
-        alert("Cadastro realizado com sucesso")
-        navagate('/loginCliente')   
-     } 
-     catch (error) {
-        alert("Cadastro não realizado com sucesso")
-     }
+        setLoading(true);
+
+        try {
+            const usuario = { email, senha };
+            const link = `http://localhost:5004/cliente/`;
+            const response = await axios.post(link, usuario);
+
+            alert("Cadastro realizado com sucesso");
+            navagate('/loginCliente');
+            setEmail('');
+            setSenha('');
+            setConfirmarsenha('');
+        } catch (error) {
+            console.error("Erro ao cadastrar:", error.response ? error.response.data : error.message);
+            alert("Cadastro não realizado com sucesso. Tente novamente.");
+        } finally {
+            setLoading(false);
+        }
     }
-   
-
 
     return (
         <div className="cadastro">
-           <div className="tela">
+            <div className="tela">
                 <div className="esquerda">
                     <img src="/assets/image/logo1.png" alt="banner da empresa" />
 
@@ -53,30 +65,32 @@ export default function Cadastro() {
                             <div className="perguntas">
                                 <div className="input">
                                     <h1> EMAIL: </h1>
-                                    <input type="text" placeholder='Ex: exemplo@exemplo.com'   value={email} onChange={e => setEmail(e.target.value)} />
+                                    <input type="text" placeholder='Ex: exemplo@exemplo.com' value={email} onChange={e => setEmail(e.target.value)} />
                                 </div>
                                 <div className="input">
                                     <h1>SENHA:</h1>
-                                    <input type="text"  placeholder=' Digite sua senha'   value={senha} onChange={e => setSenha(e.target.value)}/>
+                                    <input type="password" placeholder='Digite sua senha' value={senha} onChange={e => setSenha(e.target.value)} />
                                 </div>
                                 <div className="input">
                                     <h1>CONFIRMAR SENHA:</h1>
-                                    <input type="text"  placeholder=' Digite sua senha novamente'   value={confirmarsenha} onChange={e => setConfirmarsenha(e.target.value)}/>
+                                    <input type="password" placeholder='Digite sua senha novamente' value={confirmarsenha} onChange={e => setConfirmarsenha(e.target.value)} />
                                 </div>
 
                             </div>
 
                             
 
-                            <button onClick={Cadastrar} > Cadastre-se</button>
-                                <div className="cadastroNovo"> 
-                                    <Link to="/loginCliente">Já tem conta? <a href="">Faça seu login</a> </Link>
-                               </div>
+                            <button onClick={Cadastrar} disabled={loading}>
+                            {loading ? "Cadastrando..." : "Cadastre-se"}
+                            </button>
+                            <div className="cadastroNovo">
+                                <Link to="/loginCliente">Já tem conta? <a href="">Faça seu login</a></Link>
+                            </div>
                             
                         </div>
 
                 </div>
-           </div>
+            </div>
 
             <div className="risco"></div>
         </div>

@@ -1,12 +1,25 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Value } from 'sass';
 import { toast } from 'react-toastify';
 
 export default function TelaCadastrar(){
+    const [token, setToken] = useState(null);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let usu = localStorage.getItem('adm-logado')
+        setToken(usu)
+
+        if (usu == 'undefined' || usu == 'null' || !usu) {
+            navigate('/telaLogin')
+        }
+    }, []);
+
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');

@@ -9,20 +9,21 @@ export default function TelaLogin() {
 
     
     const navegate = useNavigate();
-  
+
     const[email, setEmail] = useState('');
     const[senha, setSenha] = useState('');
 
     async function Entrar() {
         const usuario = {
-            email: email,
-            senha: senha
+            "email": email,
+            "senha": senha
         }
 
         const link = `http://localhost:5004/login/`;
         const resposta = await axios.post(link, usuario);
-        storage('adm-logado', resposta.data.token);
-        navegate('/telaCadastrar');   
+
+        localStorage.setItem('adm-logado', resposta.data.token)
+        navegate('/telaCadastrar')
     }
 
     return(

@@ -1,11 +1,25 @@
 import './index.scss';
 import Cabecalho from '../../components/cabecalho';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 export default function AddProfissional() {
+    const [token, setToken] = useState(null);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let usu = localStorage.getItem('adm-logado')
+        setToken(usu)
+
+        if (usu == 'undefined' || usu == 'null' || !usu) {
+            navigate('/telaLogin')
+        }
+    }, []);
+
+
     const [mostrarProfissional, setMostrarProfissional] = useState(false);
     const [alterarProfissional, setAlterarProfissional] = useState(false);
     const [idEdit, setIdEdit] = useState(null);
