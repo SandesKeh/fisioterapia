@@ -2,12 +2,10 @@ import './index.scss';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import storage from 'local-storage'
+import storage from 'local-storage';
 
 
 export default function TelaLogin() {
-
-    
     const navegate = useNavigate();
 
     const[email, setEmail] = useState('');

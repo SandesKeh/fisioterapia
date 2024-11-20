@@ -1,14 +1,31 @@
 import './index.scss';
-import React, { useRef } from 'react';
+import React, {  useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export default function TelaCliente(){
+    const [nome, setNome] = useState('');
+    const [token, setToken] = useState(null);
 
-    const navegacao = useNavigate();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let usu = localStorage.getItem('clientelogado');
+        setToken(usu)
+
+        if (usu) {
+            const usuario = JSON.parse(usu);
+            setToken(usuario.token);
+            setNome(usuario.nome);
+        }
+
+        if (!usu || !token) {
+            navigate('/loginCliente');
+        }
+    }, [token, navigate]);
+
 
     const handleScrollToSection = (sectionId) => {
-        navegacao("/", { state: { sectionId } });
-
+        navigate("/", { state: { sectionId } });
     };
 
     const especialidadesRef = useRef(null);
@@ -31,7 +48,7 @@ export default function TelaCliente(){
                 </div> 
             </div>
             <div className="informacoes">
-                <h1> Seja muito bem-vindo, Kevillyn </h1>
+                <h1>Seja muito bem-vindo, {nome || 'usuário'}</h1>
 
                 <p>Segue abaixo seu horario no nosso espaço Dr. Daniela Rodrigues <br /> Fisioterapia e pilates!! </p>
 

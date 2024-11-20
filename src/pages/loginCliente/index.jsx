@@ -6,38 +6,37 @@ import axios from 'axios';
 
 
 
-
 export default function Login() {
     const navegate= useNavigate()
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
 
     async function Entrar(){
-       try {
-        const link = `http://localhost:5004/logincliente/`;
-        const user= {
-            email: email,
-            senha: senha
-        };
+        try {
+            const link = `http://localhost:5004/logincliente/`;
+            const user= {
+                email: email,
+                senha: senha
+            };
 
-        const resposta= await axios.post(link, user);
-        storage('clientelogado', resposta.data.token);
-        
-        navegate('/telaCliente') 
-       }  
-       
-       catch (error) {
-        alert("errou a senha")
-        alert("senha ou usuario invalido")
-       }
+            const resposta= await axios.post(link, user);
+            storage('clientelogado', resposta.data.token);
+            
+            navegate('/telaCliente') 
+            }  
+    
+        catch (error) {
+            alert("errou a senha")
+            alert("senha ou usuario invalido")
+        }
     }
 
-   
+
 
 
     return (
         <div className="tela-login">
-           <div className="tela">
+            <div className="tela">
                 <div className="esquerda">
                     <div className="logo">
                     <img src="/assets/image/logo1.png" alt="banner da empresa" />
@@ -76,12 +75,12 @@ export default function Login() {
                                 </div>
                                 <div className="cadastroNovo"> 
                                     <Link to="/cadastrar">Ainda não tem conta? <a href="">Faça seu cadastro</a> </Link>
-                               </div>
+                                </div>
                             
                         </div>
 
                 </div>
-           </div>
+            </div>
 
             <div className="risco"></div>
         </div>

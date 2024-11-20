@@ -64,14 +64,14 @@ export default function Notificacoes(){
 
                                 </th>
 
-                         
+                        
                                 
                         
                             </tr>
 
                             <tr>
                                 <td> Habilitar E-mail da Sessão </td>
-                               
+                            
                         
                                 
                             </tr>
@@ -85,14 +85,14 @@ export default function Notificacoes(){
 
                                 </th>
 
-                         
+                        
                                 
                         
                             </tr>
 
                             <tr>
                                 <td> Habilitar E-mail de Aniversário</td>
-                               
+                            
                         
                                 
                             </tr>
