@@ -2,7 +2,6 @@ import './index.scss';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import storage from 'local-storage';
 
 
 export default function TelaLogin() {
@@ -12,17 +11,27 @@ export default function TelaLogin() {
     const[senha, setSenha] = useState('');
 
     async function Entrar() {
-        const usuario = {
-            "email": email,
-            "senha": senha
+        try {
+            const usuario = {
+                "email": email,
+                "senha": senha
+            };
+    
+            const link = `http://localhost:5004/login/`;
+            const resposta = await axios.post(link, usuario);
+    
+            localStorage.setItem('adm-logado', resposta.data.token);
+            navegate('/telaCadastrar');
+        } catch (erro) {
+            if (erro.response && erro.response.status === 401) {
+                alert('Credenciais inválidas.');
+            } else {
+                alert('Erro ao conectar com o servidor.');
+            }
+            console.error(erro);
         }
-
-        const link = `http://localhost:5004/login/`;
-        const resposta = await axios.post(link, usuario);
-
-        localStorage.setItem('adm-logado', resposta.data.token)
-        navegate('/telaCadastrar')
     }
+    
 
     return(
         <div className="telaLogin">

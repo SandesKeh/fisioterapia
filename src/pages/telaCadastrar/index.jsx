@@ -3,23 +3,21 @@ import Cabecalho from '../../components/cabecalho';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Value } from 'sass';
 import { toast } from 'react-toastify';
 
 export default function TelaCadastrar(){
     const [token, setToken] = useState(null);
-
     const navigate = useNavigate();
 
     useEffect(() => {
-        let usu = localStorage.getItem('adm-logado')
-        setToken(usu)
-
-        if (usu == 'undefined' || usu == 'null' || !usu) {
-            navigate('/telaLogin')
+        let usu = localStorage.getItem('adm-logado');
+        setToken(usu);
+    
+        if (!usu || usu === 'undefined' || usu === 'null') {
+            navigate('/telaLogin');
         }
-    }, []);
-
+    }, [navigate]);
+    
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
@@ -38,6 +36,12 @@ export default function TelaCadastrar(){
 
     const [mostrarMensagem, setMostrarMensagem] = useState('');
     const [idDeletar, setIdDeletar] = useState(null);
+    const [pesquisa, setPesquisa] = useState('');
+    const [array, setArray] = useState([]);
+    const [alterarCliente, setAlterarCliente] = useState('');
+
+
+
     const abrirMensagem = (id) => {
             
         setMostrarMensagem(true);
@@ -50,15 +54,14 @@ export default function TelaCadastrar(){
         
     };
 
-    const [alterarCliente, setAlterarCliente] = useState('');
     const abrirAlterar = async (id) => {
         try {
             setAlterarCliente(true);
             setIdAlterar(id);
             
-            const resposta = await axios.get(`http://localhost:5004/consultar/porID/${idAlterar}?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://localhost:5004/consultar/porID/${id}?acesso-ao-token=${token}`);
             const cliente = resposta.data;
-
+    
             setNome(cliente.nome);
             setEmail(cliente.email);
             setCelular(cliente.celular);
@@ -72,17 +75,14 @@ export default function TelaCadastrar(){
             setNumero(cliente.numero);
             setBairro(cliente.bairro);
             setComplemento(cliente.complemento);
-            
-
         } catch (error) {
-            
+            console.error('Erro ao consultar cliente:', error);
         }
     };
+    
     const fecharAlterar = () => {
         setAlterarCliente(false)
     }
-
-    
 
     async function Deletar() {
         try {
@@ -94,49 +94,108 @@ export default function TelaCadastrar(){
         }
     }
 
-
-    const [array, setArray] = useState([]);
-
     async function consultar() {
         try {
             const resposta= await axios.get(`http://localhost:5004/consultar/infoPessoas?acesso-ao-token=${token}`);
             const valor = resposta.data;
             setArray(valor)
-           
+        
         } catch (err) {
             console.log(err.message)
         }
     }
 
+    async function atualizarCliente() {
+        try {
+            const dadosAtualizados = {
+                nome,
+                email,
+                celular,
+                cpf,
+                rg,
+                pais,
+                cep,
+                cidade,
+                estado,
+                endereco,
+                numero,
+                bairro,
+                complemento,
+            };
+    
+            await axios.put(`http://localhost:5004/atualizar/infoPessoas/${idAlterar}?acesso-ao-token=${token}`, dadosAtualizados);
+            toast.success('Cliente atualizado com sucesso');
+            fecharAlterar();
+            consultar();
+        } catch (error) {
+            toast.error('Erro ao atualizar cliente');
+        }
+    }
+
+    const clientesFiltrados = array.filter(item =>
+        item.nome.toLowerCase().includes(pesquisa.toLowerCase())
+    );
+
     useEffect(() => {
-        consultar();
-    })
-
-
+        if (token) {
+            consultar();
+        }
+    }, [token]);
     
 
     return(
         <div className="telacadastrar">
-               <div className="menu">
+            <div className="menu">
                     <Cabecalho/>
-                </div>
+            </div>
+            
             <div className="protecao">
-             
-
-                
+            
                 <div className="direita">
                     <div className="cima">
                         <div className="inputes">
                             <h1>Pesquisa cliente: </h1>
-                            <input type="text" placeholder='Digite o nome do cliente ' />
+                            <input type="text"
+                                placeholder="Digite o nome do cliente"
+                                value={pesquisa}
+                                onChange={(e) => setPesquisa(e.target.value)}
+                            />
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome Cliente</th>
+                                        <th>Data de Nascimento</th>
+                                        <th>Email</th>
+                                        <th>Telefone</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {clientesFiltrados.map(item => (
+                                        <tr key={item.id_informacoes_pessoais}>
+                                            <td>{item.id_informacoes_pessoais}</td>
+                                            <td>{item.nome}</td>
+                                            <td>{item.data_nascimento}</td>
+                                            <td>{item.email}</td>
+                                            <td>{item.celular}</td>
+                                            <td>
+                                                <img onClick={() => abrirAlterar(item.id_informacoes_pessoais)} src="/assets/image/bx-edit.svg" alt="Editar" />
+                                                <img onClick={() => abrirMensagem(item.id_informacoes_pessoais)} src="/assets/image/bx-trash.svg" alt="Deletar" />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>                     
                         </div>
+
                         <div className="botao">
                             
                             <div className="fim">
                             <Link to='/home' >  
                                 <button> + Adicionar Cliente </button>
                             </Link> 
-                           
+                        
                             </div>
                         </div>
                     </div>
@@ -165,7 +224,7 @@ export default function TelaCadastrar(){
                                 
                             </tr>
                     ) )}
-                   
+                
                         </table>
 
                     </div>
@@ -406,21 +465,20 @@ export default function TelaCadastrar(){
                                             <input type="text" value={bairro} onChange={e => setBairro(e.target.value)} />
                                         
                                         </div>
-                                      
+                                    
                                         </div>
                                         <h3> Complemento</h3>
                                             <input className='one' type="text" value={complemento} onChange={e => setComplemento(e.target.value)} />
                                 <div className="botao">
-                                   
+                                
                                     <div className="button">
                                         <button className='botao' onClick={ fecharAlterar}> Cancelar </button>
-                                        <button > Salvar </button>
+                                        <button onClick={atualizarCliente}>Salvar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     )}
-
                     
                 </div>
             </div>

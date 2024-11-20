@@ -1,50 +1,62 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import InputMask from 'react-input-mask';
+
 import './index.scss';
 
 export default function Card() {
     const [exibir, setExibir] = useState(false);
+    const [visualizar, setVisualizar] = useState(false);
 
     const mostrar = () => {
         setExibir(!exibir);
     };
+    const alternarVisualizacaoEndereco = () => {
+        setVisualizar(!visualizar);
+    };
 
-   
-
- 
-
-    const [visualizar, setVisualizar] = useState(false);
-
-    const endereco = () => {
-        setVisualizar (!visualizar);
-    }
-
-   ;
-
-  
 
     const navagate= useNavigate();
+    
     const [nome, setNome] = useState('');
     const [grupo, setGrupo] = useState('');
     const [data, setData]= useState('');
     const [idade, setIdade]= useState('');
     const [genero, setGenero]= useState('');
     const [email, setEmail]= useState('');
-    const [celular, setcelular]= useState('');
+    const [telefone, setTenefone]= useState('');
     const [cpf, setCpf]= useState('');
     const [rg, setRg]= useState('');
+    const [celular, setcelular]= useState('');
+    const [pais, setPais] = useState('Brasil');
+    const [cep, setCep] = useState('');
+    const [cidade, setCidade] = useState('');
+    const [estado, setEstado] = useState('');
+    const [endereco, setEndereco] = useState('');
+    const [numero, setNumero] = useState('');
+    const [bairro, setBairro] = useState('');
+    const [complemento, setComplemento] = useState('');;
 
-    const [pais, setPais]= useState('');
-    const [cep,setCep]= useState('');
-    const [cidade,setCidade]= useState('');
-    const [estado, setEstado]= useState('');
-    const [endereço, setEndereço]= useState('');
-    const [numero, setNumero]= useState('');
-    const [bairro, setBairro]= useState('');
-    const [complemento, setComplemento]= useState('');
-    
-    const [telefone, setTenefone]= useState('');
+    const calcularIdade = (data) => {
+        if (!data) return '';
+        const hoje = new Date();
+        const nascimento = new Date(data);
+        let idadeCalculada = hoje.getFullYear() - nascimento.getFullYear();
+        const mes = hoje.getMonth() - nascimento.getMonth();
+
+        if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+            idadeCalculada--;
+        }
+
+        return idadeCalculada >= 0 ? idadeCalculada : '';
+    };
+
+    const handleDataChange = (e) => {
+        const novaData = e.target.value;
+        setData(novaData);
+        setIdade(calcularIdade(novaData)); 
+    };
 
     async function Adicionarcliente() {
         try {
@@ -64,23 +76,51 @@ export default function Card() {
                 cep: cep,
                 cidade: cidade,
                 estado: estado,
-                endereco: endereço,
+                endereco: endereco,
                 numero: numero,
                 bairro: bairro,
                 complemento: complemento
             }
-             await axios.post(linkpessoal, pessoal)
+            await axios.post(linkpessoal, pessoal)
             alert('Cliente cadastrado ')
             
             navagate('/telaCadastrar')
         } catch (error) {
-           alert('erro') 
-           console.log(error.message)
+            alert('erro') 
+            console.log(error.message)
         }
 
     }
 
+    const buscarEndereco = async (cepInserido) => {
+        try {
+            if (cepInserido.length === 8) {
+                const resposta = await axios.get(`https://viacep.com.br/ws/${cepInserido}/json/`);
+                if (resposta.data.erro) {
+                    alert("CEP inválido!");
+                    return;
+                }
 
+                setEndereco(resposta.data.logradouro || '');
+                setBairro(resposta.data.bairro || '');
+                setCidade(resposta.data.localidade || '');
+                setEstado(resposta.data.uf || '');
+            }
+        } catch (error) {
+            console.error("Erro ao buscar o endereço:", error.message);
+            alert("Não foi possível buscar o endereço. Verifique o CEP e tente novamente.");
+        }
+    };
+
+
+    const handleCepChange = (e) => {
+        const novoCep = e.target.value.replace(/\D/g, '');
+        setCep(novoCep);
+
+        if (novoCep.length === 8) {
+            buscarEndereco(novoCep);
+        }
+    };
 
 
     return (
@@ -92,15 +132,11 @@ export default function Card() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z"/>
                 </svg>
-             </button>  
+            </button>  
             
         </div>  
 
-     
-        
         <div className={`contener ${exibir ? "show" : "hide"}`}>  
-           
-
                 <div className="cont1">
                     <div className="inpute">
                         <h1>Nome: </h1>
@@ -124,13 +160,13 @@ export default function Card() {
                     <div className="inpute">
                         <h1> Data de Nascimento:</h1>
 
-                        <input type="date" value={data} onChange={e => setData(e.target.value)} />
+                        <input type="date" value={data} onChange={handleDataChange} />
                     </div>
 
                     <div className="inpute">
                         <h1> Idade: </h1>
 
-                        <input type="text" value={idade} onChange={e => setIdade(e.target.value)} />
+                        <input type="text" value={idade} readOnly />
 
                     </div>
                 </div>
@@ -143,6 +179,7 @@ export default function Card() {
                             <option value=""> Selecione </option>
                             <option value="Masculino">Masculino</option>
                             <option value="Feminino">Feminino</option>
+                            <option value="Outros">Outros</option>
                         </select>
 
                     </div>
@@ -157,41 +194,58 @@ export default function Card() {
 
                 <div className="cont4">
 
-                    <div className="inpute">
-                        <h1> Celular Responsavel: </h1>
-                        <input type="text" placeholder='+55' value={celular} onChange={e => setcelular(e.target.value)} />
+                <div className="inpute">
+                        <h1>Celular Responsável:</h1>
+                        <InputMask
+                            mask="(99) 99999-9999"
+                            value={celular}
+                            onChange={e => setcelular(e.target.value)}
+                            placeholder="+55 (__) _____-____"
+                        />
                     </div>
 
                     <div className="inpute">
                         <h1>CPF:</h1>
-                        <input type="text" placeholder="___.___.___.__" value={cpf} onChange={e => setCpf(e.target.value)} />
-                    </div>
+                        <InputMask
+                            mask="999.999.999-99"
+                            value={cpf}
+                            onChange={e => setCpf(e.target.value)}
+                            placeholder="___.___.___.__"
+                        />                    </div>
                     <div className="inpute">
                         <h1> RG: </h1>
-                        <input type="text" value={rg} onChange={e => setRg(e.target.value)} />
+                        <InputMask
+                            mask="99.999.999-9"
+                            value={rg}
+                            onChange={e => setRg(e.target.value)}
+                            placeholder="___.___.___-__"
+                        />                    
                     </div>
 
                     <div className="inpute">
                         <h1> Telefone : </h1>
-
-                        <input type="text" placeholder="(__) _____-____" value={telefone} onChange={e => setTenefone(e.target.value)} />
+                        <InputMask
+                            mask="(99) 99999-9999"
+                            value={telefone}
+                            onChange={e => setTenefone(e.target.value)}
+                            placeholder="(__) _____-____"
+                        />                    
                     </div>
                 </div>
             
         </div>
 
 
-      
 
         
         <div className="cabecalho">
             <h1> 3. Endereço </h1>
             
-            <button onClick={endereco} className="i">
+            <button onClick={alternarVisualizacaoEndereco} className="i">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z"/>
+                    <path fill-rule="evenodd" d="M7.776 5.553a.5.5 0 0 1 .448 0l6 3a.5.5 0 1 1-.448.894L8 6.56 2.224 9.447a.5.5 0 1 1-.448-.894z"/>
                 </svg>
-             </button>  
+            </button>  
             
         </div>  
 
@@ -382,55 +436,80 @@ export default function Card() {
 
                 <div className="inpute">
                     <h1>CEP:</h1>
-                    <input type="text" placeholder="_____-___" value={cep} onChange={e => setCep(e.target.value)} />
+                    <InputMask
+                        mask="99999-999"
+                        value={cep}
+                        onChange={handleCepChange}
+                        placeholder="_____-___"
+                    />            
                 </div>
+
                 <div className="inpute">
                     <h1> Cidade: </h1>
-                    <input type="text" value={cidade} onChange={e => setCidade(e.target.value)} />
+                    <input
+                        type="text"
+                        value={cidade}
+                        readOnly
+                    />                
                 </div>
-            
+
                 <div className="inpute1">
                     <h1> Estado: </h1>
-                    <input type="text" value={estado} onChange={e => setEstado(e.target.value)} />
+                    <input
+                        type="text"
+                        value={estado}
+                        readOnly
+                    />                
                 </div>
+
             </div>
 
             <div className="cont3">
                     <div className="inpute1">
                         <h1> Endereço : </h1>
-
-                        <input type="text" value={endereço} onChange={e => setEndereço(e.target.value)} />
-
+                        <input
+                            type="text"
+                            value={endereco}
+                            readOnly
+                        />
                     </div>
 
                     <div className="inpute2">
                         <h1> Numero: </h1>
-
-                        <input type="text" value={numero} onChange={e => setNumero(e.target.value)} />
+                        <input
+                            type="text"
+                            value={numero}
+                            onChange={(e) => setNumero(e.target.value)}
+                        />                
                     </div>
+
 
             </div>
 
             <div className="cont3">
-                    <div className="inpute">
-                        <h1> Bairro: </h1>
-
-                        <input type="text" value={bairro} onChange={e => setBairro(e.target.value)} />
-
-                    </div>
-
-                    <div className="inpute">
-                        <h1> Complemento: </h1>
-
-                        <input type="text" value={complemento} onChange={e => setComplemento(e.target.value)} />
-                    </div>
-
+                <div className="inpute">
+                    <h1> Complemento: </h1>
+                    <input
+                        type="text"
+                        value={complemento}
+                        onChange={(e) => setComplemento(e.target.value)}
+                    />                    
                 </div>
+
+                <div className="inpute">
+                    <h1> Bairro: </h1>
+                    <input
+                        type="text"
+                        value={bairro}
+                        readOnly
+                    />
+                </div>
+            </div>
             
         </div>    
 
         <div className="botao">
-            <button onClick={Adicionarcliente} >   Salvar </button>
+            <button onClick={Adicionarcliente}> Salvar </button>
         </div>    
 
 

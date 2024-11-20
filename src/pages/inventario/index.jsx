@@ -52,7 +52,7 @@ export default function Inventario(){
     const [categoria, setCategoria]= useState('');
     const [estoque, setEstoque]= useState('');
     const [ondecomprou, setOndecomprou] = useState('');
-    const [unitário, setUnitario] = useState('');
+    const [unitario, setUnitario] = useState('');
     const [total, setTotal]= useState('');
     const [data, setData]= useState('')
     const [array, setArray] = useState([])
@@ -77,7 +77,7 @@ export default function Inventario(){
 
     async function CadastrarProduto() {
         try {
-            await axios.post(`http://localhost:5004/inserir/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitário}/${total}/${data}?acesso-ao-token=${token}`);
+            await axios.post(`http://localhost:5004/inserir/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitario}/${total}/${data}?acesso-ao-token=${token}`);
             toast.success('Produto inserido no inventário com sucesso');
             setMostrarinventario(false)     
         } catch (err) {
@@ -88,7 +88,7 @@ export default function Inventario(){
     
     async function atualizarPacotes() {
         try {
-            await axios.put(`http://localhost:5004/atualizar/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitário}/${total}/${data}/${id}?acesso-ao-token=${token}`);
+            await axios.put(`http://localhost:5004/atualizar/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitario}/${total}/${data}/${id}?acesso-ao-token=${token}`);
             toast.success('atualizado com sucesso')
             setMostrareditar(false)
         } 
@@ -193,7 +193,7 @@ export default function Inventario(){
                                     <h2>Onde comprou </h2>
                                         <input type="text" placeholder='Amazon' value={ondecomprou} onChange={e => setOndecomprou(e.target.value)} />
                                     <h2>Preço Unitario </h2>
-                                        <input type="text" placeholder='R$ 80,32' value={unitário} onChange={e => setUnitario(e.target.value)} />
+                                        <input type="text" placeholder='R$ 80,32' value={unitario} onChange={e => setUnitario(e.target.value)} />
                                     <h2>Valor total</h2>
                                         <input type="text" placeholder='R$ 803' value={total} onChange={e => setTotal(e.target.value)} />
                                     <h2>Data da Compra</h2> 
@@ -229,7 +229,7 @@ export default function Inventario(){
                                     <h2>Onde comprou </h2>
                                         <input type="text" placeholder='Amazon' value={ondecomprou} onChange={e => setOndecomprou(e.target.value)} />
                                     <h2>Preço Unitario </h2>
-                                        <input type="text" placeholder='R$ 80,32' value={unitário} onChange={e => setUnitario(e.target.value)} />
+                                        <input type="text" placeholder='R$ 80,32' value={unitario} onChange={e => setUnitario(e.target.value)} />
                                     <h2>Valor total</h2>
                                         <input type="text" placeholder='R$ 803' value={total} onChange={e => setTotal(e.target.value)} />
                                     <h2>Data da Compra</h2> 
