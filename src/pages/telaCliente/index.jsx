@@ -1,11 +1,23 @@
 import './index.scss';
+import axios from "axios";
 import React, {  useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export default function TelaCliente(){
     const [nome, setNome] = useState('');
+    const [filteredEvent, setFilteredEvent] = useState([]);
+    const [viewMode, setViewMode] = useState("Geral");
+    const [events, setEvents] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const [token, setToken] = useState(null);
-
+    const [formData, setFormData] = useState({
+        name: "",
+        date: "",
+        time: "",
+        mode: "online",
+        service: "",
+        status:"pendente"
+    });
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,15 +32,48 @@ export default function TelaCliente(){
     }, [navigate]);
 
 
+
+
     const handleScrollToSection = (sectionId) => {
         navigate("/", { state: { sectionId } });
     };
+
+    
+    const eventsForSelectedDate = events.filter(event => 
+        new Date(event.date).toDateString() === selectedDate.toDateString()
+    );
 
     const especialidadesRef = useRef(null);
         const curiosidadeRef = useRef(null);
         const sobreRef = useRef(null);
         const homeRef = useRef(null);
         const location = useLocation();
+
+        const filteredEvents = events.filter(event => event.type === viewMode);
+        const fetchEvents = () => {
+            Promise.all([
+                axios.get(`http://localhost:5004/consulta/agendaCliente?acesso-ao-token=${token}`),
+                axios.get(`http://localhost:5004/consulta/agendaPessoal?acesso-ao-token=${token}`)
+            ])
+            .then(([clienteResp, pessoalResp]) => {
+                console.log("Resposta Cliente:", clienteResp.data);
+                console.log("Resposta Pessoal:", pessoalResp.data);
+    
+                const clienteEvents = clienteResp.data.map(event => ({ ...event, type: "Geral" }));
+                const pessoalEvents = pessoalResp.data.map(event => ({ ...event, type: "Pessoal" }));
+                const allEvents = [...clienteEvents, ...pessoalEvents];
+                
+                console.log("Eventos recebidos:", allEvents);
+                setEvents(allEvents);
+            })
+            .catch(error => {
+                console.error("Erro ao buscar eventos:", error);
+                alert("Erro ao buscar eventos. Verifique o console para mais detalhes.");
+                
+            });
+    
+        };
+        
 
     return(
         <div className="telacliente">
@@ -52,16 +97,21 @@ export default function TelaCliente(){
                     <table>
                         <tr>
                             <th> Dia </th>
-                            <th> Semana </th>
                             <th>Categoria</th>
+                            <th>Modo</th>
                             <th> Horario</th>
                         
                         </tr>                   
                         <tr>
-                            <td> 31/10/2024 </td>
-                            <td> Quinta-Feira</td>
-                            <td> Pilates </td>
-                            <td> 15:00 </td>
+                        {filteredEvents.map(event => (
+                                <tr key={event.id}>
+                                  <td>{event.date || "Data não disponível"}</td>
+                                  <td>{event.service || "Serviço não disponível"}</td>
+                                    <td>{event.mode || "Local não disponível"}</td>
+                                    <td>{event.time || "Horário não disponível"}</td>
+
+                                </tr>
+                            ))}
                     
 
                         </tr>

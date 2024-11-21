@@ -6,6 +6,7 @@
     background-color: #03989F;
     position: relative;
     .tela{
+        background-color: #03989F;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -21,7 +22,7 @@
 
 
             img{
-                width: 250px;
+                width: 10rem;
                 margin-left: 90px;
                 padding: 20px 0px 0px 20px;
             }
@@ -31,19 +32,18 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 2px;
-                margin: 60px 0px 0px 180px ;
+                margin: 60px 0px 0px 40px ;
                 
 
                 h1{
-                    font: 700 38px Inter;
+                    font: 700 28px Inter;
                     color: #fff;
                 }
                 
                 p{
-                    
-                    font: 700 20px Inter;
+                    font: 700 16px Inter;
                     color: #000000;
-                    width: 270px;
+                    width:100%
                 }
             }
         }
@@ -63,13 +63,13 @@
                 justify-content: space-between;
                 background-color: #fffffff5;
                 border-radius: 12px;
-                padding: 80px 60px 200px 60px;
-                height: 600px;
-                gap: 5px;
+                padding: 60px 40px;
+                height: auto; //tipo um elastico
+                gap: 10px;
                 z-index: 1;
                 .text{
                     h1{
-                        font: 700 40px Inter;
+                        font: 700 32px Inter;
                     }
                 }
 
@@ -92,7 +92,7 @@
                 
 
                 h1{
-                    font: 600 34px poppins;
+                    font: 600 24px poppins;
                     color: #000000;
                 }
 
@@ -171,3 +171,71 @@
 
 }
 
+
+
+
+// responsividade
+@media (max-width: 1024px) {
+    .cadastro .tela .esquerda, .cadastro .tela .direita {
+        width: 100%; 
+    }
+    .cadastro .tela .esquerda img{
+        width: 10rem;
+        margin-left: 10px;
+    }
+    .cadastro .risco{
+        top: 500px;
+
+    }
+   
+}
+
+@media (max-width: 768px) {
+    .cadastro .tela {
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+    }
+    .cadastro .tela .direita{
+        height:840px ;
+     }
+     .cadastro .risco{
+        top: 500px;
+
+    }
+    .cadastro .tela .esquerda .textos {
+        margin: 20px 0 0 20px;
+    }
+
+    .cadastro .tela .direita .cartao {
+        padding: 20px 10px;
+        top: 500px;
+    }
+    .cadastro .tela .esquerda img{
+        width: 10rem;
+        margin-left: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cadastro .tela .esquerda img{
+        width: 7rem;
+        margin-left: 10px;
+    }
+    .cadastro .tela .direita{
+        height:840px ;
+     }
+    .cadastro .tela .direita .cartao {
+        padding: 20px 10px;
+        top: 500px;
+
+    }
+
+    .cadastro .tela .direita .cartao .input input {
+        width: 100%;
+    }
+    .cadastro .risco{
+        top: 500px;
+
+    }
+}
