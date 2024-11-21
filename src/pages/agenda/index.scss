@@ -266,4 +266,54 @@
 
     }
     
+
+    .cabecalho{
+        display: flex;
+        flex-direction: row;
+        padding-right: 10vh;
+        
+        
+    
+        .menu{
+            display: flex;
+            flex-direction: column ;
+            justify-content: space-around;
+            background-color: #001429;
+            padding-top: 15px;
+            width: 100%;
+            height: 100vh;
+            
+            border-radius: 0px 0px 0px 0px;
+            
+            .picons {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                cursor: pointer;
+                align-items: center;
+                height: 150px;
+                transition: .3s;
+                width: 100%;
+                text-decoration: none;
+            
+                img{
+                    background-color: #08B4AC;
+                }
+                
+                h1{
+                    font: 400 28px Roboto ;
+                    color: #08B4AC;
+                    
+                }
+            }
+            .picons:hover{
+                background-color: #08b4abaf;
+                
+            }
+        }
+    }   
+        
+       
+       
+    
 }

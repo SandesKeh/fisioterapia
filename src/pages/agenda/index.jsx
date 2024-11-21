@@ -67,7 +67,6 @@ export default function Agenda() {
         })
         .catch(error => {
             console.error("Erro ao buscar eventos:", error);
-            alert("Erro ao buscar eventos. Verifique o console para mais detalhes.");
             
         });
 
