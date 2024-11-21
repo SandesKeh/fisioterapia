@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import InputMask from 'react-input-mask';
+import { toast } from 'react-toastify';
 
 import './index.scss';
 
@@ -97,12 +98,11 @@ export default function Card() {
                 complemento: complemento
             }
             await axios.post(linkpessoal, pessoal)
-            alert('Cliente cadastrado ')
+            toast.success('Cliente cadastrado com sucesso');
             
             navagate('/telaCadastrar')
         } catch (error) {
-            console.error('Erro ao salvar cliente:', error.response ? error.response.data : error.message);
-            alert('Erro');
+            toast.error("Erro, Cliente não cadastrado ");
         }
 
     }
@@ -112,7 +112,7 @@ export default function Card() {
             if (cepInserido.length === 8) {
                 const resposta = await axios.get(`https://viacep.com.br/ws/${cepInserido}/json/`);
                 if (resposta.data.erro) {
-                    alert("CEP inválido!");
+                    toast.error("CEP inválido!");
                     return;
                 }
 
@@ -123,7 +123,7 @@ export default function Card() {
             }
         } catch (error) {
             console.error("Erro ao buscar o endereço:", error.message);
-            alert("Não foi possível buscar o endereço. Verifique o CEP e tente novamente.");
+            toast.error("Não foi possível buscar o endereço. Verifique o CEP e tente novamente.");
         }
     };
 

@@ -39,6 +39,7 @@ export default function AddDocumento(){
 
     const navegate = useNavigate();
     const [idEdit, setIdEdit] = useState(null);
+    const [idDeletar, setIdDletar] = useState(null);
     const [tipo, setTipo] = useState('');
     const [titulo, setTitulos]= useState('');
     const [conteudo, setConteudo]= useState('');
@@ -47,8 +48,21 @@ export default function AddDocumento(){
     const [tituloo, setTituloss]= useState('');
     const [conteudoo, setConteudoo]= useState('');
     const [dataa, setDataa]= useState('');
-    const [ array, setArray] = useState([])
-    
+    const [ array, setArray] = useState([]);
+    const [mostrarMensagem, setMostrarMensagem] = useState('');
+
+
+    const abrirMensagem = (id) => {
+            
+        setMostrarMensagem(true);
+        setIdDletar(id)
+    };
+
+    const fecharMensagem = (e) => {
+        
+        setMostrarMensagem(false)
+        
+    };
 
     async function Documentos() {
         try {
@@ -62,7 +76,7 @@ export default function AddDocumento(){
 
     useEffect(() => {
         Documentos();
-    }, []);
+    });
 
     async function Adicionardocumento() {
         if (!tipo || !titulo || !conteudo || !data) {
@@ -87,8 +101,19 @@ export default function AddDocumento(){
             setMostrarProfissional(false)
             Documentos()
         } catch (error) {
-            alert('Erro ao cadastrar documento')
+            toast.error('Erro ao cadastrar documento')
             
+        }
+    }
+
+    async function Adicionar() {
+        try {
+            await axios.post(`http://localhost:5004/inseir/documento/${tipo}/${titulo}/${conteudo}/${data}?acesso-ao-token=${token}`);
+            toast.success('Documentação cadastrado com sucesso');
+            setAlterarDocumento(false)
+            Documentos();
+        } catch (error) {
+            toast.error('Erro, Documentação não cadastrado');
         }
     }
 
@@ -112,6 +137,8 @@ export default function AddDocumento(){
         }
     };
 
+    
+
 
     const fecharDocymentoEditar = () => {
         setAlterarDocumento(false);
@@ -125,25 +152,24 @@ export default function AddDocumento(){
             await axios.put(`http://localhost:5004/update/documento/${tipoo}/${tituloo}/${conteudoo}/${dataa}/${idEdit}?acesso-ao-token=${token}`);
             toast.success('Documento alterado com sucesso');
             setAlterarDocumento(false);
+            Documentos();
             
-        } catch (err) {
-            toast.error("erro ");
+        } catch (error) {
+            toast.error("erro, o documento não foi alterado");
         }
     }
     
 
-    const excluirDocumento = async (id) => {
-        const confirmar = window.confirm('Tem certeza que deseja excluir este documento?');
-        if (confirmar) {
-            try {
-                await axios.delete(`http://localhost:5004/delete/documento/${id}?acesso-ao-token=${token}`);
-                toast.success('Documento excluído com sucesso');
-                Documentos();
-            } catch (err) {
-                toast.error('Erro ao excluir documento');
-            }
+    async function Deletar() {
+        try {
+            const resposta = await axios.delete(`http://localhost:5004/deletar/documentacao/${idDeletar}?acesso-ao-token=${token}`)
+            toast.success('Documento deletado com sucesso')
+            setMostrarMensagem(false);
+            Documentos();
+        } catch (error) {
+            toast.error('Erro, Documento não deletado')
         }
-    };
+    }
     
 
     return(
@@ -230,7 +256,7 @@ export default function AddDocumento(){
                                         <td> {item.conteudo} </td>
                                         <td> {item.dataCadastro}</td>
                                         <td> <img onClick={ () => abrirDocumentolEditar(item.id, item.tipo, item.titulo, item.conteudo, item.dataCadastro)} src="/assets/image/bx-edit.svg" alt="Editar" /> 
-                                             <img onClick={() => excluirDocumento(item.id)} src="/assets/image/bx-trash.svg" alt="Excluir" />
+                                             <img onClick={() => abrirMensagem(item.id)} src="/assets/image/bx-trash.svg" alt="Excluir" />
                                         </td>
                                     
                                     </tr>
@@ -301,6 +327,26 @@ export default function AddDocumento(){
                     )}
                 </div>
                 
+                {mostrarMensagem && (
+                        <div className="popup-backgroundd">
+                            <div className="popupp">
+                                <div className="mensagemm">
+                                    <h1>Cancelar cliente </h1>
+                                    <img onClick={fecharMensagem} src="/assets/image/bx-x.svg" alt="" />
+                                </div>
+                                <div className="mensagee">
+                                    <h2 >Atenção! <br /> Caso remova o documento não terá mais acesso a ele.</h2>
+                                </div>
+                                <div className="botaoo">
+                                    <h1> Tem certeza que deseja desativar esse cliente? </h1>
+                                    <div className="buttonn">
+                                        <button className='fimm' onClick={fecharMensagem} > Cancelar </button>
+                                        <button onClick={Deletar}  > Deletar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
             
                 
 

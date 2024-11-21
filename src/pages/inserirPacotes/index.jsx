@@ -26,6 +26,7 @@ export default function InserirPacotes(){
     const [mostrarprofissional, setMostrarProfissional] = useState(false);
     const [alterarProfissional, setAlterarProfissional] = useState(false);
     const [idEdit, setIdEdit] = useState(null); 
+    const [idDelet, setIdDelet] = useState(null);
 
     const [nome, setNome]= useState('');
     const [valor, setValor] = useState('');
@@ -90,13 +91,12 @@ export default function InserirPacotes(){
     async function Cadastrar() {
      try {
         await axios.post(`http://localhost:5004/inserir/pacotes/${nome}/${valor}?acesso-ao-token=${token}`);
-        alert('foi');
+        toast.success('Pacote cadastrado com sucesso');
         setMostrarProfissional(false);
         pacotes();
      } 
-     catch (err) {
-        console.log(err.message)
-        alert(err.message)
+     catch (error) {
+        toast.error('Erro, Pacote não cadastrado');
      }
     }
     
@@ -111,6 +111,34 @@ export default function InserirPacotes(){
             toast.error("erro ");
         }
     }
+
+
+    const [mostrarMensagem, setMostrarMensagem] = useState('');
+
+    const abrirMensagem = (id) => {
+            
+        setMostrarMensagem(true);
+        setIdDelet(id)
+    };
+
+    const fecharMensagem = (e) => {
+        
+        setMostrarMensagem(false)
+        
+    };
+
+
+
+    async function Deletar() {
+        try {
+            const resposta = await axios.delete(`http://localhost:5004/deletar/pacote/${idDelet}?acesso-ao-token=${token}`);
+            setMostrarMensagem(false);
+            toast.success('Pacote deletado com sucesso');
+        } catch (error) {
+            toast.error('Erro, pacote não deletado');
+        }
+    }
+
     return(
         <div className="inserirpacotes">
             <div className="cabecalho">
@@ -177,7 +205,7 @@ export default function InserirPacotes(){
                                         <td> {item.nome}</td>
                                         <td> {item.valor}</td>
                                         <td> <img onClick={ () => abrirPacotesEditar(item.id_pacotes, item.nome, item.valor)} src="/assets/image/bx-edit.svg" alt="" /> 
-                                        <img src="/assets/image/bx-trash.svg" alt="" /></td>
+                                        <img onClick= { () => abrirMensagem(item.id_pacotes)} src="/assets/image/bx-trash.svg" alt="" /></td>
 
                                     </tr>
                            ))}
@@ -215,7 +243,7 @@ export default function InserirPacotes(){
                         </div>
                     )}
 
-{alterarProfissional && (
+                    {alterarProfissional && (
                         <div className="popup-background">
                             <div className="popup">
                                 <div className="mensagem">
@@ -243,6 +271,28 @@ export default function InserirPacotes(){
                         </div>
                     )}
             </div>
+
+            {mostrarMensagem && (
+                        <div className="popup-backgroundd">
+                            <div className="popupp">
+                                <div className="mensagemm">
+                                    <h1>Cancelar cliente </h1>
+                                    <img onClick={fecharMensagem} src="/assets/image/bx-x.svg" alt="" />
+                                </div>
+                                <div className="mensagee">
+                                    <h2 >Atenção! <br /> Caso remova o pacote não terá mais acesso as informaões dele.</h2>
+                                </div>
+                                <div className="botaoo">
+                                    <h1> Tem certeza que deseja desativar esse cliente? </h1>
+                                    <div className="buttonn">
+                                        <button className='fimm' onClick={fecharMensagem} > Cancelar </button>
+                                        <button onClick={Deletar} > Deletar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
             
         </div>
     )
