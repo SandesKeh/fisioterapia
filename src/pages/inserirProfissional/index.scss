@@ -15,6 +15,7 @@
         display: flex;
         flex-direction: row;
         width: 25%;
+        height: 100vh;
         padding-left: 10%;
         
     
@@ -117,6 +118,11 @@
             td{
                 background-color: #D9D9D9;
             }
+
+
+
+            
+ 
             .popup-background {
                 position: fixed;
                 top: 0;
@@ -207,5 +213,88 @@
                 }
             }
     }
+    .popup-backgroundd {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5); 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
 
+
+        .popupp {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            justify-content: space-between;
+            width: 40%;
+            height: auto;
+            background-color: white;
+            box-shadow: 3px 3px 5px gray;
+            padding: 20px 0px 20px 0px;
+
+            .mensagemm{
+                display: flex;
+                flex-direction: row;
+                h1{
+                    padding-left: 55px;
+                    font: 900 25px Inter;
+                }
+                img{
+                    padding-left: 390px;
+                    
+                }
+
+            }
+            .mensagee{
+                margin: 30px;
+                display: flex;
+                justify-content: center;
+                width: 90%;
+                height: 15vh;
+                background-color: #08b4ab6b;
+                padding: 20px;
+                
+                h2{
+                    
+                    font: 900 19px Inter;
+                    color: #08B4AC;
+                }
+            }
+
+            .botaoo{
+                display: flex;
+                flex-direction: row;
+
+                .fimm{ 
+                    display: flex;
+                    flex-direction: row;
+                    display: flex;
+                    gap:20px ;
+                    align-items: center ;
+                }
+                
+                h1{
+                    font: 900 15px Inter;
+                    margin-left: 50px;
+                }
+                .buttonn{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center ;
+                    gap: 10px;
+                    padding-top: 20px;
+                    width: 10%;
+                    button{
+                        border-radius: 6px;
+                        background-color: #08B4AC;
+                    }
+                }
+            }
+        }
+    }
 }

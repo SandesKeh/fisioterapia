@@ -48,7 +48,7 @@ export default function TelaCadastrar(){
         setIdDeletar(id)
     };
 
-    const fecharMensagem = (e) => {
+    const fecharMensagem = () => {
         
         setMostrarMensagem(false)
         
@@ -86,11 +86,11 @@ export default function TelaCadastrar(){
 
     async function Deletar() {
         try {
-            const resposta = await axios.delete(`http://localhost:5004/deletar/infoPessoas/${idDeletar}?acesso-ao-token=${token}`)
-            setMostrarMensagem(false)
-            toast.success('Deletado com sucesso')
+            const resposta = await axios.delete(`http://localhost:5004/deletar/infoPessoas/${idDeletar}?acesso-ao-token=${token}`);
+            setMostrarMensagem(false);
+            toast.success('Cliente deletado com sucesso');
         } catch (error) {
-            toast.error('Erro, cliente não deletado')
+            toast.error('Erro, Cliente não deletado');
         }
     }
 

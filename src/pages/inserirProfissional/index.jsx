@@ -19,7 +19,7 @@ export default function AddProfissional() {
         }
     }, []);
 
-
+    const [mostrarMensagem, setMostrarMensagem] = useState('');
     const [mostrarProfissional, setMostrarProfissional] = useState(false);
     const [alterarProfissional, setAlterarProfissional] = useState(false);
     const [idEdit, setIdEdit] = useState(null);
@@ -32,6 +32,17 @@ export default function AddProfissional() {
     const [emailed, setEmailed] = useState('');
     const [acessoed, setAcessoed] = useState('');
     
+    const abrirMensagem = (id) => {
+            
+        setMostrarMensagem(true);
+        setIdDelet(id)
+    };
+
+    const fecharMensagem = (e) => {
+        
+        setMostrarMensagem(false)
+        
+    };
 
     const abrirProfissional = () => {
         setMostrarProfissional(true);
@@ -102,8 +113,18 @@ export default function AddProfissional() {
             toast.success('Profissional alterado com sucesso');
             setAlterarProfissional(false);
             
-        } catch (err) {
-            toast.error("erro ");
+        } catch (error) {
+            toast.error("Erro, profissional não alterado ");
+        }
+    }
+
+    async function Deletar() {
+        try {
+            const resposta = await axios.delete(`http://localhost:5004/deletar/usuario/profissional/${idDelet}?acesso-ao-token=${token}`);
+            setMostrarMensagem(false);
+            toast.success('Profissional deletado com sucesso');
+        } catch (error) {
+            toast.error('Erro, profissional não deletado');
         }
     }
 
@@ -179,12 +200,15 @@ export default function AddProfissional() {
                                     <td>{item.acesso}</td>
                                     <td>
                                         <img onClick={() => abrirProfissionalEditar(item.id_adicionar_profissional, item.nome, item.email, item.acesso)} src="/assets/image/bx-edit.svg" alt="Editar" />
-                                        <img src="/assets/image/bx-trash.svg" alt="Bloquear" />
+                                        <img onClick={() => abrirMensagem(item.id_adicionar_profissional)} src="/assets/image/bx-trash.svg" alt="Bloquear" />
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+
+                    
+        
 
                     {mostrarProfissional && (
                         <div className="popup-background">
@@ -273,8 +297,28 @@ export default function AddProfissional() {
                     )}
                 </div>
                 
+
             
-                
+                    {mostrarMensagem && (
+                        <div className="popup-backgroundd">
+                            <div className="popupp">
+                                <div className="mensagemm">
+                                    <h1>Cancelar cliente </h1>
+                                    <img onClick={fecharMensagem} src="/assets/image/bx-x.svg" alt="" />
+                                </div>
+                                <div className="mensagee">
+                                    <h2 >Atenção! <br /> Caso remova o profissional não terá mais acesso as informaões dele.</h2>
+                                </div>
+                                <div className="botaoo">
+                                    <h1> Tem certeza que deseja desativar esse cliente? </h1>
+                                    <div className="buttonn">
+                                        <button className='fimm' onClick={fecharMensagem} > Cancelar </button>
+                                        <button onClick={Deletar} > Deletar </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
     
             
