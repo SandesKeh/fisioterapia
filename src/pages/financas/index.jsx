@@ -124,12 +124,12 @@ export default function Financas(){
 
             if (tipo === 'despesa') {
                 await axios.put(`http://localhost:5004/update/despesa/${propriedadeed}/${categoriaed}/${descricaoed}/${valored}/${dataed}/${idEdit}?acesso-ao-token=${token}`);
-                toast.success('Despesas alterado com sucesso');
+                toast.success('Despesa alterado com sucesso');
             } 
             
             else if (tipo === 'receita') {
                 await axios.put(`http://localhost:5004/update/receitas/${propriedadeed}/${categoriaed}/${descricaoed}/${valored}/${dataed}/${idEdit}?acesso-ao-token=${token}`);
-                toast.success('Despesas alterado com sucesso');
+                toast.success('Receita alterado com sucesso');
             }
             
         } catch (err) {
@@ -140,20 +140,37 @@ export default function Financas(){
 
 
     const formatarMoeda = (valor, valored) => {
-        if (!valor || !valored) return '';
-        const numero = parseFloat(valor, valored);
-        if (isNaN(numero)) return '';
-        return numero.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-        });
+        if (!valor && !valored) return '';
+    
+        const receita = valor ? parseFloat(valor) : 0;
+        const despesa = valored ? parseFloat(valored) : 0;
+    
+        return {
+            receita: receita.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            }),
+            despesa: despesa.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            }),
+        };
     };
     
     const tratarDigitoMoeda = (valor, valored) => {
-        const somenteNumeros = [valor, valored].replace(/[^\d]/g, '');
-        const numeroComCentavos = (parseInt(somenteNumeros, 10) / 100).toFixed(2); 
-        return numeroComCentavos; 
+        const tratar = (v) => {
+            if (!v) return '0.00';
+            const somenteNumeros = v.toString().replace(/[^\d]/g, '');
+            return (parseInt(somenteNumeros, 10) / 100).toFixed(2);
+        };
+    
+        return {
+            receita: tratar(valor),
+            despesa: tratar(valored),
+        };
     };
+    
+    
 
 
     return(
