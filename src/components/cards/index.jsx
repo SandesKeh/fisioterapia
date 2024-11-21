@@ -140,7 +140,7 @@ export default function Card() {
 
     return (
         <div className="cards">
-        <div className="cabecalho">
+        <div onClick={mostrar} className="cabecalho">
             <h1> 1. Informações Pessoais</h1>
             
             <button onClick={mostrar} className="i">
@@ -253,8 +253,8 @@ export default function Card() {
 
 
         
-        <div className="cabecalho">
-            <h1> 3. Endereço </h1>
+        <div onClick={alternarVisualizacaoEndereco} className="cabecalho">
+            <h1 > 2. Endereço </h1>
             
             <button onClick={alternarVisualizacaoEndereco} className="i">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-chevron-compact-up" viewBox="0 0 16 16">

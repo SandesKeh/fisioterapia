@@ -120,15 +120,16 @@ export default function TelaCadastrar(){
                 endereco,
                 numero,
                 bairro,
-                complemento,
-            };
+                complemento
+            }
     
-            await axios.put(`http://localhost:5004/atualizar/infoPessoas/${idAlterar}?acesso-ao-token=${token}`, dadosAtualizados);
+            await axios.put(`http://localhost:5004/update/infoPessoas/${idAlterar}?acesso-ao-token=${token}`, dadosAtualizados);
             toast.success('Cliente atualizado com sucesso');
             fecharAlterar();
             consultar();
-        } catch (error) {
+        } catch (err) {
             toast.error('Erro ao atualizar cliente');
+            console.log(err.message);
         }
     }
 
@@ -140,7 +141,7 @@ export default function TelaCadastrar(){
         if (token) {
             consultar();
         }
-    }, [token]);
+    });
     
 
     return(
