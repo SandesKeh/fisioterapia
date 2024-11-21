@@ -31,7 +31,6 @@ export default function Agenda() {
         name: "",
         date: "",
         time: "",
-        retun: "não",
         mode: "online",
         service: "",
         status:"pendente"
@@ -244,6 +243,12 @@ export default function Agenda() {
                                 <th>Local</th>
                                 <th>Status</th>
                                 <th>Evento</th>
+
+                                {viewMode === "Geral" && (
+                                 <th>Serviço</th>
+
+                                )}
+
                                 <th>Data</th>
                                 <th>Horário</th>
                                 <th>Ações</th>
@@ -259,6 +264,12 @@ export default function Agenda() {
                                         </span>
                                     </td>
                                     <td>{event.name || "Nome não disponível"}</td>
+                                    
+                                    {viewMode === "Geral" && (
+                                         <td>{event.service || "Serviço não disponível"}</td>
+
+                                )}
+                                
                                     <td>{event.date || "Data não disponível"}</td>
                                     <td>{event.time || "Horário não disponível"}</td>
                                     <td>
@@ -286,12 +297,6 @@ export default function Agenda() {
                                 <label>Horário:
                                     <input type="time" name="time" value={formData.time} onChange={handleInputChange} />
                                 </label>
-                                <label>Repetir:
-                                    <select name="repeat" value={formData.retun} onChange={handleInputChange}>
-                                        <option value="não">Não</option>
-                                        <option value="sim">Sim</option>
-                                    </select>
-                                </label>
                                 <label>Modo:
                                     <select name="mode" value={formData.mode} onChange={handleInputChange}>
                                         <option value="online">Online</option>
@@ -302,8 +307,8 @@ export default function Agenda() {
                                     <label>Serviço:
                                         <select name="service" value={formData.service} onChange={handleInputChange}>
                                             <option value="">Selecionar</option>
-                                            <option value="serviço1">Serviço 1</option>
-                                            <option value="serviço2">Serviço 2</option>
+                                            <option value="Pilates">Pilates</option>
+                                            <option value="Fisioterapia">Fisioterapia</option>
                                         </select>
                                     </label>
                                 )}
