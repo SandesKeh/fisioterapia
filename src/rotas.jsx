@@ -14,6 +14,7 @@ import Notificacoes from "./pages/notificacoes";
 import Inventario from "./pages/inventario";
 import TelaCliente from "./pages/telaCliente";
 import Financas from "./pages/financas";
+import LoginP from "./pages/login";
 
 
 import { ToastContainer } from 'react-toastify';
@@ -53,6 +54,8 @@ export default function Rotas() {
                 <Route path="/inventario" element={<Inventario/>}/>
                 <Route path="/telaCliente" element={<TelaCliente/>}/>
                 <Route path="/financas" element={<Financas/>}/>
+                <Route path="/login" element={<LoginP/>}/>
+
 
             </Routes>
         </BrowserRouter>

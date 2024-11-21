@@ -132,7 +132,7 @@ export default function Landingpage() {
             <Link className='contato' to="" style={{ textDecoration: 'none' }}>
                 <button onClick={() => foterRef.current.scrollIntoView({ behavior: 'smooth' })}>Contatos</button>
             </Link>
-            <Link  to="/telaLogin">
+            <Link  to="/login">
                 <button id='login'>Login</button>
             </Link>
             
