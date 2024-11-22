@@ -17,7 +17,7 @@ export default function TelaLogin() {
                 "senha": senha
             };
     
-            const link = `http://localhost:5004/login/`;
+            const link = `http://4.172.207.208:5004/login/`;
             const resposta = await axios.post(link, usuario);
     
             localStorage.setItem('adm-logado', resposta.data.token);

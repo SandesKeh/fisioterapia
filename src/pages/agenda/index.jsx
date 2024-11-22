@@ -51,8 +51,8 @@ export default function Agenda() {
     // Função para buscar eventos de Cliente e Pessoal
     const fetchEvents = () => {
         Promise.all([
-            axios.get(`http://localhost:5004/consulta/agendaCliente?acesso-ao-token=${token}`),
-            axios.get(`http://localhost:5004/consulta/agendaPessoal?acesso-ao-token=${token}`)
+            axios.get(`http://4.172.207.208:5004/consulta/agendaCliente?acesso-ao-token=${token}`),
+            axios.get(`http://4.172.207.208:5004/consulta/agendaPessoal?acesso-ao-token=${token}`)
         ])
         .then(([clienteResp, pessoalResp]) => {
             console.log("Resposta Cliente:", clienteResp.data);
@@ -110,8 +110,8 @@ export default function Agenda() {
         };
 
         const endpoint = viewMode === "Geral" 
-            ? `http://localhost:5004/inserir/agendaCliente?acesso-ao-token=${token}`
-            : `http://localhost:5004/inserir/agendaPessoal?acesso-ao-token=${token}`;
+            ? `http://4.172.207.208:5004/inserir/agendaCliente?acesso-ao-token=${token}`
+            : `http://4.172.207.208:5004/inserir/agendaPessoal?acesso-ao-token=${token}`;
 
         axios.post(endpoint, newEvent)
             .then(response => {
@@ -130,8 +130,8 @@ export default function Agenda() {
         const updatedStatus = event.status === "pendente" ? "concluído" : "pendente";
 
         const endpoint = viewMode === "Geral" 
-            ? `http://localhost:5004/atualizar/agendaCliente/${id}?acesso-ao-token=${token}` 
-            : `http://localhost:5004/atualizar/agendaPessoal/${id}?acesso-ao-token=${token}`;
+            ? `http://4.172.207.208:5004/atualizar/agendaCliente/${id}?acesso-ao-token=${token}` 
+            : `http://4.172.207.208:5004/atualizar/agendaPessoal/${id}?acesso-ao-token=${token}`;
 
         axios.put(endpoint, {status: updatedStatus })
             .then(() => {
@@ -145,8 +145,8 @@ export default function Agenda() {
 
     const handleDeleteEvent = (id) => {
         const endpoint = viewMode === "Geral" 
-            ? `http://localhost:5004/deleta/agendaCliente/${id}?acesso-ao-token=${token}` 
-            : `http://localhost:5004/deleta/agendaPessoal/${id}?acesso-ao-token=${token}`;
+            ? `http://4.172.207.208:5004/deleta/agendaCliente/${id}?acesso-ao-token=${token}` 
+            : `http://4.172.207.208:5004/deleta/agendaPessoal/${id}?acesso-ao-token=${token}`;
 
         axios.delete(endpoint)
             .then(() => {

@@ -27,7 +27,7 @@ export default function Cadastro() {
 
         try {
             const usuario = { email, senha };
-            const link = `http://localhost:5004/cliente/`;
+            const link = `http://4.172.207.208:5004/cliente/`;
             const response = await axios.post(link, usuario);
 
             alert("Cadastro realizado com sucesso");

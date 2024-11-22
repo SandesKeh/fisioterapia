@@ -67,7 +67,7 @@ export default function Inventario(){
 
     async function inventario() {
         try {
-            const resposta = await axios.get(`http://Localhost:5004/inventario/?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/inventario/?acesso-ao-token=${token}`);
             const value = resposta.data;
             setArray(value);
             console.log(array);
@@ -84,7 +84,7 @@ export default function Inventario(){
 
     async function CadastrarProduto() {
         try {
-            await axios.post(`http://localhost:5004/inseir/usuario/inventario/${nomeproduto}}/${categoria}/${estoque}/${ondecomprou}/${unitario}/${total}/${data}?acesso-ao-token=${token}`);
+            await axios.post(`http://4.172.207.208:5004/inseir/usuario/inventario/${nomeproduto}}/${categoria}/${estoque}/${ondecomprou}/${unitario}/${total}/${data}?acesso-ao-token=${token}`);
             toast.success('Produto inserido no inventário com sucesso');
             setMostrarinventario(false)     
         } catch (err) {
@@ -95,7 +95,7 @@ export default function Inventario(){
 
     async function Adicionar() {
         try {
-            await axios.post(`http://localhost:5004/inseir/usuario/inventario/${nomeproduto}}/${categoria}/${estoque}/${ondecomprou}/${unitario}/${total}/${data}?acesso-ao-token=${token}`);
+            await axios.post(`http://4.172.207.208:5004/inseir/usuario/inventario/${nomeproduto}}/${categoria}/${estoque}/${ondecomprou}/${unitario}/${total}/${data}?acesso-ao-token=${token}`);
             toast.success('Profissional cadastrado com sucesso');
             setMostrarinventario(false);
             inventario()
@@ -106,7 +106,7 @@ export default function Inventario(){
     
     async function atualizarPacotes() {
         try {
-            await axios.put(`http://localhost:5004/atualizar/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitario}/${total}/${data}/${id}?acesso-ao-token=${token}`);
+            await axios.put(`http://4.172.207.208:5004/atualizar/inventario/${nomeproduto}/${categoria}/${estoque}/${ondecomprou}/${unitario}/${total}/${data}/${id}?acesso-ao-token=${token}`);
             toast.success('atualizado com sucesso')
             setMostrareditar(false)
         } 

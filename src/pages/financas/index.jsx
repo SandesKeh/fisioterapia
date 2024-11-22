@@ -87,7 +87,7 @@ export default function Financas(){
                 dataPagamento: data,
             };
     
-            const link = `http://localhost:5004/inserir/receitas/?acesso-ao-token=${token}`;
+            const link = `http://4.172.207.208:5004/inserir/receitas/?acesso-ao-token=${token}`;
             await axios.post(link, receita);
     
             toast.success('Receita cadastrada com sucesso');
@@ -99,7 +99,7 @@ export default function Financas(){
     }
     async function buscarReceitas() {
         try {
-            const respostaReceitas = await axios.get(`http://localhost:5004/receitas/?acesso-ao-token=${token}`);
+            const respostaReceitas = await axios.get(`http://4.172.207.208:5004/receitas/?acesso-ao-token=${token}`);
             return respostaReceitas.data;
         } catch (err) {
             console.log('Erro ao buscar receitas:', err.message);
@@ -118,7 +118,7 @@ export default function Financas(){
                 dataPagamento: dataed,
             };
     
-            const link = `http://localhost:5004/inserir/despesas/?acesso-ao-token=${token}`;
+            const link = `http://4.172.207.208:5004/inserir/despesas/?acesso-ao-token=${token}`;
             await axios.post(link, despesa);
     
             toast.success('Despesa cadastrada com sucesso');
@@ -130,7 +130,7 @@ export default function Financas(){
     }
     async function buscarDespesas() {
         try {
-            const respostaDespesas = await axios.get(`http://localhost:5004/despesas/?acesso-ao-token=${token}`);
+            const respostaDespesas = await axios.get(`http://4.172.207.208:5004/despesas/?acesso-ao-token=${token}`);
             return respostaDespesas.data;
         } catch (err) {
             console.log('Erro ao buscar despesas:', err.message);
@@ -151,7 +151,7 @@ export default function Financas(){
         try {
             setAlterarProfissionalReceita(true);
             setIdEdit(idEdit);
-            const resposta = await axios.get(`http://localhost:5004/consultar/receitas/${idEdit}?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/consultar/receitas/${idEdit}?acesso-ao-token=${token}`);
             const receita = resposta.data;
     
             setPropriedade(receita.propriedade);
@@ -168,7 +168,7 @@ export default function Financas(){
         try {
             setAlterarProfissionalDespesa(true);
             setIdEdit(idEdit);
-            const resposta = await axios.get(`http://localhost:5004/consultar/despesas/${idEdit}?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/consultar/despesas/${idEdit}?acesso-ao-token=${token}`);
             const receita = resposta.data;
     
             setPropriedadeed(receita.propriedadeed);
@@ -215,7 +215,7 @@ export default function Financas(){
 
     async function deletarReceita() {
         try {
-            const link = `http://localhost:5004/deletar/receitas/${idDelet}?acesso-ao-token=${token}`;
+            const link = `http://4.172.207.208:5004/deletar/receitas/${idDelet}?acesso-ao-token=${token}`;
             await axios.delete(link);
             toast.success('Receita deletada com sucesso');
             financas();
@@ -225,7 +225,7 @@ export default function Financas(){
     }
     async function deletarDespesa() {
         try {
-            const link = `http://localhost:5004/deletar/despesas/${idDelet}?acesso-ao-token=${token}`;
+            const link = `http://4.172.207.208:5004/deletar/despesas/${idDelet}?acesso-ao-token=${token}`;
             await axios.delete(link);
             toast.success('Despesa deletada com sucesso');
             financas();
@@ -292,8 +292,8 @@ export default function Financas(){
     useEffect(() => {
         async function carregarDados() {
             try {
-                const respostaReceitas = await axios.get(`http://localhost:5004/consultar/receitas?acesso-ao-token=${token}`);
-                const respostaDespesas = await axios.get(`http://localhost:5004/consultar/despesas?acesso-ao-token=${token}`);
+                const respostaReceitas = await axios.get(`http://4.172.207.208:5004/consultar/receitas?acesso-ao-token=${token}`);
+                const respostaDespesas = await axios.get(`http://4.172.207.208:5004/consultar/despesas?acesso-ao-token=${token}`);
     
                 setReceitas(respostaReceitas.data);
                 setDespesas(respostaDespesas.data);

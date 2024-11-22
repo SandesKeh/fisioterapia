@@ -59,7 +59,7 @@ export default function TelaCadastrar(){
             setAlterarCliente(true);
             setIdAlterar(id);
             
-            const resposta = await axios.get(`http://localhost:5004/consultar/porID/${id}?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/consultar/porID/${id}?acesso-ao-token=${token}`);
             const cliente = resposta.data;
     
             setNome(cliente.nome);
@@ -86,7 +86,7 @@ export default function TelaCadastrar(){
 
     async function Deletar() {
         try {
-            const resposta = await axios.delete(`http://localhost:5004/deletar/infoPessoas/${idDeletar}?acesso-ao-token=${token}`);
+            const resposta = await axios.delete(`http://4.172.207.208:5004/deletar/infoPessoas/${idDeletar}?acesso-ao-token=${token}`);
             setMostrarMensagem(false);
             toast.success('Cliente deletado com sucesso');
         } catch (error) {
@@ -96,7 +96,7 @@ export default function TelaCadastrar(){
 
     async function consultar() {
         try {
-            const resposta= await axios.get(`http://localhost:5004/consultar/infoPessoas?acesso-ao-token=${token}`);
+            const resposta= await axios.get(`http://4.172.207.208:5004/consultar/infoPessoas?acesso-ao-token=${token}`);
             const valor = resposta.data;
             setArray(valor)
         
@@ -123,7 +123,7 @@ export default function TelaCadastrar(){
                 complemento
             }
     
-            await axios.put(`http://localhost:5004/update/infoPessoas/${idAlterar}?acesso-ao-token=${token}`, dadosAtualizados);
+            await axios.put(`http://4.172.207.208:5004/update/infoPessoas/${idAlterar}?acesso-ao-token=${token}`, dadosAtualizados);
             toast.success('Cliente atualizado com sucesso');
             fecharAlterar();
             consultar();

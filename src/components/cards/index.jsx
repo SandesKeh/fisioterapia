@@ -76,7 +76,7 @@ export default function Card() {
     const cpfSemMascara = cpf.replace(/\D/g, '');
     async function Adicionarcliente() {
         try {
-            const linkpessoal = `http://localhost:5004/inserir/infoPessoal?acesso-ao-token=${token}`;
+            const linkpessoal = `http://4.172.207.208:5004/inserir/infoPessoal?acesso-ao-token=${token}`;
             const pessoal = {
                 nome: nome,
                 grupo: grupo,

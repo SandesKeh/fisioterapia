@@ -48,7 +48,7 @@ export default function InserirPacotes(){
             setAlterarProfissional(true);
             setIdEdit(id);  
 
-            const resposta = await axios.get(`http://localhost:5004/consultar/pacote/${id}?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/consultar/pacote/${id}?acesso-ao-token=${token}`);
             const profissional = resposta.data;
 
           
@@ -71,7 +71,7 @@ export default function InserirPacotes(){
 
     async function pacotes() {
         try {
-            const resposta = await axios.get(`http://localhost:5004/consultar/pacotes?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/consultar/pacotes?acesso-ao-token=${token}`);
             const value = resposta.data;
             setArray(value);
             console.log(array);
@@ -90,7 +90,7 @@ export default function InserirPacotes(){
 
     async function Cadastrar() {
      try {
-        await axios.post(`http://localhost:5004/inserir/pacotes/${nome}/${valor}?acesso-ao-token=${token}`);
+        await axios.post(`http://4.172.207.208:5004/inserir/pacotes/${nome}/${valor}?acesso-ao-token=${token}`);
         toast.success('Pacote cadastrado com sucesso');
         setMostrarProfissional(false);
         pacotes();
@@ -103,7 +103,7 @@ export default function InserirPacotes(){
     
     async function Alterar() {
         try {
-            await axios.put(`http://localhost:5004/update/pacotes/${nomeed}/${valored}/${idEdit}?acesso-ao-token=${token}`);
+            await axios.put(`http://4.172.207.208:5004/update/pacotes/${nomeed}/${valored}/${idEdit}?acesso-ao-token=${token}`);
             toast.success('Pacote alterado com sucesso');
             setAlterarProfissional(false);
             
@@ -131,7 +131,7 @@ export default function InserirPacotes(){
 
     async function Deletar() {
         try {
-            const resposta = await axios.delete(`http://localhost:5004/deletar/pacote/${idDelet}?acesso-ao-token=${token}`);
+            const resposta = await axios.delete(`http://4.172.207.208:5004/deletar/pacote/${idDelet}?acesso-ao-token=${token}`);
             setMostrarMensagem(false);
             toast.success('Pacote deletado com sucesso');
         } catch (error) {

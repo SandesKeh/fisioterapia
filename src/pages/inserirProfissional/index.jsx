@@ -59,7 +59,7 @@ export default function AddProfissional() {
             setAlterarProfissional(true);
             setIdEdit(id);  
 
-            const resposta = await axios.get(`http://localhost:5004/consultar/usuario/profissional/${id}?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/consultar/usuario/profissional/${id}?acesso-ao-token=${token}`);
             const profissional = resposta.data;
 
           
@@ -83,7 +83,7 @@ export default function AddProfissional() {
 
     async function ConsultarProfissionais() {
         try {
-            const resposta = await axios.get(`http://localhost:5004/usuario/profissional?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/usuario/profissional?acesso-ao-token=${token}`);
             setArray(resposta.data);
         } catch (err) {
             console.log(err.message);
@@ -97,7 +97,7 @@ export default function AddProfissional() {
  
     async function Adicionar() {
         try {
-            await axios.post(`http://localhost:5004/inseir/usuario/profissional/${nome}/${email}/${acesso}?acesso-ao-token=${token}`);
+            await axios.post(`http://4.172.207.208:5004/inseir/usuario/profissional/${nome}/${email}/${acesso}?acesso-ao-token=${token}`);
             toast.success('Profissional cadastrado com sucesso');
             setMostrarProfissional(false);
             ConsultarProfissionais();
@@ -109,7 +109,7 @@ export default function AddProfissional() {
 
     async function Alterar() {
         try {
-            await axios.put(`http://localhost:5004/update/profissional/${nomeed}/${emailed}/${acessoed}/${idEdit}?acesso-ao-token=${token}`);
+            await axios.put(`http://4.172.207.208:5004/update/profissional/${nomeed}/${emailed}/${acessoed}/${idEdit}?acesso-ao-token=${token}`);
             toast.success('Profissional alterado com sucesso');
             setAlterarProfissional(false);
             
@@ -120,7 +120,7 @@ export default function AddProfissional() {
 
     async function Deletar() {
         try {
-            const resposta = await axios.delete(`http://localhost:5004/deletar/usuario/profissional/${idDelet}?acesso-ao-token=${token}`);
+            const resposta = await axios.delete(`http://4.172.207.208:5004/deletar/usuario/profissional/${idDelet}?acesso-ao-token=${token}`);
             setMostrarMensagem(false);
             toast.success('Profissional deletado com sucesso');
         } catch (error) {

@@ -52,8 +52,8 @@ export default function TelaCliente(){
         const filteredEvents = events.filter(event => event.type === viewMode);
         const fetchEvents = () => {
             Promise.all([
-                axios.get(`http://localhost:5004/consulta/agendaCliente?acesso-ao-token=${token}`),
-                axios.get(`http://localhost:5004/consulta/agendaPessoal?acesso-ao-token=${token}`)
+                axios.get(`http://4.172.207.208:5004/consulta/agendaCliente?acesso-ao-token=${token}`),
+                axios.get(`http://4.172.207.208:5004/consulta/agendaPessoal?acesso-ao-token=${token}`)
             ])
             .then(([clienteResp, pessoalResp]) => {
                 console.log("Resposta Cliente:", clienteResp.data);

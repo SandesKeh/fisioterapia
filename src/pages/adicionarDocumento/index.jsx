@@ -66,7 +66,7 @@ export default function AddDocumento(){
 
     async function Documentos() {
         try {
-            const resposta = await axios.get(`http://localhost:5004/documentacao/?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/documentacao/?acesso-ao-token=${token}`);
             setArray(resposta.data);
         } 
         catch (err) {
@@ -84,7 +84,7 @@ export default function AddDocumento(){
             return;
         }
         try {
-            const link= `http://localhost:5004/documentacao/?acesso-ao-token=${token}`;
+            const link= `http://4.172.207.208:5004/documentacao/?acesso-ao-token=${token}`;
             const documento = {
                 tipo: tipo,
                 titulo: titulo,
@@ -108,7 +108,7 @@ export default function AddDocumento(){
 
     async function Adicionar() {
         try {
-            await axios.post(`http://localhost:5004/inseir/documento/${tipo}/${titulo}/${conteudo}/${data}?acesso-ao-token=${token}`);
+            await axios.post(`http://4.172.207.208:5004/inseir/documento/${tipo}/${titulo}/${conteudo}/${data}?acesso-ao-token=${token}`);
             toast.success('Documentação cadastrado com sucesso');
             setAlterarDocumento(false)
             Documentos();
@@ -122,7 +122,7 @@ export default function AddDocumento(){
             setAlterarDocumento(true);
             setIdEdit(id);  
 
-            const resposta = await axios.get(`http://localhost:5004/consultar/usuario/documento/${id}?acesso-ao-token=${token}`);
+            const resposta = await axios.get(`http://4.172.207.208:5004/consultar/usuario/documento/${id}?acesso-ao-token=${token}`);
             const documento = resposta.data;
 
         
@@ -137,7 +137,6 @@ export default function AddDocumento(){
         }
     };
 
-    
 
 
     const fecharDocymentoEditar = () => {
@@ -149,7 +148,7 @@ export default function AddDocumento(){
     
     async function Alterar() {
         try {
-            await axios.put(`http://localhost:5004/update/documento/${tipoo}/${tituloo}/${conteudoo}/${dataa}/${idEdit}?acesso-ao-token=${token}`);
+            await axios.put(`http://4.172.207.208:5004/update/documento/${tipoo}/${tituloo}/${conteudoo}/${dataa}/${idEdit}?acesso-ao-token=${token}`);
             toast.success('Documento alterado com sucesso');
             setAlterarDocumento(false);
             Documentos();
@@ -162,7 +161,7 @@ export default function AddDocumento(){
 
     async function Deletar() {
         try {
-            const resposta = await axios.delete(`http://localhost:5004/deletar/documentacao/${idDeletar}?acesso-ao-token=${token}`)
+            const resposta = await axios.delete(`http://4.172.207.208:5004/deletar/documentacao/${idDeletar}?acesso-ao-token=${token}`)
             toast.success('Documento deletado com sucesso')
             setMostrarMensagem(false);
             Documentos();
