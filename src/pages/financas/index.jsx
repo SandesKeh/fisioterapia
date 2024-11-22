@@ -3,14 +3,20 @@ import Cabecalho from '../../components/cabecalho';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Financas(){
+    const [receitas, setReceitas] = useState([]);
+    const [despesas, setDespesas] = useState([]);
 
-    const [mostrarReceita, setMostrarReceita] = useState(false);
-    const [alterarProfissional, setAlterarProfissional] = useState(false);
+    const [mostrarPopupReceita, setMostrarPopupReceita] = useState(false);
+    const [mostrarPopupDespesa, setMostrarPopupDespesa] = useState(false);
+    
+    const [alterarProfissionalReceita, setAlterarProfissionalReceita] = useState(false);
+    const [alterarProfissionalDespesa, setAlterarProfissionalDespesa] = useState(false);
     const [idEdit, setIdEdit] = useState(null);
+    const [idDelet, setIdDelet] = useState(null);
 
     const [propriedade, setPropriedade] = useState('');
     const [categoria, setCategoria] = useState('');
@@ -37,141 +43,267 @@ export default function Financas(){
             navigate('/telaLogin')
         }
     }, []);
+    
 
-    const abrirReceita = () => {
-        setMostrarReceita(true);
-    };
-    const fecharReceita = (e) => {
-        setMostrarReceita(false)
-    };
+    const [array, setArray] = useState([]);
+    const [saldoAtual, setSaldoAtual] = useState(0);
+    const [despesasPrevistas, setDespesasPrevistas] = useState(0);
 
-
-    const abrirProfissionalEditar = async (id, tipo) => {
+    async function financas() {
         try {
-            setAlterarProfissional(true);
-            setIdEdit(id);
-
-            if (tipo === 'despesa') {
-                const resposta = await axios.get(`http://localhost:5004/consultar/despesas/${id}?acesso-ao-token=${token}`);
-                const despesa = resposta.data;
-                setPropriedadeed(despesa.propriedade);
-                setCategoriaed(despesa.categoria_financeira);
-                setDescricaoed(despesa.descricao);
-                setValored(despesa.valor);
-                setDataed(despesa.data_pagamento);
-                setPagamentoed(despesa.pagamentoed);
-            } 
-            
-            else if (tipo === 'receita') {
-                const resposta = await axios.get(`http://localhost:5004/consultar/receitas/${id}?acesso-ao-token=${token}`);
-                const receita = resposta.data;
-                setPropriedade(receita.propriedade);
-                setCategoria(receita.categoria_financeira);
-                setDescricao(receita.descricao);
-                setValor(receita.valor);
-                setData(receita.data_pagamento);
-                setPagamento(receita.pagamento);
-            }
-
+            const despesas = await buscarDespesas();
+            const receitas = await buscarReceitas();
+    
+            const combinados = [
+                ...despesas.map((item) => ({ ...item, tipo: 'Despesa' })),
+                ...receitas.map((item) => ({ ...item, tipo: 'Receita' }))
+            ];
+    
+            setArray(combinados);
+    
+            let saldoAtual = 0;
+            let despesasPrevistas = 0;
+    
+            combinados.forEach(item => {
+                if (item.tipo === 'Receita') saldoAtual += parseFloat(item.valor);
+                if (item.tipo === 'Despesa') despesasPrevistas += parseFloat(item.valor);
+            });
+    
+            setSaldoAtual(saldoAtual);
+            setDespesasPrevistas(despesasPrevistas);
         } catch (err) {
-            console.log(err);
+            console.log('Erro ao carregar as finanças:', err.message);
         }
-    };
-    const fecharProfissionalEditar = () => {
-        setAlterarProfissional(false);
-        setIdEdit(null)
-    };
+    }
 
 
-
-    async function addDespesa() {
+    async function adicionarReceita() {
         try {
-            const link = `http://localhost:5004/inserir/despesas/?acesso-ao-token=${token}`;
-            const despesa = {
+            const receita = {
                 propriedade: propriedade,
                 categoriaFinanceira: categoria,
                 descricao: descricao,
                 valor: valor,
-                dataPagamento: data
-            }
-            await axios.post(link, despesa);
-            toast.success('Despesas cadastrada com sucesso');
-            setMostrarReceita(false)
-            financas()
+                dataPagamento: data,
+            };
+    
+            const link = `http://localhost:5004/inserir/receitas/?acesso-ao-token=${token}`;
+            await axios.post(link, receita);
+    
+            toast.success('Receita cadastrada com sucesso');
+            setMostrarPopupReceita(false);
+            financas();
         } catch (error) {
-            toast.error('não foi cadastrado')
+            toast.error('Não foi possível cadastrar a receita');
         }
     }
-
-    const [array, setArray]= useState([]);
-    async function financas() {
+    async function buscarReceitas() {
         try {
-            const resposta = await axios.get(`http://localhost:5004/despesas/?acesso-ao-token=${token}`);
-            const valor = resposta.data;
-            setArray(valor)
+            const respostaReceitas = await axios.get(`http://localhost:5004/receitas/?acesso-ao-token=${token}`);
+            return respostaReceitas.data;
         } catch (err) {
-            console.log(err.message)
+            console.log('Erro ao buscar receitas:', err.message);
+            return [];
         }
     }
 
-    useEffect(( ) => {
-        financas()
-    })
 
-    async function Alterar(tipo) {
+    async function adicionarDespesa() {
         try {
-            setAlterarProfissional(false)
+            const despesa = {
+                propriedade: propriedadeed,
+                categoriaFinanceira: categoriaed,
+                descricao: descricaoed,
+                valor: valored,
+                dataPagamento: dataed,
+            };
+    
+            const link = `http://localhost:5004/inserir/despesas/?acesso-ao-token=${token}`;
+            await axios.post(link, despesa);
+    
+            toast.success('Despesa cadastrada com sucesso');
+            setMostrarPopupDespesa(false);
+            financas();
+        } catch (error) {
+            toast.error('Não foi possível cadastrar a despesa');
+        }
+    }
+    async function buscarDespesas() {
+        try {
+            const respostaDespesas = await axios.get(`http://localhost:5004/despesas/?acesso-ao-token=${token}`);
+            return respostaDespesas.data;
+        } catch (err) {
+            console.log('Erro ao buscar despesas:', err.message);
+            return [];
+        }
+    }
 
-            if (tipo === 'despesa') {
-                await axios.put(`http://localhost:5004/update/despesa/${propriedadeed}/${categoriaed}/${descricaoed}/${valored}/${dataed}/${idEdit}?acesso-ao-token=${token}`);
-                toast.success('Despesa alterado com sucesso');
-            } 
-            
-            else if (tipo === 'receita') {
-                await axios.put(`http://localhost:5004/update/receitas/${propriedadeed}/${categoriaed}/${descricaoed}/${valored}/${dataed}/${idEdit}?acesso-ao-token=${token}`);
-                toast.success('Receita alterado com sucesso');
+    const handleAddReceita = () => {
+        adicionarReceita();
+    };
+    
+    const handleAddDespesa = () => {
+        adicionarDespesa();
+    };
+    
+
+    async function atualizarReceita() {
+        try {
+            setAlterarProfissionalReceita(true);
+            setIdEdit(idEdit);
+            const resposta = await axios.get(`http://localhost:5004/consultar/receitas/${idEdit}?acesso-ao-token=${token}`);
+            const receita = resposta.data;
+    
+            setPropriedade(receita.propriedade);
+            setCategoria(receita.categoria_financeira);
+            setDescricao(receita.descricao);
+            setValor(receita.valor);
+            setData(receita.data_pagamento);
+            setPagamento(receita.pagamento);
+        } catch (err) {
+            console.error('Erro ao abrir edição de receita:', err.message);
+        }
+    }
+    async function atualizarDespesa() {
+        try {
+            setAlterarProfissionalDespesa(true);
+            setIdEdit(idEdit);
+            const resposta = await axios.get(`http://localhost:5004/consultar/despesas/${idEdit}?acesso-ao-token=${token}`);
+            const receita = resposta.data;
+    
+            setPropriedadeed(receita.propriedadeed);
+            setCategoriaed(receita.categoriaed);
+            setDescricaoed(receita.descricaoed);
+            setValored(receita.valored);
+            setDataed(receita.dataed);
+            setPagamentoed(receita.pagamentoed);
+        } catch (err) {
+            console.error('Erro ao abrir edição de despesa:', err.message);
+        }
+    }
+
+    const abrirAlterar = (id, tipo) => {
+        if (tipo === 'Receita') {
+            atualizarReceita(idEdit);
+        } else {
+            atualizarDespesa(idEdit);
+        }
+    };
+
+    const fecharEditarReceita = () => {
+        setAlterarProfissionalReceita(false);
+        setIdEdit(null);
+        setPropriedade('');
+        setCategoria('');
+        setDescricao('');
+        setValor('');
+        setData('');
+        setPagamento('');
+    };
+    
+    const fecharEditarDespesa = () => {
+        setAlterarProfissionalDespesa(false);
+        setIdEdit(null);
+        setPropriedadeed('');
+        setCategoriaed('');
+        setDescricaoed('');
+        setValored('');
+        setDataed('');
+        setPagamentoed('');
+    };
+
+
+    async function deletarReceita() {
+        try {
+            const link = `http://localhost:5004/deletar/receitas/${idDelet}?acesso-ao-token=${token}`;
+            await axios.delete(link);
+            toast.success('Receita deletada com sucesso');
+            financas();
+        } catch (error) {
+            toast.error('Erro ao deletar a receita');
+        }
+    }
+    async function deletarDespesa() {
+        try {
+            const link = `http://localhost:5004/deletar/despesas/${idDelet}?acesso-ao-token=${token}`;
+            await axios.delete(link);
+            toast.success('Despesa deletada com sucesso');
+            financas();
+        } catch (error) {
+            toast.error('Erro ao deletar a despesa');
+        }
+    }
+
+    const deletarTudo = async (id, tipo) => {
+        setIdDelet(id)
+        try {
+            if (tipo === 'Receita') {
+                await deletarReceita(idDelet);
+            } else {
+                await deletarDespesa(idDelet);
             }
-            
-        } catch (err) {
-            toast.error("Erro ao atualizar os dados ");
+        } catch (error) {
+            console.error('Erro ao excluir:', error);
         }
-    }
-
-
-
-    const formatarMoeda = (valor, valored) => {
-        if (!valor && !valored) return '';
-    
-        const receita = valor ? parseFloat(valor) : 0;
-        const despesa = valored ? parseFloat(valored) : 0;
-    
-        return {
-            receita: receita.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-            }),
-            despesa: despesa.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-            }),
-        };
     };
     
-    const tratarDigitoMoeda = (valor, valored) => {
-        const tratar = (v) => {
-            if (!v) return '0.00';
-            const somenteNumeros = v.toString().replace(/[^\d]/g, '');
-            return (parseInt(somenteNumeros, 10) / 100).toFixed(2);
-        };
-    
-        return {
-            receita: tratar(valor),
-            despesa: tratar(valored),
-        };
+
+    const handleSaveAlteracao = () => {
+        if (alterarProfissionalReceita) {
+            atualizarReceita(idEdit);
+        } else if (alterarProfissionalDespesa) {
+            atualizarDespesa(idEdit);
+        }
+    };
+
+
+
+
+    const formatarMoeda = (valor) => {
+        if (typeof valor !== 'string') valor = valor.toString();
+        valor = valor.replace(/\D/g, '');
+
+        if (!valor) return 'R$ 0,00';
+        valor = valor.replace(/^0+/, '');
+
+        let valorComVirgula = valor.replace(/(\d)(\d{2})$/, '$1,$2');
+        valorComVirgula = valorComVirgula.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        return `R$ ${valorComVirgula}`;
+    };
+    const handleChangeReceita = (e) => {
+        const novoValor = e.target.value.replace(/\D/g, '');
+        setValor(novoValor);
+    };
+    const handleChangeDespesa = (e) => {
+        const novoValor = e.target.value.replace(/\D/g, '');
+        setValor(novoValor); 
     };
     
-    
 
+    const formatarData = (data) => {
+        const dataFormatada = new Date(data);
+        return dataFormatada.toLocaleDateString('pt-BR');
+    };
+
+
+    useEffect(() => {
+        financas();
+    }, []);
+    useEffect(() => {
+        async function carregarDados() {
+            try {
+                const respostaReceitas = await axios.get(`http://localhost:5004/consultar/receitas?acesso-ao-token=${token}`);
+                const respostaDespesas = await axios.get(`http://localhost:5004/consultar/despesas?acesso-ao-token=${token}`);
+    
+                setReceitas(respostaReceitas.data);
+                setDespesas(respostaDespesas.data);
+            } catch (err) {
+                console.log("Erro ao carregar dados:", err);
+            }
+        }
+    
+        carregarDados();
+    }, []);
 
     return(
         <div className="financas">
@@ -185,8 +317,8 @@ export default function Financas(){
                             <h1> Período: </h1>
                             <select name="" id=""> <option value="text"> Ago/2024</option> </select>
                             <div className="botao">                                
-                                <button id='primeiro' onClick={abrirReceita} >+ Adicionar Receita </button>
-                                <button id='segundo' onClick={abrirReceita} >+ Adicionar despesa </button>
+                                <button id='primeiro' onClick={() => setMostrarPopupReceita(true)}>+ Adicionar Receita</button>
+                                <button id='segundo' onClick={() => setMostrarPopupDespesa(true)}>+ Adicionar Despesa</button>
                             </div>
                         </div>
 
@@ -198,7 +330,7 @@ export default function Financas(){
 
                                 <div className="saldoatual">
                                     <h1>Saldo atual</h1>
-                                    <h2>R$ 0,00 </h2>
+                                    <h2> {saldoAtual.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} </h2>
                                 </div>
 
                                 <div className="naopago">
@@ -213,7 +345,7 @@ export default function Financas(){
 
                                 <div className="saldoatual">
                                     <h1>Despesas Prevista</h1>
-                                    <h2>R$ 0,00</h2>
+                                    <h2>{despesasPrevistas.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</h2>
                                 </div>
 
                                 <div className="naopago">
@@ -231,51 +363,135 @@ export default function Financas(){
 
                         <div className="tabela">
                             <table>
-                                <tr>
-                                    <th> ID</th>
-                                    <th> Propiedade</th>
-                                    <th>Categoria Financeira</th>
-                                    <th> Descrição</th>
-                                    <th> Valor  </th>
-                                    <th> Data pagamento </th>
-                                    <th> Ações </th>
-                                </tr>
-
-                                {array.map(item => (
-                                    <tr key={item.id_adicionar_despesa}>
-                                        <td> {item.id_adicionar_despesa} </td>
-                                        <td> {item.propriedade} </td>
-                                        <td> {item.categoria_financeira} </td>
-                                        <td> {item.descricao} </td>
-                                        <td> {item.valor} </td>
-                                        <td> {item.data_pagamento} </td>
-                                        <td> 
-                                            <img onClick={ () => abrirProfissionalEditar(item.id_adicionar_despesa, item.propriedade, item.categoria_financeira, item.descricao, item.valor, item.data_pagamento)} src="/assets/image/bx-edit.svg" alt="" /> 
-                                            <img src="/assets/image/bx-trash.svg" alt="" />
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Propriedade</th>
+                                        <th>Categoria Financeira</th>
+                                        <th>Descrição</th>
+                                        <th>Valor</th>
+                                        <th>Data Pagamento</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {array.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.tipo}</td>
+                                        <td>{item.propriedade}</td>
+                                        <td>{item.categoria_financeira}</td>
+                                        <td>{item.descricao}</td>
+                                        <td>{parseFloat(item.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+                                        <td>{formatarData(item.data_pagamento)}</td>
+                                        <td>
+                                            <img
+                                                onClick={() => abrirAlterar(item.id, item.tipo)}
+                                                src="/assets/image/bx-edit.svg"
+                                                alt="Editar"
+                                            />
+                                            <img
+                                                onClick={() => deletarTudo(item.id, item.tipo)}
+                                                src="/assets/image/bx-trash.svg"
+                                                alt="Excluir"
+                                            />
                                         </td>
                                     </tr>
                                 ))}
+                                </tbody>
                             </table>
                         </div>
 
-                        {mostrarReceita && (
+                        {mostrarPopupReceita && (
                             <div className="popup-background">
                                 <div className="popup">
                                     <div className="mensagem">
-                                        <h1>Adicionar Despesa  </h1>
-                                        <img onClick={fecharReceita} src="/assets/image/bx-x.svg" alt="" />
+                                        <h1>Adicionar Receita</h1>
+                                        <img onClick={() => setMostrarPopupReceita(false)} src="/assets/image/bx-x.svg" alt="Fechar" />
                                     </div>
                                     <div className="mensage">
-                                        <h1> Propriedade: </h1>
-                                        <select value={propriedadeed} onChange={e => setPropriedadeed(e.target.value)} > 
-                                            <option value=""> Selecione </option>
-                                            <option value="convênio "> Convênio </option>
-                                            <option value="público "> Público  </option>
-                                        </select>
-                                        <h1> Categoria financeira:</h1>
-                                        <select value={categoriaed} onChange={e => setCategoriaed(e.target.value)} >
+                                        <h1>Propriedade:</h1>
+                                        <select value={propriedade} onChange={(e) => setPropriedade(e.target.value)}>
                                             <option value="">Selecione</option>
-                                            <option value="13_salari">13° salário</option>
+                                            <option value="convênio">Convênio</option>
+                                            <option value="público">Público</option>
+                                        </select>
+
+                                        <h1>Categoria Financeira:</h1>
+                                        <select value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="venda_produtos">Venda de Produtos</option>
+                                            <option value="servicos_prestados">Serviços Prestados</option>
+                                            <option value="investimentos">Investimentos</option>
+                                            {/*outras categorias de receitas*/}
+                                        </select>
+
+                                        <h1>Descrição:</h1>
+                                        <input
+                                            type="text"
+                                            placeholder="Digite aqui"
+                                            value={descricao}
+                                            onChange={(e) => setDescricao(e.target.value)}
+                                        />
+
+                                        <div className="row">
+                                            <div className="valor">
+                                                <h1>Valor:</h1>
+                                                <input
+                                                    type="text"
+                                                    placeholder="R$ 0,00"
+                                                    value={formatarMoeda(valor)}
+                                                    onChange={handleChangeReceita}
+                                                />
+                                            </div>
+                                            <div className="data">
+                                                <h1>Data de pagamento:</h1>
+                                                <input
+                                                    type="date"
+                                                    value={data}
+                                                    onChange={(e) => setData(e.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <h1>Forma de pagamento:</h1>
+                                        <select value={pagamento} onChange={(e) => setPagamento(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="Crédito">Crédito</option>
+                                            <option value="Débito">Débito</option>
+                                            <option value="Dinheiro">Dinheiro</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="botao">
+                                        <div className="button">
+                                            <button className="botao" onClick={() => setMostrarPopupReceita(false)}> Cancelar </button>
+                                            <button onClick={handleAddReceita}>Salvar</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        )}
+
+                        {mostrarPopupDespesa && (
+                            <div className="popup-background">
+                                <div className="popup">
+                                    <div className="mensagem">
+                                        <h1>Adicionar Despesa</h1>
+                                        <img onClick={() => setMostrarPopupDespesa(false)} src="/assets/image/bx-x.svg" alt="Fechar" />
+                                    </div>
+                                    <div className="mensage">
+                                        <h1>Propriedade:</h1>
+                                        <select value={propriedadeed} onChange={(e) => setPropriedadeed(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="convênio">Convênio</option>
+                                            <option value="público">Público</option>
+                                        </select>
+
+                                        <h1>Categoria Financeira:</h1>
+                                        <select value={categoriaed} onChange={(e) => setCategoriaed(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="13_salario">13° salário</option>
                                             <option value="adiantamento">Adiantamento</option>
                                             <option value="agua">Água</option>
                                             <option value="ajuste_caixa">Ajuste de caixa</option>
@@ -320,63 +536,146 @@ export default function Financas(){
                                             <option value="viagens">Viagens</option>
                                         </select>
 
-                                        <h1>Descrição: </h1>
-                                        <input type="text" placeholder='Digite aqui' value={descricaoed} onChange={e => setDescricaoed(e.target.value)} />
+                                        <h1>Descrição:</h1>
+                                        <input
+                                            type="text"
+                                            placeholder="Digite aqui"
+                                            value={descricaoed}
+                                            onChange={(e) => setDescricaoed(e.target.value)}
+                                        />
+
                                         <div className="row">
                                             <div className="valor">
-                                                <h1>Valor: </h1>
+                                                <h1>Valor:</h1>
                                                 <input
                                                     type="text"
                                                     placeholder="R$ 0,00"
-                                                    value={formatarMoeda(valored)}
-                                                    onChange={(e) => {
-                                                        const valorBruto = tratarDigitoMoeda(e.target.value);
-                                                        setValor(valorBruto); 
-                                                    }}
-                                                />;
+                                                    value={formatarMoeda(valor)}
+                                                    onChange={handleChangeDespesa}
+                                                />
                                             </div>
                                             <div className="data">
                                                 <h1>Data de pagamento:</h1>
-                                                <input type="date" value={dataed} onChange={e => setDataed(e.target.value)} />
+                                                <input
+                                                    type="date"
+                                                    value={dataed}
+                                                    onChange={(e) => setDataed(e.target.value)}
+                                                />
                                             </div>
                                         </div>
+
                                         <h1>Forma de pagamento:</h1>
-                                        <select value={pagamentoed} onChange={e => setPagamentoed(e.target.value)} > 
-                                            <option value=""> Selecione </option>
-                                            <option value="Crédito"> Crédito </option>
-                                            <option value="Débito"> Débito </option>
-                                            <option value="Dinheiro"> Dinheiro </option>
+                                        <select value={pagamentoed} onChange={(e) => setPagamentoed(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="Crédito">Crédito</option>
+                                            <option value="Débito">Débito</option>
+                                            <option value="Dinheiro">Dinheiro</option>
                                         </select>
                                     </div>
+
                                     <div className="botao">
-                                    
                                         <div className="button">
-                                            <button className='botao' onClick={fecharReceita} > Cancelar </button>
-                                            <button onClick={addDespesa} > Salvar </button>
+                                            <button className="botao" onClick={() => setMostrarPopupDespesa(false)}> Cancelar </button>
+                                            <button onClick={handleAddDespesa}>Salvar</button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         )}
 
-                        {alterarProfissional && (
+
+                        {alterarProfissionalReceita && (
                             <div className="popup-background">
                                 <div className="popup">
                                     <div className="mensagem">
-                                        <h1>Adicionar Despesa  </h1>
-                                        <img onClick={fecharProfissionalEditar} src="/assets/image/bx-x.svg" alt="" />
+                                        <h1>Editar Receita</h1>
+                                        <img onClick={fecharEditarReceita} src="/assets/image/bx-x.svg" alt="Fechar" />
                                     </div>
                                     <div className="mensage">
-                                        <h1> Propriedade: </h1>
-                                        <select value={propriedadeed} onChange={e => setPropriedadeed(e.target.value)} > 
-                                            <option value=""> Selecione </option>
-                                            <option value="convênio "> Convênio </option>
-                                            <option value="público "> Público  </option>
-                                        </select>
-                                        <h1> Categoria financeira:</h1>
-                                        <select value={categoriaed} onChange={e => setCategoriaed(e.target.value)} >
+                                        <h1>Propriedade:</h1>
+                                        <select value={propriedade} onChange={(e) => setPropriedadeed(e.target.value)}>
                                             <option value="">Selecione</option>
-                                            <option value="13_salari">13° salário</option>
+                                            <option value="convênio">Convênio</option>
+                                            <option value="público">Público</option>
+                                        </select>
+
+                                        <h1>Categoria Financeira:</h1>
+                                        <select value={categoria} onChange={(e) => setCategoriaed(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="venda_produtos">Venda de Produtos</option>
+                                            <option value="servicos_prestados">Serviços Prestados</option>
+                                            <option value="investimentos">Investimentos</option>
+                                            {/* outras categorias de receita */}
+                                        </select>
+
+                                        <h1>Descrição:</h1>
+                                        <input
+                                            type="text"
+                                            placeholder="Digite aqui"
+                                            value={descricao}
+                                            onChange={(e) => setDescricaoed(e.target.value)}
+                                        />
+
+                                        <div className="row">
+                                            <div className="valor">
+                                                <h1>Valor:</h1>
+                                                <input
+                                                    type="text"
+                                                    placeholder="R$ 0,00"
+                                                    value={formatarMoeda(valor)}
+                                                    onChange={handleChangeReceita}
+                                                />
+                                            </div>
+                                            <div className="data">
+                                                <h1>Data de pagamento:</h1>
+                                                <input
+                                                    type="date"
+                                                    value={data}
+                                                    onChange={(e) => setDataed(e.target.value)}
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <h1>Forma de pagamento:</h1>
+                                        <select value={pagamento} onChange={(e) => setPagamentoed(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="Crédito">Crédito</option>
+                                            <option value="Débito">Débito</option>
+                                            <option value="Dinheiro">Dinheiro</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="botao">
+                                        <div className="button">
+                                            <button className='botao' onClick={fecharEditarReceita} > Cancelar </button>
+                                            <button onClick={handleSaveAlteracao}>Salvar</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        )}
+
+                        {alterarProfissionalDespesa && (
+                            <div className="popup-background">
+                                <div className="popup">
+                                    <div className="mensagem">
+                                        <h1>Editar Despesa</h1>
+                                        <img onClick={fecharEditarDespesa} src="/assets/image/bx-x.svg" alt="Fechar" />
+                                    </div>
+                                    <div className="mensage">
+                                        <h1>Propriedade:</h1>
+                                        <select value={propriedadeed} onChange={(e) => setPropriedadeed(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="convênio">Convênio</option>
+                                            <option value="público">Público</option>
+                                        </select>
+
+                                        <h1>Categoria Financeira:</h1>
+                                        <select value={categoriaed} onChange={(e) => setCategoriaed(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="13_salario">13° salário</option>
                                             <option value="adiantamento">Adiantamento</option>
                                             <option value="agua">Água</option>
                                             <option value="ajuste_caixa">Ajuste de caixa</option>
@@ -420,44 +719,55 @@ export default function Financas(){
                                             <option value="vale_transporte">Vale Transporte</option>
                                             <option value="viagens">Viagens</option>
                                         </select>
-                                        <h1>Descrição: </h1>
-                                        <input type="text" placeholder='Digite aqui' value={descricaoed} onChange={e => setDescricaoed(e.target.value)} />
+
+                                        <h1>Descrição:</h1>
+                                        <input
+                                            type="text"
+                                            placeholder="Digite aqui"
+                                            value={descricaoed}
+                                            onChange={(e) => setDescricaoed(e.target.value)}
+                                        />
+
                                         <div className="row">
                                             <div className="valor">
-                                                <h1>Valor: </h1>
+                                                <h1>Valor:</h1>
                                                 <input
                                                     type="text"
                                                     placeholder="R$ 0,00"
-                                                    value={formatarMoeda(valored)}
-                                                    onChange={(e) => {
-                                                        const valorBruto = tratarDigitoMoeda(e.target.value);
-                                                        setValor(valorBruto); 
-                                                    }}
-                                                />;
+                                                    value={formatarMoeda(valor)}
+                                                    onChange={handleChangeDespesa}
+                                                />
                                             </div>
                                             <div className="data">
                                                 <h1>Data de pagamento:</h1>
-                                                <input type="date" value={dataed} onChange={e => setDataed(e.target.value)} />
+                                                <input
+                                                    type="date"
+                                                    value={dataed}
+                                                    onChange={(e) => setDataed(e.target.value)}
+                                                />
                                             </div>
                                         </div>
+
                                         <h1>Forma de pagamento:</h1>
-                                        <select value={pagamentoed} onChange={e => setPagamentoed(e.target.value)} > 
-                                            <option value=""> Selecione </option>
-                                            <option value="Crédito"> Crédito </option>
-                                            <option value="Débito"> Débito </option>
-                                            <option value="Dinheiro"> Dinheiro </option>
+                                        <select value={pagamentoed} onChange={(e) => setPagamentoed(e.target.value)}>
+                                            <option value="">Selecione</option>
+                                            <option value="Crédito">Crédito</option>
+                                            <option value="Débito">Débito</option>
+                                            <option value="Dinheiro">Dinheiro</option>
                                         </select>
                                     </div>
+
                                     <div className="botao">
-                                    
                                         <div className="button">
-                                            <button className='botao' onClick={fecharProfissionalEditar} > Cancelar </button>
-                                            <button onClick={Alterar} > Salvar </button>
+                                            <button className='botao' onClick={fecharEditarDespesa} > Cancelar </button>
+                                            <button onClick={handleSaveAlteracao}>Salvar</button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         )}
+
                     </div>
 
                 </div>
