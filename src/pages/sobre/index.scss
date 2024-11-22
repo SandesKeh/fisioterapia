@@ -1,5 +1,7 @@
 .sobreMais {
     font-family: "Lilita";
+    margin-top: 150px; /* Ajuste para a altura do cabeçalho */
+
     .primeiro{
         margin-top: 10rem;
        }
@@ -8,13 +10,19 @@
     
 
     .cabecalho{
-        display: flex;
-        position: fixed;
-        flex-direction: row;
-        justify-content: space-around;
-        background-color: #03989F;
-        padding: 20px 0px;
-        width: 100%;
+         
+display: flex;
+    
+   
+position: fixed;
+    top: 0; /* Fixado no topo */
+    z-index: 1000; /* Garante que o cabeçalho fique acima dos outros elementos */
+flex-direction: row;
+justify-content: space-around;
+background-color: #03989F;
+    padding: 20px 0px;
+    width: 100%;
+
         .dois{
             display: flex;
             flex-direction: row;
@@ -413,14 +421,31 @@
         .valores {
             overflow: hidden;
             width: 100%;
-            position: relative;
             
+.carMae{
+            height: 500px;
+            position: relative; /* Alterado para 'relative' */
             .carrossel {
                 display: flex;
+                padding: 40px;
+                height: 200px;
                 gap: 20px; 
                 animation: slide 15s linear infinite; 
             }
         
+.valores .carrossel {
+    
+   
+    display: flex;
+        
+       
+    padding: 40px;
+        height: 200px;
+        gap: 20px;
+        
+      
+    animation: slide 15s linear infinite;
+    }
             .mae {
                 display: flex;
                 flex-direction: column;
@@ -445,6 +470,7 @@
             }
         }
         
+        }
 
         @keyframes slide {
             0% {

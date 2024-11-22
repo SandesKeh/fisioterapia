@@ -168,7 +168,9 @@ export default function Sobre() {
                                 
                 <h1 className='titulo'> Valores </h1>
              <div className="valores">
-    <div className="carrossel">
+
+                <div className='carMae'>
+                <div className="carrossel">
         <div className='mae'>
             <h3 className='topicos'>Excelência:</h3>
             <p>Compromisso com a qualidade no atendimento e resultados clínicos.</p>
@@ -212,6 +214,10 @@ export default function Sobre() {
             <p>Compreensão e sensibilidade nas interações com pacientes e colaboradores.</p>
         </div>
     </div>
+
+                    
+                </div>
+   
  </div>
   </div>
         <div className="rodape">

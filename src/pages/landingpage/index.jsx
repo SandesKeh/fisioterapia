@@ -153,7 +153,8 @@ export default function Landingpage() {
             <div className="sobre" >
                 <div className="tex"> 
                     <h1>Sobre nós</h1>
-                    <p>Nosso objetivo é ir além de uma simples seção de fisioterapia e pilates, buscamos impulsionar a sáude dos nossos clientes. Entendemos que cada organização é única em sua estrutura e necessidade, por isso estamos comprometidos em oferecer soluções personalizadas e integradas à sua realidade, independente do seu porte.</p>
+                    <p>Nosso objetivo é ir além de uma simples seção de fisioterapia e pilates,
+                     buscamos impulsionar a sáude dos nossos clientes. Entendemos que cada organização é única em sua estrutura e necessidade, por isso estamos comprometidos em oferecer soluções personalizadas e integradas à sua realidade, independente do seu porte.</p>
                     <p>Estamos prontos para ajudá-lo a alcançar seus objetivos. Nossa experiência e dedicação em transformar-lo uma nova pessoa são a base para o seu sucesso. 
                     Junte-se a nós e    descubra.</p>
                     <Link className='link' to="/sobre">Saiba mais</Link> 

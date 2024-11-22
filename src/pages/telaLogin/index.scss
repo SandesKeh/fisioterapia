@@ -118,7 +118,7 @@
             height: 100vh;
             width: 100%;
 
-            .centro{
+            .centro{    
                 img{
                     width: 500px;
                 }
@@ -126,5 +126,103 @@
         }
     }
 
+    @media (max-width: 600px) {
+        .all {
+            flex-direction: column; /* Alterar para coluna em telas menores */
+            gap: 10px;
+            padding: 0 15px; /* Reduzir o padding para dispositivos pequenos */
+
+            .direita{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 300px;
+                width: 100%;
     
+                .centro{    
+                    img{
+                        width: 460px;
+                    }
+                }
+            }
+        }
+
+        .esquerda {
+            width: 100%; /* Garantir que ocupe toda a largura */
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .card {
+            width: 90%; /* Garantir que o card ocupe 90% da largura da tela */
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-size: 40px; /* Reduzir o tamanho da fonte */
+        }
+
+        .perguntas h1 {
+            font-size: 25px; /* Reduzir o tamanho dos títulos das perguntas */
+        }
+
+        input {
+            font-size: 16px; /* Reduzir o tamanho da fonte do input */
+            padding: 10px 10px 10px 40px;
+        }
+
+        button {
+            width: 90%; /* Ajustar o botão para ocupar 90% da largura */
+            font-size: 16px; /* Reduzir o tamanho da fonte do botão */
+            padding: 10px ;
+        }
+
+        .centro img {
+            width: 50px; /* Reduzir o tamanho da logo em telas pequenas */
+            position: absolute;
+            top: 10px; /* Ajustar o espaço do topo */
+            left: 10px; /* Ajuste a distância da esquerda */
+        }
+    }
+
+    /* Media Query para telas extra pequenas (até 400px) */
+    @media (max-width: 400px) {
+        .all {
+            gap: 5px; /* Diminuir o gap entre os elementos */
+        }
+       
+        .esquerda .card {
+            padding: 15px;
+            width: 85%;
+        }
+
+        h1 {
+            font-size: 30px; /* Font menor */
+        }
+
+        .perguntas h1 {
+            font-size: 20px; /* Font menor */
+        }
+
+        input {
+            font-size: 14px; /* Font ainda menor para campos de input */
+            padding: 8px 10px;
+        }
+
+        button {
+            width: 80%; /* Ajustar a largura do botão */
+            font-size: 14px; /* Ajustar o tamanho da fonte */
+            padding: 10px;
+        }
+
+        .centro img {
+            width: 50px; /* Reduzir ainda mais o tamanho do logo */
+            position: absolute;
+            top: 10px; /* Ajustar o espaço do topo */
+            left: 10px; /* Ajuste a distância da esquerda */
+        }
+    }
+
 }

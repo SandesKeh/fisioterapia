@@ -47,17 +47,14 @@
         justify-content: center;
         padding-top: 9%;
         width: 100%;
-        
-
-
+    
         .direita {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             width: 50%;
-           
-
+            
             .cartao {
                 display: flex;
                 flex-direction: column;
@@ -67,15 +64,14 @@
                 border-radius: 12px;
                 padding: 100px 80px;
                 height: 55vh; 
-            
                 z-index: 1;
-
+    
                 .text {
                     h1 {
                         font: 700 32px Inter;
                     }
                 }
-
+    
                 .senha {
                     display: flex;
                     margin-left: auto;
@@ -85,7 +81,7 @@
                         color: #000000;
                     }
                 }
-
+    
                 .cadastroNovo {
                     display: flex;
                     text-align: center;
@@ -96,21 +92,21 @@
                         color: #000000;
                     }
                 }
-
+    
                 h1 {
                     font: 600 24px Poppins;
                     color: #000000;
                 }
-
+    
                 .perguntas {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     gap: 10px;
-
+    
                     .input {
                         padding: 5px;
-
+    
                         input {
                             border: 1px solid rgb(233, 231, 231);
                             border-color: hsl(0, 0%, 89%);
@@ -124,14 +120,14 @@
                             padding-left: 10px;
                             box-shadow: 1px 1px 15px hsl(0, 0%, 89%);
                         }
-
+    
                         h1 {
                             font: 900 15px Inter;
                             padding: 10px;
                         }
                     }
                 }
-
+    
                 button {
                     padding: 10px 30px;
                     font: 500 16px Inter;
@@ -144,14 +140,14 @@
                     color: rgb(255, 255, 255);
                     transition: 0.5s;
                 }
-
+    
                 button:hover {
                     transform: scaleX(1.05);
                     background-color: #ffffff;
                     color: #17d1b8;
                     border: 2px solid #17d1b8;
                 }
-
+    
                 button:active {
                     transform: scaleX(1);
                     background-color: #05a5ad;
@@ -160,7 +156,7 @@
             }
         }
     }
-
+    
     .risco {
         background-color: #ffff;
         width: 100%;
@@ -169,4 +165,33 @@
         z-index: 0;
         top: 400px;
     }
-}
+  
+   
+    img {
+        max-width: 110px; 
+        height: 100px;
+    }
+    
+    
+    @media (max-width: 450px) {
+
+        .tela {
+            padding-top: 50px; 
+        }
+    
+    
+        .cartao {
+            padding: 30px 20px; 
+            width: 90%; 
+            height: auto;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+    
+        button {
+            width: 20px;
+            font-size: 14px;
+            padding: 8px 20px;
+        }
+    }
+}    

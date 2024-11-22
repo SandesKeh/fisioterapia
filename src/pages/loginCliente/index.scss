@@ -163,7 +163,6 @@
     }
 }
 
-// responsividade
 @media (max-width: 1024px) {
     .tela-login .tela .esquerda, .tela-login .tela .direita {
         width: 100%; 
@@ -173,7 +172,7 @@
         margin-left: 10px;
     }
     .tela-login .tela .direita{
-       height:840px ;
+       height:520px ;
        background-color: #03989F;
     }
 }
@@ -185,14 +184,14 @@
         align-content: center;
     }
     .tela-login .tela .direita{
-        height:840px ;
+        height:520px ;
      }
     .tela-login .tela .esquerda .textos {
         margin: 20px 0 0 20px;
     }
 
     .tela-login .tela .direita .cartao {
-        padding: 20px 10px;
+        padding: 40px 20px;
     }
     .tela-login .tela .esquerda .logo img{
         width: 10rem;
@@ -209,7 +208,8 @@
         height:840px ;
      }
     .tela-login .tela .direita .cartao {
-        padding: 20px 10px;
+        padding: 10px 10px;
+        
     }
 
     .tela-login .tela .direita .cartao .input input {
